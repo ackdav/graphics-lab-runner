@@ -113,10 +113,16 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     // TODO: implement solar system here
     
     
+    elapsedTime = elapsedTime+deltaTime;
     
-    vmml::Matrix4f modelMatrix = player_character.getPos();
+    //Assign Player Position
     
+    vmml::Matrix4f modelMatrix = vmml::create_translation(vmml::Vector3f(elapsedTime,0,0)) * player_character.getPos();
     
+    //Assign Block Positions
+    
+    vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(5,0,0)) *  player_character.getPos();
+
     
     
     vmml::Matrix4f viewMatrix = bRenderer().getObjects()->getCamera("camera")->getViewMatrix();
@@ -145,6 +151,7 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     {
         bRenderer::log("No shader available.");
     }
+     
     
 
     
@@ -152,9 +159,38 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     
     
     bRenderer().getModelRenderer()->drawModel("minecraftcharacter", "camera", modelMatrix, std::vector<std::string>({ }));
+    
+    
+    shader = bRenderer().getObjects()->getShader("guy");
+    
+    if (shader.get())
+    {
+        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
+        shader->setUniform("ViewMatrix", viewMatrix);
+        shader->setUniform("ModelMatrix", modelMatrix2);
+        
+        vmml::Matrix3f normalMatrix;
+        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix2)), normalMatrix);
+        shader->setUniform("NormalMatrix", normalMatrix);
+        
+        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+        shader->setUniform("EyePos", eyePos);
+        
+        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
+        shader->setUniform("Ia", vmml::Vector3f(1.f));
+        shader->setUniform("Id", vmml::Vector3f(1.f));
+        shader->setUniform("Is", vmml::Vector3f(1.f));
+    }
+    else
+    {
+        bRenderer::log("No shader available.");
+    }
+    
 
     
-    bRenderer().getModelRenderer()->drawModel("block", "camera", modelMatrix, std::vector<std::string>({ }));
+
+    
+    bRenderer().getModelRenderer()->drawModel("block", "camera", modelMatrix2, std::vector<std::string>({ }));
     
     
     

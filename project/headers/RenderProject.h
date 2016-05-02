@@ -70,6 +70,8 @@ private:
 	GLint _lastStateSpaceKey = 0;
 	vmml::Matrix4f _viewMatrixHUD;
     
+    double elapsedTime = 0;
+    
     
     Entity player_character;
 

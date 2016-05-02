@@ -39,7 +39,7 @@ public:
     
     Entity(vmml::Vector3f &scale){
         
-        _currentPos=vmml::create_scaling(scale);
+        _currentPos= vmml::create_rotation(M_PI_F*3/2, vmml::Vector3f(0,1,0)) * vmml::create_scaling(scale);
         
         
     }
