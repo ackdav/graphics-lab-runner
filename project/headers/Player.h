@@ -15,16 +15,10 @@ class Player: public Entity{
     
 private:
     
-    
-    
 public:
-
+    
     Player(vmml::Matrix4f &Mat):Entity(Mat){}
-    Player(vmml::Vector3f &scale):Entity(scale){}
-
-    
-    
-    
+    Player():Entity(vmml::Vector3f(0.3f),vmml::Vector3f(-100.0f,1.0f,0.0f),vmml::Vector3f(0,1,0),M_PI_F*3/2,"guy","minecraftcharacter"){}
     
 };
 

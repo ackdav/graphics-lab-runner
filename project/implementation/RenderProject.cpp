@@ -44,6 +44,8 @@ void RenderProject::initFunction()
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
+//    bRenderer().getInput()->singleTapRecognized();
+//
     
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)
@@ -53,10 +55,10 @@ void RenderProject::initFunction()
     
     
     //Set starting position
+    controller.initialize(bRenderer());
+
     
-    
-    vmml::Vector3f tempPos = vmml::Vector3f(0.9f);
-    player_character = Player(tempPos);
+//    player_character = Player(tempPos);
     
     
     // Update render queue
@@ -94,8 +96,8 @@ void RenderProject::loopFunction(const double &deltaTime, const double &elapsedT
     updateRenderQueue("camera", deltaTime);
     
     // Quit renderer when escape is pressed
-    if (bRenderer().getInput()->getKeyState(bRenderer::KEY_ESCAPE) == bRenderer::INPUT_PRESS)
-        bRenderer().terminateRenderer();
+//    if (bRenderer().getInput()->getKeyState(bRenderer::KEY_ESCAPE) == bRenderer::LEFT_MOUSE_BUTTON)
+//        bRenderer().terminateRenderer();
 }
 
 /* This function is executed when terminating the renderer */
@@ -108,91 +110,114 @@ void RenderProject::terminateFunction()
 void RenderProject::updateRenderQueue(const std::string &camera, const double &deltaTime)
 {
  
-    /*** solar system ***/
-    
-    // TODO: implement solar system here
-    
-    
-    elapsedTime = elapsedTime+deltaTime;
-    
-    //Assign Player Position
-    
-    vmml::Matrix4f modelMatrix = vmml::create_translation(vmml::Vector3f(elapsedTime,0,0)) * player_character.getPos();
-    
-    //Assign Block Positions
-    
-    vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(5,0,0)) *  player_character.getPos();
-
-    
-    
-    vmml::Matrix4f viewMatrix = bRenderer().getObjects()->getCamera("camera")->getViewMatrix();
-    
-    ShaderPtr shader = bRenderer().getObjects()->getShader("guy");
-    
-    if (shader.get())
-    {
-        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-        shader->setUniform("ViewMatrix", viewMatrix);
-        shader->setUniform("ModelMatrix", modelMatrix);
-        
-        vmml::Matrix3f normalMatrix;
-        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
-        shader->setUniform("NormalMatrix", normalMatrix);
-        
-        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
-        shader->setUniform("EyePos", eyePos);
-        
-        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
-        shader->setUniform("Ia", vmml::Vector3f(1.f));
-        shader->setUniform("Id", vmml::Vector3f(1.f));
-        shader->setUniform("Is", vmml::Vector3f(1.f));
+    vmml::Matrix4f modelMatrix;
+    if (bRenderer().getInput()->singleTapRecognized()){
+    elapsedTime = elapsedTime+deltaTime*3;
     }
-    else
-    {
-        bRenderer::log("No shader available.");
-    }
-     
-    
+    controller.update(elapsedTime);
 
+//    int ButtonPress = ;bRenderer().getInput()->getCursorPositionX()
     
-    //shader->setUniform("NormalMatrix", vmml::Matrix3f(modelMatrix));
+//    printf("%d",ButtonPress);
+    //Renderer().getInput()->getTouches().map::
     
-    
-    bRenderer().getModelRenderer()->drawModel("minecraftcharacter", "camera", modelMatrix, std::vector<std::string>({ }));
-    
-    
-    shader = bRenderer().getObjects()->getShader("guy");
-    
-    if (shader.get())
-    {
-        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-        shader->setUniform("ViewMatrix", viewMatrix);
-        shader->setUniform("ModelMatrix", modelMatrix2);
-        
-        vmml::Matrix3f normalMatrix;
-        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix2)), normalMatrix);
-        shader->setUniform("NormalMatrix", normalMatrix);
-        
-        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
-        shader->setUniform("EyePos", eyePos);
-        
-        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
-        shader->setUniform("Ia", vmml::Vector3f(1.f));
-        shader->setUniform("Id", vmml::Vector3f(1.f));
-        shader->setUniform("Is", vmml::Vector3f(1.f));
-    }
-    else
-    {
-        bRenderer::log("No shader available.");
-    }
-    
-
-    
-
-    
-    bRenderer().getModelRenderer()->drawModel("block", "camera", modelMatrix2, std::vector<std::string>({ }));
-    
-    
+//    printf("%d",Renderer().getInput()->doubleTapRecognized());
+//
+//    if (bRenderer().getInput()->singleTapRecognized())
+//{
+//        
+//        
+//        
+//        modelMatrix = vmml::create_translation(vmml::Vector3f(elapsedTime,0,0)) * player_character.getPos();
+//        
+//        
+//    }
+//    else{
+//        
+//       modelMatrix = player_character.getPos();
+//    }
+//
+//    
+//    /*** solar system ***/
+//    
+//    // TODO: implement solar system here
+//    
+//    
+//    elapsedTime = elapsedTime+deltaTime;
+//    
+//    
+//    //Assign Block Positions
+//    
+//    vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(5,0,0)) *  player_character.getPos();
+//
+//    
+//    
+//    vmml::Matrix4f viewMatrix = bRenderer().getObjects()->getCamera("camera")->getViewMatrix();
+//    
+//    ShaderPtr shader = bRenderer().getObjects()->getShader("guy");
+//    
+//    if (shader.get())
+//    {
+//        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
+//        shader->setUniform("ViewMatrix", viewMatrix);
+//        shader->setUniform("ModelMatrix", modelMatrix);
+//        
+//        vmml::Matrix3f normalMatrix;
+//        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
+//        shader->setUniform("NormalMatrix", normalMatrix);
+//        
+//        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+//        shader->setUniform("EyePos", eyePos);
+//        
+//        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
+//        shader->setUniform("Ia", vmml::Vector3f(1.f));
+//        shader->setUniform("Id", vmml::Vector3f(1.f));
+//        shader->setUniform("Is", vmml::Vector3f(1.f));
+//    }
+//    else
+//    {
+//        bRenderer::log("No shader available.");
+//    }
+//     
+//    
+//
+//    
+//    //shader->setUniform("NormalMatrix", vmml::Matrix3f(modelMatrix));
+//    
+//    
+//    bRenderer().getModelRenderer()->drawModel("minecraftcharacter", "camera", modelMatrix, std::vector<std::string>({ }));
+//    
+//
+//    
+//    shader = bRenderer().getObjects()->getShader("guy");
+//    
+//    if (shader.get())
+//    {
+//        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
+//        shader->setUniform("ViewMatrix", viewMatrix);
+//        shader->setUniform("ModelMatrix", modelMatrix2);
+//        
+//        vmml::Matrix3f normalMatrix;
+//        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix2)), normalMatrix);
+//        shader->setUniform("NormalMatrix", normalMatrix);
+//        
+//        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+//        shader->setUniform("EyePos", eyePos);
+//        
+//        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
+//        shader->setUniform("Ia", vmml::Vector3f(1.f));
+//        shader->setUniform("Id", vmml::Vector3f(1.f));
+//        shader->setUniform("Is", vmml::Vector3f(1.f));
+//    }
+//    else
+//    {
+//        bRenderer::log("No shader available.");
+//    }
+//    
+//    
+//    bRenderer().getModelRenderer()->drawModel("block", "camera", modelMatrix2, std::vector<std::string>({ }));
+//    
+//    
     
 
 }
@@ -205,6 +230,7 @@ void RenderProject::updateCamera(const std::string &camera, const double &deltaT
 
     bRenderer().getObjects()->getCamera(camera)->setRotation(vmml::Vector3f(0.0f,0.f,0.f));
     
+    bRenderer().getObjects()->getCamera(camera)->setPosition(controller.getPlayerPosition() - vmml::Vector3f(5.0f,0.0f,-10.0f));
 }
 
 /* For iOS only: Handle device rotation */
