@@ -74,6 +74,9 @@ void RenderProject::initFunction()
 /* Draw your scene here */
 void RenderProject::loopFunction(const double &deltaTime, const double &elapsedTime)
 {
+    
+    
+    
     //	bRenderer::log("FPS: " + std::to_string(1 / deltaTime));	// write number of frames per second to the console every frame
     
     //// Draw Scene and do post processing ////
@@ -119,15 +122,42 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     bool isTouching = false;
     int direction;  // Directions: 1=Right, 2=Left, 3=Jump, 4=Down, 5=No Input
     TouchMap touchMap = bRenderer().getInput()->getTouches();
+    
     for (auto t = touchMap.begin(); t != touchMap.end(); ++t)
     {
        elapsedTime = (elapsedTime+deltaTime);
-        direction=1;
         isTouching=true;
+        
+        Touch touch = t->second;
+        
+        // if touch is in right half of the view: move right
+        
+        if (touch.startPositionX > bRenderer().getView()->getWidth() / 2){
+            direction=1;
+            
+        }
+        
+        // If touch is in left half of the view: move left
+        
+        if (touch.startPositionX < bRenderer().getView()->getWidth() / 2){
+            direction=2;
+            
+        }
+        
+        
+        
     }
-    if(isTouching==false){direction=5;}
+    if(isTouching==false){
+        direction=5;
+    }
     
     controller.update(elapsedTime,direction);
+    
+    
+    
+    // ---------> Prints BoundingBox Size of a given model in console
+    
+    std::cout << "BB: " << bRenderer().getObjects()->getModel("minecraftcharacter")->getBoundingBoxObjectSpace();
     
     
 

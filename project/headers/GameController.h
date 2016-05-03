@@ -103,6 +103,16 @@ public:
             }
         }
         
+        if(direction==2){
+            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+                
+                iterator->move(vmml::Vector3f(-elapsedTime,-elapsedTime,0));
+                trans = vmml::Vector3f(+elapsedTime,0,0);
+                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+                drawEntity(*iterator);
+            }
+        }
+        
         if(direction==5){
             for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
                 
