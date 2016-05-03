@@ -14,6 +14,8 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Ground.h"
+#include "Environment.h"
+#include "Background.h"
 
 class Controller {
 private:
@@ -77,23 +79,37 @@ public:
         // TODO: Matrix to initialize objects
         Ground ground;
         entities.push_back(ground);
+        
         for( int a = 1; a < 100; a = a + 1 )
         {
             Ground ground(vmml::Vector3f(a*2.0f,0.0f,0.0f));
             entities.push_back(ground);
             Ground ground2(vmml::Vector3f(a*2.0f*-1,0.0f,0.0f));
             entities.push_back(ground2);
+            
         }
+        
+        Environment cloud(vmml::Vector3f(5,5,0));
+        entities.push_back(cloud);
+        
+        Background background(vmml::Vector3f(0,0,-50));
+        entities.push_back(background);
+        
+        
+        
+        
         gameController.initialize(_brenderer);
     }
     
-    void update(double elapsedTime) {
+    void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
             //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
             drawEntity(*iterator);
         }
-        gameController.update(elapsedTime);
+        
+        gameController.update(elapsedTime,direction);
+        
     }
     
     

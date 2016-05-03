@@ -14,6 +14,8 @@
 #include "bRenderer.h"
 #include "Entity.h"
 #include "Player.h"
+#include "Environment.h"
+#include "Background.h"
 
 
 class GameController {
@@ -24,6 +26,7 @@ private:
     Player player;
     Renderer brenderer;
     vmml::Vector3f trans;
+    vmml::Matrix4f CurrentIteratorPos;
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -85,16 +88,55 @@ public:
         entities.push_back(player);
     }
     
-    void update(double elapsedTime) {
+    
+    void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
-        for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            iterator->move(vmml::Vector3f(elapsedTime,0,0));
-            trans = vmml::Vector3f(-elapsedTime,0,0);
-            //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
-            drawEntity(*iterator);
+        
+        
+        if(direction==1){
+            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+                
+                iterator->move(vmml::Vector3f(elapsedTime,-elapsedTime,0));
+                trans = vmml::Vector3f(-elapsedTime,0,0);
+                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+                drawEntity(*iterator);
+            }
         }
+        
+        if(direction==5){
+            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+                
+                //iterator->move(vmml::Vector3f(0,0,0));
+                //trans = vmml::Vector3f(-0,0,0);
+                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+                CurrentIteratorPos = iterator->getPos();
+                CurrentIteratorPos = vmml::create_translation(vmml::Vector3f(0,-0.5,0))*CurrentIteratorPos;
+                iterator->setPos(CurrentIteratorPos);
+                drawEntity(*iterator);
+            }
+        }
+
+        
+        
+        
     }
-};
+    
+
+    
+   /*             void update(double elapsedTime) {
+                    std::list<Entity>::iterator iterator;
+                    for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+                        iterator->move(vmml::Vector3f(elapsedTime,0,0));
+                        trans = vmml::Vector3f(-elapsedTime,0,0);
+                        //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+                        drawEntity(*iterator);
+                    }
+                    
+     */
+       
+
+    };
+
 
 
 #endif

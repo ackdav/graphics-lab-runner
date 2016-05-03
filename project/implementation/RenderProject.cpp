@@ -44,6 +44,8 @@ void RenderProject::initFunction()
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, guyShader, guyProperties);
 //    bRenderer().getInput()->singleTapRecognized();
 //
     
@@ -111,10 +113,24 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
 {
  
     vmml::Matrix4f modelMatrix;
-    if (bRenderer().getInput()->singleTapRecognized()){
-    elapsedTime = elapsedTime+deltaTime*3;
+    
+    
+    // Touch controls TODO: Implement more directions, implement Collision Detection, adjust Camera according to player character
+    bool isTouching = false;
+    int direction;  // Directions: 1=Right, 2=Left, 3=Jump, 4=Down, 5=No Input
+    TouchMap touchMap = bRenderer().getInput()->getTouches();
+    for (auto t = touchMap.begin(); t != touchMap.end(); ++t)
+    {
+       elapsedTime = (elapsedTime+deltaTime);
+        direction=1;
+        isTouching=true;
     }
-    controller.update(elapsedTime);
+    if(isTouching==false){direction=5;}
+    
+    controller.update(elapsedTime,direction);
+    
+    
+
 
 //    int ButtonPress = ;bRenderer().getInput()->getCursorPositionX()
     
@@ -230,7 +246,7 @@ void RenderProject::updateCamera(const std::string &camera, const double &deltaT
 
     bRenderer().getObjects()->getCamera(camera)->setRotation(vmml::Vector3f(0.0f,0.f,0.f));
     
-    bRenderer().getObjects()->getCamera(camera)->setPosition(controller.getPlayerPosition() - vmml::Vector3f(5.0f,0.0f,-10.0f));
+    bRenderer().getObjects()->getCamera(camera)->setPosition(controller.getPlayerPosition() - vmml::Vector3f(0.0f,0.0f,-10.0f));
 }
 
 /* For iOS only: Handle device rotation */
