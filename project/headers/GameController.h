@@ -96,7 +96,10 @@ public:
         if(direction==1){
             for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
                 iterator->move(vmml::Vector3f(elapsedTime,-elapsedTime,0));
-                trans = vmml::Vector3f(-elapsedTime,0,0);
+//                trans = iterator->getPos();
+//                trans = vmml::Vector3f(-elapsedTime,0,0);
+                trans = vmml::Vector3f( -iterator->getTranslate().x(), 0.f,0.f);
+
                 //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
                 drawEntity(*iterator);
             }
@@ -106,7 +109,9 @@ public:
             for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
                 
                 iterator->move(vmml::Vector3f(-elapsedTime,-elapsedTime,0));
-                trans = vmml::Vector3f(+elapsedTime,0,0);
+                
+                trans = vmml::Vector3f(-iterator->getTranslate().x(), 0.f,0.f);
+
                 //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
                 drawEntity(*iterator);
             }
@@ -125,7 +130,8 @@ public:
             }
         }
 
-        
+        std::cout << "CONTROLLER GET PLAYER POSITION: " << trans;
+
         
         
     }

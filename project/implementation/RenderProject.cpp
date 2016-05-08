@@ -156,9 +156,9 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     
     
     // ---------> Prints BoundingBox Size of a given model in console
-    
     std::cout << "BB: " << bRenderer().getObjects()->getModel("minecraftcharacter")->getBoundingBoxObjectSpace();
-    
+   
+
     
 
 
