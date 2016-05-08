@@ -91,11 +91,10 @@ public:
     
     void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
-        
+
         
         if(direction==1){
             for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-                
                 iterator->move(vmml::Vector3f(elapsedTime,-elapsedTime,0));
                 trans = vmml::Vector3f(-elapsedTime,0,0);
                 //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));

@@ -151,7 +151,7 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
         direction=5;
     }
     
-    controller.update(elapsedTime,direction);
+    controller.update(0.01f,direction);
     
     
     
