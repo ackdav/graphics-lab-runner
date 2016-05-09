@@ -90,108 +90,94 @@ public:
         entities.push_back(player);
     }
     
-    
-    void update(double elapsedTime, int direction) {
+    vmml::Vector3f getInput(double elapsedTime, int direction, bool jumpable){
         std::list<Entity>::iterator iterator;
-        ycoordinate = (float)entities.begin()->getPos().y();
-        std::cout << "Y COORDINATE : " <<ycoordinate;
-//        GameObject dude = GameObject(vmml::Matrix4f(Entity.getPos()), 50.0f, aabb);
-
-        
+//        ycoordinate = (float)entities.begin()->getPos().y();
+        float xVec = 0.f;
+        float yVec = 0.f;
+        float zVec = 0.f;
         
         if(direction==1){
-//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            iterator = entities.begin();
-            if (ycoordinate - 0.03 < -1.f ){
-                ycoordinate = 0.f;
-            }
-            else {
-                ycoordinate =  - 0.03f;
-            }
-            
-                iterator->move(vmml::Vector3f(elapsedTime,ycoordinate,0.f));
-            
-//                trans = iterator->getPos();
-//                trans = vmml::Vector3f(-elapsedTime,0,0);
-                trans = vmml::Vector3f( -iterator->getTranslate().x(), 0.f,0.f);
-
-//                if(iterator.collidesWith(plane2)){
-//                    modelMatrix = vmml::create_translation(vmml::Vector3f(-1.0f, 0.0f, 0.0f)) * modelMatrix;
-//                    std::cerr << "COLLISION DETECTED" <<  std::endl;
-//                }
-            
-                drawEntity(*iterator);
+            //            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+//            iterator = entities.begin();
+//            if (ycoordinate - 0.03 < -1.f ){
+//                ycoordinate = 0.f;
 //            }
+//            else {
+//                ycoordinate =  - 0.03f;
+//            }
+//            
+//            iterator->move(vmml::Vector3f(elapsedTime,ycoordinate,0.f));
+            xVec += 0.05;
+            
+            //                trans = iterator->getPos();
+            //                trans = vmml::Vector3f(-elapsedTime,0,0);
+//            trans = vmml::Vector3f( -iterator->getTranslate().x(), 0.f,0.f);
+//            
+            //                if(iterator.collidesWith(plane2)){
+            //                    modelMatrix = vmml::create_translation(vmml::Vector3f(-1.0f, 0.0f, 0.0f)) * modelMatrix;
+            //                    std::cerr << "COLLISION DETECTED" <<  std::endl;
+            //                }
+            
+//            drawEntity(*iterator);
+            //            }
         }
         
         if(direction==2){
-//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            iterator = entities.begin();
-
-            
-                if (ycoordinate - 0.03 < -1.f ){
-                    ycoordinate = 0.f;
-                }
-                else {
-                    ycoordinate =  - 0.03f;
-                }
-                
-                iterator->move(vmml::Vector3f(-elapsedTime,ycoordinate,0));
-                
-                trans = vmml::Vector3f(-iterator->getTranslate().x(), 0.f,0.f);
-
-                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
-                drawEntity(*iterator);
+            xVec -= 0.05;
+            if (jumpable == true){
+                yVec += 0.9;}
+            //            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+//            iterator = entities.begin();
+//            
+//            
+//            if (ycoordinate - 0.03 < -1.f ){
+//                ycoordinate = 0.f;
 //            }
+//            else {
+//                ycoordinate =  - 0.03f;
+//            }
+//            
+//            iterator->move(vmml::Vector3f(-elapsedTime,ycoordinate,0));
+//            
+//            trans = vmml::Vector3f(-iterator->getTranslate().x(), 0.f,0.f);
+//            
+//            //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+//            drawEntity(*iterator);
+            //            }
         }
         
-        if(direction==5){
-            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-                
-                if (ycoordinate - 0.03 < -1.f ){
-                    std::cout << "\n ddd" << ycoordinate;
-                    ycoordinate = 0.f;
-                }
-                else {
-                    ycoordinate =  - 0.03f;
-                }
-                
-                //iterator->move(vmml::Vector3f(0,0,0));
-                //trans = vmml::Vector3f(-0,0,0);
-                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
-                //CurrentIteratorPos = iterator->getPos();
-                //CurrentIteratorPos = vmml::create_translation(vmml::Vector3f(0.f,0.f,0))*CurrentIteratorPos;
-                
-                iterator->move(vmml::Vector3f(0.0f,ycoordinate,0.f));
-                
-                //iterator->setPos(CurrentIteratorPos);
-                
-                drawEntity(*iterator);
-            }
-        }
-
-        std::cout << "PLAYER POSITION : " << vmml::Vector3f(iterator-> getTranslate());
-
-        
-        
-    }
-    
-
-    
-   /*             void update(double elapsedTime) {
-                    std::list<Entity>::iterator iterator;
-                    for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-                        iterator->move(vmml::Vector3f(elapsedTime,0,0));
-                        trans = vmml::Vector3f(-elapsedTime,0,0);
-                        //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
-                        drawEntity(*iterator);
-                    }
-                    
-     */
-       
-
+//        if(direction==5){
+//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+//                
+//                if (ycoordinate - 0.03 < -1.f ){
+//                    std::cout << "\n ddd" << ycoordinate;
+//                    ycoordinate = 0.f;
+//                }
+//                else {
+//                    ycoordinate =  - 0.03f;
+//                }
+//                
+//                iterator->move(vmml::Vector3f(0.0f,ycoordinate,0.f));
+//                drawEntity(*iterator);
+//            }
+        return vmml::Vector3f(xVec,yVec,zVec);
+    };;
+//    void update(double elapsedTime, int direction) {
+//           }
     };
 
+
+/*             void update(double elapsedTime) {
+ std::list<Entity>::iterator iterator;
+ for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+ iterator->move(vmml::Vector3f(elapsedTime,0,0));
+ trans = vmml::Vector3f(-elapsedTime,0,0);
+ //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+ drawEntity(*iterator);
+ }
+ 
+ */
 
 
 #endif

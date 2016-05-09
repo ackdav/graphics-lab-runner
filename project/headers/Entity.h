@@ -36,6 +36,10 @@ public:
         return _currentPos;
     }
     
+    float getCurrentXPos() {
+        return _currentPos.get_column(3).x();
+    }
+    
     vmml::Vector3f getTranslate() {
         return translation;
     }
@@ -45,12 +49,12 @@ public:
     
     
     void move(vmml::Vector3f _translation) {
-//        std::cout << "current translate = " << getTranslate()+_translation;
+        //        std::cout << "current translate = " << getTranslate()+_translation;
         translation =  getTranslate() +_translation  ;
-//        _currentPos = vmml::create_translation(translation) * _startPos;
-//        std::cout << "\n start pos: \n" << _startPos << "\n current Pos :  \n" << _currentPos;
+        //        _currentPos = vmml::create_translation(translation) * _startPos;
+        //        std::cout << "\n start pos: \n" << _startPos << "\n current Pos :  \n" << _currentPos;
         _currentPos = vmml::create_translation(translation) *  _startPos;
-//        setTranslate(translation);
+        //        setTranslate(translation);
     }
     
     std::string getShaderName() {
@@ -71,7 +75,7 @@ public:
         _startPos =  vmml::create_rotation(angle, axis) *vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
         translation = vmml::Vector3f(0.f,0.f,0.f);
-
+        
     }
     
     Entity(vmml::Matrix4f &Pos){

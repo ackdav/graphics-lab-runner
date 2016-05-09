@@ -20,8 +20,11 @@
 class Controller {
 private:
     std::list<Entity> entities;
+    std::list<Entity> moveableEntities;
     GameController gameController;
     Renderer brenderer;
+    Player player;
+    bool jumpable;
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -56,7 +59,7 @@ private:
         }
         
         brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
-//         std::cout << "object " << objName << brenderer.getObjects()->getModel("block")->getBoundingBoxObjectSpace();
+        //         std::cout << "object " << objName << brenderer.getObjects()->getModel("block")->getBoundingBoxObjectSpace();
         
     }
     
@@ -72,7 +75,8 @@ public:
     }
     
     vmml::Vector3f getPlayerPosition() {
-        return gameController.getPlayerPos();
+        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
+        return vmml::Vector3f(-moveableEntities.begin()->getCurrentXPos(), 0.f,0.f);
     }
     
     void initialize(Renderer _brenderer) {
@@ -80,6 +84,7 @@ public:
         // TODO: Matrix to initialize objects
         Ground ground;
         entities.push_back(ground);
+        jumpable = false;
         
         for( int a = 1; a < 100; a = a + 1 )
         {
@@ -96,20 +101,47 @@ public:
         Background background(vmml::Vector3f(0,0,-50));
         entities.push_back(background);
         
+        moveableEntities.push_back(player);
         
-        
-        
-        gameController.initialize(_brenderer);
     }
     
     void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
+        std::list<Entity>::iterator moveableIterator;
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
             drawEntity(*iterator);
         }
+        // Move default -0.15 to floor
+        float gravity = -0.15;
+        for (moveableIterator = moveableEntities.begin(); moveableIterator != moveableEntities.end(); ++moveableIterator) {
+            //get userInput and add gravity - Todo: Check if user is on ground -> he can jump, else: not.
+            //jumpable = bool
+            vmml::Vector3f user = gameController.getInput(elapsedTime, direction, jumpable);
+            moveableIterator->move(vmml::Vector3f(0.f,gravity,0.f) + user);
+            //?
+            vmml::Vector4f pos = moveableIterator->getPos().get_column(3);
+            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+                
+                vmml::AABBf boundingBox2 = brenderer.getObjects()->getModel(iterator->getObjName())->getBoundingBoxObjectSpace();
+                vmml::AABBf box2(iterator->getPos() * boundingBox2.getMin(),iterator->getPos() * boundingBox2.getMax());
+                
+                // Upon collision, move 0.01 up, until no collision is detected (still need to check with all other objects for collision, therefore no break)
+                while (box2.isIn(vmml::Vector3f(pos.x(),pos.y(),pos.z()))) {
+                    moveableIterator->move(vmml::Vector3f(0,0.001f,0.f));
+                    pos = moveableIterator->getPos().get_column(3);
+                }
+
+                
+            }
+            drawEntity(*moveableIterator);
+        }
         
-        gameController.update(elapsedTime,direction);
+        
+        
+        
+        
+        
+        //gameController.update(elapsedTime,direction);
         
     }
     
