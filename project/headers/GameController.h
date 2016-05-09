@@ -16,7 +16,7 @@
 #include "Player.h"
 #include "Environment.h"
 #include "Background.h"
-
+#include "GameObject.h"
 
 class GameController {
     
@@ -27,6 +27,8 @@ private:
     Renderer brenderer;
     vmml::Vector3f trans;
     vmml::Matrix4f CurrentIteratorPos;
+    float ycoordinate = 0.f;
+
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -91,46 +93,84 @@ public:
     
     void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
+        ycoordinate = (float)entities.begin()->getPos().y();
+        std::cout << "Y COORDINATE : " <<ycoordinate;
+//        GameObject dude = GameObject(vmml::Matrix4f(Entity.getPos()), 50.0f, aabb);
 
         
+        
         if(direction==1){
-            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-                iterator->move(vmml::Vector3f(elapsedTime,-elapsedTime,0));
+//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+            iterator = entities.begin();
+            if (ycoordinate - 0.03 < -1.f ){
+                ycoordinate = 0.f;
+            }
+            else {
+                ycoordinate =  - 0.03f;
+            }
+            
+                iterator->move(vmml::Vector3f(elapsedTime,ycoordinate,0.f));
+            
 //                trans = iterator->getPos();
 //                trans = vmml::Vector3f(-elapsedTime,0,0);
                 trans = vmml::Vector3f( -iterator->getTranslate().x(), 0.f,0.f);
 
-                //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
+//                if(iterator.collidesWith(plane2)){
+//                    modelMatrix = vmml::create_translation(vmml::Vector3f(-1.0f, 0.0f, 0.0f)) * modelMatrix;
+//                    std::cerr << "COLLISION DETECTED" <<  std::endl;
+//                }
+            
                 drawEntity(*iterator);
-            }
+//            }
         }
         
         if(direction==2){
-            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+            iterator = entities.begin();
+
+            
+                if (ycoordinate - 0.03 < -1.f ){
+                    ycoordinate = 0.f;
+                }
+                else {
+                    ycoordinate =  - 0.03f;
+                }
                 
-                iterator->move(vmml::Vector3f(-elapsedTime,-elapsedTime,0));
+                iterator->move(vmml::Vector3f(-elapsedTime,ycoordinate,0));
                 
                 trans = vmml::Vector3f(-iterator->getTranslate().x(), 0.f,0.f);
 
                 //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
                 drawEntity(*iterator);
-            }
+//            }
         }
         
         if(direction==5){
             for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
                 
+                if (ycoordinate - 0.03 < -1.f ){
+                    std::cout << "\n ddd" << ycoordinate;
+                    ycoordinate = 0.f;
+                }
+                else {
+                    ycoordinate =  - 0.03f;
+                }
+                
                 //iterator->move(vmml::Vector3f(0,0,0));
                 //trans = vmml::Vector3f(-0,0,0);
                 //position = position * vmml::create_translation(vmml::Vector3f(elapsedTime,0,0));
-                CurrentIteratorPos = iterator->getPos();
-                CurrentIteratorPos = vmml::create_translation(vmml::Vector3f(0,-0.5,0))*CurrentIteratorPos;
-                iterator->setPos(CurrentIteratorPos);
+                //CurrentIteratorPos = iterator->getPos();
+                //CurrentIteratorPos = vmml::create_translation(vmml::Vector3f(0.f,0.f,0))*CurrentIteratorPos;
+                
+                iterator->move(vmml::Vector3f(0.0f,ycoordinate,0.f));
+                
+                //iterator->setPos(CurrentIteratorPos);
+                
                 drawEntity(*iterator);
             }
         }
 
-        std::cout << "CONTROLLER GET PLAYER POSITION: " << trans;
+        std::cout << "PLAYER POSITION : " << vmml::Vector3f(iterator-> getTranslate());
 
         
         

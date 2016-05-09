@@ -1,6 +1,7 @@
 #include "RenderProject.h"
 
 /* Initialize the Project */
+vmml::AABBf aabb;
 void RenderProject::init()
 {
     bRenderer::loadConfigFile("config.json");	// load custom configurations replacing the default values in Configuration.cpp
@@ -48,7 +49,7 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, guyShader, guyProperties);
 //    bRenderer().getInput()->singleTapRecognized();
 //
-    
+   
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)
     

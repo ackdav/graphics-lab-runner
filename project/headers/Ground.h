@@ -21,6 +21,7 @@ public:
     
     Ground():Entity(vmml::Vector3f(1.0f),vmml::Vector3f(0.0f,-3.0f,0.0f),"guy","block"){}
     
+    
 };
 
 
