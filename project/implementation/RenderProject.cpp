@@ -74,9 +74,6 @@ void RenderProject::initFunction()
 /* Draw your scene here */
 void RenderProject::loopFunction(const double &deltaTime, const double &elapsedTime)
 {
-    
-    
-    
     //	bRenderer::log("FPS: " + std::to_string(1 / deltaTime));	// write number of frames per second to the console every frame
     
     //// Draw Scene and do post processing ////
@@ -151,7 +148,7 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
         direction=5;
     }
     
-    controller.update(0.01f,direction);
+    controller.update(0.04f,direction);
     
     
     
