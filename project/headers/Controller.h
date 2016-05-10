@@ -9,6 +9,10 @@
 #ifndef bRenderer_ios_Controller_h
 #define bRenderer_ios_Controller_h
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
 #include "GameController.h"
 #include "bRenderer.h"
 #include "Entity.h"
@@ -16,6 +20,8 @@
 #include "Ground.h"
 #include "Environment.h"
 #include "Background.h"
+#include "LevelBuilder.h"
+
 
 class Controller {
 private:
@@ -23,14 +29,15 @@ private:
     std::list<Entity> moveableEntities;
     GameController gameController;
     Renderer brenderer;
-    Player player;
+    Entity player;
+    Entity skyplane;
     bool jumpable;
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
         std::string shaderName = entity.getShaderName();
         std::string objName = entity.getObjName();
-        
+        std::cout<<"SHADER: "<<shaderName<<std::endl;
         vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
         
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
@@ -86,29 +93,40 @@ public:
         entities.push_back(ground);
         jumpable = false;
         
-        for( int a = 1; a < 100; a = a + 1 )
-        {
-            Ground ground(vmml::Vector3f(a*2.0f,0.0f,0.0f));
-            entities.push_back(ground);
-            Ground ground2(vmml::Vector3f(a*2.0f*-1,0.0f,0.0f));
-            entities.push_back(ground2);
-            
-        }
+        LevelBuilder levelBuilder(_brenderer);
         
-        Environment cloud(vmml::Vector3f(5,5,0));
-        entities.push_back(cloud);
+        entities = levelBuilder.getEntities();
+        moveableEntities = levelBuilder.getMoveableEntities();
+        player = levelBuilder.getPlayer();
+        skyplane = levelBuilder.getSkyplane();
         
-        Background background(vmml::Vector3f(0,0,-50));
-        entities.push_back(background);
-        
-        moveableEntities.push_back(player);
+        //for( int a = 1; a < 100; a = a + 1 )
+        //{
+//            Ground ground(vmml::Vector3f(a*2.0f,0.0f,0.0f));
+//            entities.push_back(ground);
+//            Ground ground2(vmml::Vector3f(a*2.0f*-1,0.0f,0.0f));
+//            entities.push_back(ground2);
+//            
+//        }
+//        
+//        Environment cloud(vmml::Vector3f(5,5,0));
+//        entities.push_back(cloud);
+//        
+//        Background background(vmml::Vector3f(0,0,-50));
+//        entities.push_back(background);
+//        
+//        moveableEntities.push_back(player);
         
     }
     
     void update(double elapsedTime, int direction) {
         std::list<Entity>::iterator iterator;
         std::list<Entity>::iterator moveableIterator;
+        
+        drawEntity(skyplane);
+        
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+            std::cout<<iterator->getTranslate()<<std::endl;
             drawEntity(*iterator);
         }
         // Move default -0.15 to floor

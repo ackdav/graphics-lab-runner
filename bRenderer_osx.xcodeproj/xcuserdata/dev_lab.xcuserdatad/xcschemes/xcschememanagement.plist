@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>bRenderer_ios.xcscheme</key>
+		<key>bRenderer_osx.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1D6058900D05DD3D006BFB54</key>
+		<key>B485F9961B961D500051C6DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

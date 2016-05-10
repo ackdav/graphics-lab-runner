@@ -9,18 +9,15 @@
 #ifndef bRenderer_ios_Player_h
 #define bRenderer_ios_Player_h
 
-#include "Entity.h"
+#include "MoveableEntity.h"
 
-class Player: public Entity{
+class Player{
     
 private:
     
 public:
     
-    Player(vmml::Matrix4f &Mat):Entity(Mat){}
-    
-    //why -100 ??  (david)
-    Player():Entity(vmml::Vector3f(0.3f),vmml::Vector3f(-100.0f,1.0f,0.0f),vmml::Vector3f(0,1,0),M_PI_F*3/2,"guy","minecraftcharacter"){
+    Player(vmml::Vector3f _scale,vmml::Vector3f _translation,vmml::Vector3f _axis,float _angle, std::string _shaderName, std::string _objName){
     }
     
     

@@ -47,6 +47,10 @@ public:
         translation = translate;
     }
     
+    bool isMoving() {
+        return false;
+    }
+    
     
     void move(vmml::Vector3f _translation) {
         //        std::cout << "current translate = " << getTranslate()+_translation;
@@ -68,19 +72,15 @@ public:
     Entity(vmml::Vector3f scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName):translation(_translation),shaderName(_shaderName),objName(_objName){
         _startPos = vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
-        translation = vmml::Vector3f(0.f,0.f,0.f);
     }
     
     Entity(vmml::Vector3f scale,vmml::Vector3f _translation,vmml::Vector3f axis,float angle, std::string _shaderName, std::string _objName):translation(_translation),shaderName(_shaderName),objName(_objName){
         _startPos =  vmml::create_rotation(angle, axis) *vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
-        translation = vmml::Vector3f(0.f,0.f,0.f);
-        
     }
     
     Entity(vmml::Matrix4f &Pos){
         _currentPos = Pos;
-        translation = vmml::Vector3f(0.f,0.f,0.f);
     }
     
     Entity(){}

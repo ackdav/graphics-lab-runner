@@ -23,7 +23,7 @@ class GameController {
     
 private:
     std::list<Entity> entities;
-    Player player;
+    Entity player;
     Renderer brenderer;
     vmml::Vector3f trans;
     vmml::Matrix4f CurrentIteratorPos;

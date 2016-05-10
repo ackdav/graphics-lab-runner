@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "bRenderer_ios.app"
-               BlueprintName = "bRenderer_ios"
-               ReferencedContainer = "container:bRenderer_ios.xcodeproj">
+               BlueprintIdentifier = "B485F9961B961D500051C6DB"
+               BuildableName = "bRenderer_osx"
+               BlueprintName = "bRenderer_osx"
+               ReferencedContainer = "container:bRenderer_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "bRenderer_ios.app"
-            BlueprintName = "bRenderer_ios"
-            ReferencedContainer = "container:bRenderer_ios.xcodeproj">
+            BlueprintIdentifier = "B485F9961B961D500051C6DB"
+            BuildableName = "bRenderer_osx"
+            BlueprintName = "bRenderer_osx"
+            ReferencedContainer = "container:bRenderer_osx.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "bRenderer_ios.app"
-            BlueprintName = "bRenderer_ios"
-            ReferencedContainer = "container:bRenderer_ios.xcodeproj">
+            BlueprintIdentifier = "B485F9961B961D500051C6DB"
+            BuildableName = "bRenderer_osx"
+            BlueprintName = "bRenderer_osx"
+            ReferencedContainer = "container:bRenderer_osx.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "bRenderer_ios.app"
-            BlueprintName = "bRenderer_ios"
-            ReferencedContainer = "container:bRenderer_ios.xcodeproj">
+            BlueprintIdentifier = "B485F9961B961D500051C6DB"
+            BuildableName = "bRenderer_osx"
+            BlueprintName = "bRenderer_osx"
+            ReferencedContainer = "container:bRenderer_osx.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
