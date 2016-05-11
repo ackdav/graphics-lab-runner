@@ -52,7 +52,7 @@ private:
             vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
             shader->setUniform("NormalMatrix", normalMatrix);
             
-            vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+            vmml::Vector4f eyePos = vmml::Vector4f(brenderer.getObjects()->getCamera("camera")->getPosition(), 1.0f);
             shader->setUniform("EyePos", eyePos);
             
             shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));

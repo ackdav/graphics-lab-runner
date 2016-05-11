@@ -31,6 +31,8 @@ varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
+
+
 void main()
 {
     lowp vec4 ambientResult = vec4(Ka * Ia, 1.0);
@@ -77,5 +79,26 @@ void main()
 
     vec4 colorVarying = vec4(vec3(0.5) + n.xyz * 0.5, 1.0);
     //gl_FragColor = (ambientResult + diffuseResult) * color + specularResult;
+
+
+    
+    float sil = dot(normalize(EyePos.xyz - pos.xyz), normalVarying);
+    
+    
+    if (sil > 0.95)
+        color *= 0.95*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.8)
+        color *= 0.8*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.7)
+        color *= 0.7*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.6)
+        color *= 0.6*vec4(1.0,1.0,1.0,1.0);
+    else
+        color *= 0.5*vec4(1.0,1.0,1.0,1.0);
+
+    
+   
+
     gl_FragColor = (ambientResult+diffuseResult ) * color ;
+    
 }

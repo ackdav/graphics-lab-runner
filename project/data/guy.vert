@@ -32,12 +32,15 @@ varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
+
+
 void main()
 {
     posVarying = ModelMatrix * Position;
     normalVarying = normalize(NormalMatrix * Normal);
     tangentVarying = normalize(NormalMatrix * Tangent);
     texCoordVarying = TexCoord;
+
     
     gl_Position = ProjectionMatrix * ViewMatrix * posVarying;
 }
