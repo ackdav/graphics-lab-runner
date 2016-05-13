@@ -31,8 +31,6 @@ varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
-varying vec4 vVertex;
-
 
 
 void main()
@@ -61,32 +59,44 @@ void main()
     lowp float intensity = dot(n, l);
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
     lowp vec4 diffuseResult = vec4(clamp(diffuse, 0.0, 1.0), 1.0);
-
+    
+    // If vertex is lit, calculate specular term in view space using the Blinn-Phong model
+    lowp vec4 specularResult = vec4(0.0);
+    if (intensity > 0.0)
+    {
+        mediump vec3 eyeVec = normalize(EyePos.xyz - pos.xyz);
+        mediump vec3 h = normalize(l + eyeVec);
+        
+        mediump float specIntensity = pow(max(dot(h,n), 0.0), Ns);
+        mediump vec3 specular = Ks * clamp(texture2D(SpecularMap,texCoordVarying.st).xyz* (specIntensity/4.0), 0.0, 1.0) * Is;
+        specularResult = vec4(clamp(specular, 0.0, 1.0), 1.0);
+    }
     
     lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.st);
+//    color=clamp(color,-1.0,1.0);
+//    normal = normalize(normal * 2.0 - 1.0);
+//    lowp vec4 color = vec4(1.0,0.0,1.0,1.0);
 
-//    float sil = dot(normalize(LightPos - pos).xyz, normalVarying);
-//    
-//    
-////
-////    
-////    for(float i = 1.0; i>0.5; i=i-0.25){
-////        
-////        if(sil>i){
-////            color *=i*vec4(1.0,1.0,1.0,1.0);
-////            break;
-////        }
-////    }
-////    
-//    
-//    
-//
-//    
-//    if (gl_FrontFacing == true) {
-//        color*=0.5*vec4(1.0,1.0,1.0,1.0);
-//    }
-//    else
-//        color*=vec4(1.0,1.0,1.0,1.0);
+    vec4 colorVarying = vec4(vec3(0.5) + n.xyz * 0.5, 1.0);
+    //gl_FragColor = (ambientResult + diffuseResult) * color + specularResult;
+
+
+    
+    float sil = dot(normalize(EyePos.xyz - pos.xyz), normalVarying);
+    
+    
+    if (sil > 0.95)
+        color *= 0.95*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.8)
+        color *= 0.8*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.7)
+        color *= 0.7*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.6)
+        color *= 0.6*vec4(1.0,1.0,1.0,1.0);
+    else
+        color *= 0.5*vec4(1.0,1.0,1.0,1.0);
+
+    
    
 
     gl_FragColor = (ambientResult+diffuseResult ) * color ;

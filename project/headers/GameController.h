@@ -52,7 +52,7 @@ private:
             vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
             shader->setUniform("EyePos", eyePos);
             
-            shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
+            shader->setUniform("LightPos", vmml::Vector4f(1.0, 1.0, 10.0, 1.0));
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
             shader->setUniform("Is", vmml::Vector3f(1.f));

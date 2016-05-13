@@ -94,7 +94,7 @@ public:
             row--;
         }
         EntityBuilder builder;
-        builder.setObjectName("backgroundPlane").setShaderName("guy").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(1,1,10)).setFacing(1);
+        builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(1,1,10)).setFacing(1);
         skyplane = builder.createEntity();
         
     }

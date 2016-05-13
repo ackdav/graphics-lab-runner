@@ -36,17 +36,23 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->setShaderVersionES("#version 100");
     
     // load materials and shaders before loading the model
-    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 0, false, false, false, false, false);				// load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
+    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 0, false, false, false, false, false);
+	
+    ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 0, false, false, false, false, false);
+    
+    // load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
     
     // create additional properties for a model
     PropertiesPtr guyProperties = bRenderer().getObjects()->createProperties("guyProperties");
+    
+    PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
     
     // load models
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
-    bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, backgroundShader, backgroundProperties);
 //    bRenderer().getInput()->singleTapRecognized();
 //
    
