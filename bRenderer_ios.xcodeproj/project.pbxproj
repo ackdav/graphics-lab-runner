@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22542B081CD75AC500C29FD7 /* block.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 22542B051CD75AC500C29FD7 /* block.mtl */; };
-		22542B091CD75AC500C29FD7 /* block.obj in Resources */ = {isa = PBXBuildFile; fileRef = 22542B061CD75AC500C29FD7 /* block.obj */; };
+		22542B081CD75AC500C29FD7 /* block-grass.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 22542B051CD75AC500C29FD7 /* block-grass.mtl */; };
+		22542B091CD75AC500C29FD7 /* block-grass.obj in Resources */ = {isa = PBXBuildFile; fileRef = 22542B061CD75AC500C29FD7 /* block-grass.obj */; };
 		22542B0A1CD75AC500C29FD7 /* grassTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 22542B071CD75AC500C29FD7 /* grassTop.png */; };
 		225A60C61CE6060C00424AF6 /* background.frag in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C41CE6060C00424AF6 /* background.frag */; };
 		225A60C71CE6060C00424AF6 /* background.vert in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C51CE6060C00424AF6 /* background.vert */; };
 		226A48421CD7A55700106866 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 226A48411CD7A55700106866 /* Arrow.png */; };
-		22BAD7461CD8C2870070B4F2 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD7451CD8C2870070B4F2 /* Storyboard.storyboard */; };
 		22BAD74B1CD8DD2E0070B4F2 /* clouds.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD7481CD8DD2E0070B4F2 /* clouds.mtl */; };
 		22BAD74C1CD8DD2E0070B4F2 /* clouds.obj in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD7491CD8DD2E0070B4F2 /* clouds.obj */; };
 		22BAD74D1CD8DD2E0070B4F2 /* cloudsDiff.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD74A1CD8DD2E0070B4F2 /* cloudsDiff.png */; };
@@ -31,6 +30,14 @@
 		630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC731CD687DA00AB6C23 /* characterdiffuse.png */; };
 		630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */; };
 		630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */; };
+		6351C0831CE7381B000DEB3E /* block_diff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0801CE7381B000DEB3E /* block_diff.png */; };
+		6351C0841CE7381B000DEB3E /* block.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0811CE7381B000DEB3E /* block.mtl */; };
+		6351C0851CE7381B000DEB3E /* block.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0821CE7381B000DEB3E /* block.obj */; };
+		6351C0871CE77FA3000DEB3E /* player.frag in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0861CE77FA3000DEB3E /* player.frag */; };
+		6351C0891CE77FAC000DEB3E /* player.vert in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0881CE77FAC000DEB3E /* player.vert */; };
+		6351C08D1CE783F0000DEB3E /* player.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 6351C08C1CE783F0000DEB3E /* player.mtl */; };
+		6351C08F1CE784A6000DEB3E /* sprite_player.png in Resources */ = {isa = PBXBuildFile; fileRef = 6351C08E1CE784A6000DEB3E /* sprite_player.png */; };
+		6351C0911CE78849000DEB3E /* player.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0901CE78849000DEB3E /* player.obj */; };
 		A81653571CE083FA00577BF2 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81653561CE083FA00577BF2 /* GameObject.cpp */; };
 		A83875391CE1CF2A004D88D9 /* level.txt in Resources */ = {isa = PBXBuildFile; fileRef = A83875381CE1CF2A004D88D9 /* level.txt */; };
 		A838753B1CE1CF65004D88D9 /* level.txt in Resources */ = {isa = PBXBuildFile; fileRef = A838753A1CE1CF65004D88D9 /* level.txt */; };
@@ -140,13 +147,12 @@
 		22542B021CD7472900C29FD7 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		22542B031CD755F800C29FD7 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		22542B041CD7569D00C29FD7 /* Ground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
-		22542B051CD75AC500C29FD7 /* block.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.mtl; sourceTree = "<group>"; };
-		22542B061CD75AC500C29FD7 /* block.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.obj; sourceTree = "<group>"; };
+		22542B051CD75AC500C29FD7 /* block-grass.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "block-grass.mtl"; sourceTree = "<group>"; };
+		22542B061CD75AC500C29FD7 /* block-grass.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "block-grass.obj"; sourceTree = "<group>"; };
 		22542B071CD75AC500C29FD7 /* grassTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grassTop.png; sourceTree = "<group>"; };
 		225A60C41CE6060C00424AF6 /* background.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.frag; sourceTree = "<group>"; };
 		225A60C51CE6060C00424AF6 /* background.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.vert; sourceTree = "<group>"; };
 		226A48411CD7A55700106866 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
-		22BAD7451CD8C2870070B4F2 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		22BAD7471CD8DB490070B4F2 /* Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		22BAD7481CD8DD2E0070B4F2 /* clouds.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clouds.mtl; sourceTree = "<group>"; };
 		22BAD7491CD8DD2E0070B4F2 /* clouds.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clouds.obj; sourceTree = "<group>"; };
@@ -166,6 +172,14 @@
 		630FAC731CD687DA00AB6C23 /* characterdiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characterdiffuse.png; sourceTree = "<group>"; };
 		630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.mtl; sourceTree = "<group>"; };
 		630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.obj; sourceTree = "<group>"; };
+		6351C0801CE7381B000DEB3E /* block_diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_diff.png; sourceTree = "<group>"; };
+		6351C0811CE7381B000DEB3E /* block.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.mtl; sourceTree = "<group>"; };
+		6351C0821CE7381B000DEB3E /* block.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.obj; sourceTree = "<group>"; };
+		6351C0861CE77FA3000DEB3E /* player.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = player.frag; sourceTree = "<group>"; };
+		6351C0881CE77FAC000DEB3E /* player.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = player.vert; sourceTree = "<group>"; };
+		6351C08C1CE783F0000DEB3E /* player.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.mtl; sourceTree = "<group>"; };
+		6351C08E1CE784A6000DEB3E /* sprite_player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite_player.png; sourceTree = "<group>"; };
+		6351C0901CE78849000DEB3E /* player.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.obj; sourceTree = "<group>"; };
 		6376BC4C1CD7E6C500E2D48E /* Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		6376BC4D1CD7E71500E2D48E /* GameController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		A81635D51CE1F6FE00ED1A8C /* MoveableEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoveableEntity.h; sourceTree = "<group>"; };
@@ -412,6 +426,14 @@
 		B47949841BA6742B00B5E9DC /* data */ = {
 			isa = PBXGroup;
 			children = (
+				6351C08E1CE784A6000DEB3E /* sprite_player.png */,
+				6351C0901CE78849000DEB3E /* player.obj */,
+				6351C08C1CE783F0000DEB3E /* player.mtl */,
+				6351C0881CE77FAC000DEB3E /* player.vert */,
+				6351C0861CE77FA3000DEB3E /* player.frag */,
+				6351C0801CE7381B000DEB3E /* block_diff.png */,
+				6351C0811CE7381B000DEB3E /* block.mtl */,
+				6351C0821CE7381B000DEB3E /* block.obj */,
 				A83875401CE1D0EE004D88D9 /* level.txt */,
 				630FAC731CD687DA00AB6C23 /* characterdiffuse.png */,
 				630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */,
@@ -420,8 +442,8 @@
 				22BAD74F1CD8E24B0070B4F2 /* backgroundDiff.png */,
 				22BAD7501CD8E24B0070B4F2 /* backgroundPlane.mtl */,
 				22BAD7511CD8E24B0070B4F2 /* backgroundPlane.obj */,
-				22542B051CD75AC500C29FD7 /* block.mtl */,
-				22542B061CD75AC500C29FD7 /* block.obj */,
+				22542B051CD75AC500C29FD7 /* block-grass.mtl */,
+				22542B061CD75AC500C29FD7 /* block-grass.obj */,
 				22542B071CD75AC500C29FD7 /* grassTop.png */,
 				22BAD7481CD8DD2E0070B4F2 /* clouds.mtl */,
 				22BAD7491CD8DD2E0070B4F2 /* clouds.obj */,
@@ -434,7 +456,6 @@
 				540DDD7D1CA020B700DE3FCC /* diffuse3.png */,
 				540DDD7B1CA0058A00DE3FCC /* guy.mtl */,
 				540DDD751CA0024A00DE3FCC /* guy.frag */,
-				22BAD7451CD8C2870070B4F2 /* Storyboard.storyboard */,
 				540DDD761CA0024A00DE3FCC /* guy.obj */,
 				540DDD771CA0024A00DE3FCC /* guy.vert */,
 				B47949921BA6742B00B5E9DC /* config.json */,
@@ -764,14 +785,17 @@
 				22BAD74C1CD8DD2E0070B4F2 /* clouds.obj in Resources */,
 				B4794A311BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				540DDD781CA0024A00DE3FCC /* guy.frag in Resources */,
-				22BAD7461CD8C2870070B4F2 /* Storyboard.storyboard in Resources */,
 				540DDD791CA0024A00DE3FCC /* guy.obj in Resources */,
 				A83875391CE1CF2A004D88D9 /* level.txt in Resources */,
 				630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */,
+				6351C08D1CE783F0000DEB3E /* player.mtl in Resources */,
 				B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */,
+				6351C0911CE78849000DEB3E /* player.obj in Resources */,
+				6351C0841CE7381B000DEB3E /* block.mtl in Resources */,
 				226A48421CD7A55700106866 /* Arrow.png in Resources */,
 				225A60C71CE6060C00424AF6 /* background.vert in Resources */,
 				540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */,
+				6351C0831CE7381B000DEB3E /* block_diff.png in Resources */,
 				22BAD74B1CD8DD2E0070B4F2 /* clouds.mtl in Resources */,
 				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,
 				630FAC641CD632AD00AB6C23 /* norm.png in Resources */,
@@ -779,18 +803,22 @@
 				A838753B1CE1CF65004D88D9 /* level.txt in Resources */,
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,
 				22BAD74D1CD8DD2E0070B4F2 /* cloudsDiff.png in Resources */,
+				6351C08F1CE784A6000DEB3E /* sprite_player.png in Resources */,
 				22BAD7521CD8E24B0070B4F2 /* backgroundDiff.png in Resources */,
 				B47949AF1BA6742B00B5E9DC /* config.json in Resources */,
+				6351C0871CE77FA3000DEB3E /* player.frag in Resources */,
 				22BAD7541CD8E24B0070B4F2 /* backgroundPlane.obj in Resources */,
 				B4794A301BA6743D00B5E9DC /* LICENSE.txt in Resources */,
+				6351C0851CE7381B000DEB3E /* block.obj in Resources */,
+				6351C0891CE77FAC000DEB3E /* player.vert in Resources */,
 				540DDD7E1CA020B700DE3FCC /* diffuse3.png in Resources */,
 				A838753D1CE1CF9B004D88D9 /* level.txt in Resources */,
 				22BAD7531CD8E24B0070B4F2 /* backgroundPlane.mtl in Resources */,
 				A838753F1CE1D0BF004D88D9 /* level.txt in Resources */,
 				54B964A81CB259CE008843E2 /* normal3.png in Resources */,
 				B4CB8CD01B72E43300FE041B /* Project-Info.plist in Resources */,
-				22542B081CD75AC500C29FD7 /* block.mtl in Resources */,
-				22542B091CD75AC500C29FD7 /* block.obj in Resources */,
+				22542B081CD75AC500C29FD7 /* block-grass.mtl in Resources */,
+				22542B091CD75AC500C29FD7 /* block-grass.obj in Resources */,
 				22542B0A1CD75AC500C29FD7 /* grassTop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

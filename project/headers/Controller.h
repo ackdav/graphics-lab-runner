@@ -52,10 +52,12 @@ private:
             vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
             shader->setUniform("NormalMatrix", normalMatrix);
             
-            vmml::Vector4f eyePos = vmml::Vector4f(brenderer.getObjects()->getCamera("camera")->getPosition(), 1.0f);
+            vmml::Vector4f eyePos = vmml::Vector4f(-brenderer.getObjects()->getCamera("camera")->getPosition().x()-16.5f,brenderer.getObjects()->getCamera("camera")->getPosition().y()+22.f,brenderer.getObjects()->getCamera("camera")->getPosition().z(), 1.0f);
+//            vmml::Vector4f eyePos = vmml::Vector4f(brenderer.getObjects()->getCamera("camera")->getPosition().x(),brenderer.getObjects()->getCamera("camera")->getPosition().y(),brenderer.getObjects()->getCamera("camera")->getPosition().z(), 1.0f);
+            
             shader->setUniform("EyePos", eyePos);
             
-            shader->setUniform("LightPos", vmml::Vector4f(1.0, 1.0, 10.0, 1.0));
+            shader->setUniform("LightPos", vmml::Vector4f(player.getPos().x(), player.getPos().y(), player.getPos().z(), 1.0));
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
             shader->setUniform("Is", vmml::Vector3f(1.f));
@@ -82,7 +84,7 @@ public:
     }
     
     vmml::Vector3f getPlayerPosition() {
-        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
+//        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
         return vmml::Vector3f(-moveableEntities.begin()->getCurrentXPos(), 0.f,0.f);
     }
     

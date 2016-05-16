@@ -36,31 +36,36 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->setShaderVersionES("#version 100");
     
     // load materials and shaders before loading the model
-    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 0, false, false, false, false, false);
+    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 1, false, false, false, false, false);
 	
-    ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 0, false, false, false, false, false);
-    
+    ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 1, false, false, false, false, false);
+    ShaderPtr playerShader = bRenderer().getObjects()->loadShaderFile("player", 0, false, true, true, false, false);
     // load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
+    MaterialPtr playerMaterial = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
+    
     
     // create additional properties for a model
     PropertiesPtr guyProperties = bRenderer().getObjects()->createProperties("guyProperties");
-    
+    PropertiesPtr playerProperties = bRenderer().getObjects()->createProperties("playerProperties");
+
     PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
     
     // load models
+    bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
+
+    
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
-    bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, backgroundShader, backgroundProperties);
-//    bRenderer().getInput()->singleTapRecognized();
-//
-   
+
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)
     
     // create camera
     bRenderer().getObjects()->createCamera("camera", vmml::Vector3f(0.0f, 0.0f, 10.0f), vmml::Vector3f(0.f, 0.0f, 0.5f));
+    
     
     
     //Set starting position
@@ -118,8 +123,31 @@ void RenderProject::terminateFunction()
 /* Update render queue */
 void RenderProject::updateRenderQueue(const std::string &camera, const double &deltaTime)
 {
+//    vmml::Matrix4f modelMatrix =  vmml::create_translation(vmml::Vector3f(30.f, -24.0, 0.0)) * vmml::create_scaling(vmml::Vector3f(0.3f));
+//
+//    bRenderer().getObjects()->getProperties("flameProperties")->setScalar("offset", _randomOffset);		// pass offset for wave effect
+//    // create three flames
+//    for (GLfloat z = 0.0f; z < 3.0f; z++)
+//    {
+//        // translate
+//        vmml::Matrix4f translation = vmml::create_translation(vmml::Vector3f(0.65f / bRenderer().getView()->getAspectRatio(), 0.6f + (0.08f*z), (-z / 100.0f - 0.50f)));
+//        // rotate
+//        GLfloat rot = 0.0f;
+//        if (fmod(z, 2.0f) != 0.0f)
+//            rot = M_PI_F;
+//        
+//        vmml::Matrix4f rotation = vmml::create_rotation(rot, vmml::Vector3f::UNIT_Z);
+//        // scale
+//        GLfloat ParticleScale = 1.225f - (0.23f*z);
+//        vmml::Matrix4f scaling = vmml::create_scaling(vmml::Vector3f(ParticleScale / bRenderer().getView()->getAspectRatio(), ParticleScale, ParticleScale));
+//        // model matrix
+//        modelMatrix = translation * scaling * rotation;
+//        // submit to render queue
+//        bRenderer().getModelRenderer()->queueModelInstance(bRenderer().getObjects()->getModel("flame"), ("flame_instance" + std::to_string(z)), modelMatrix, _viewMatrixHUD, vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false, true, GL_SRC_ALPHA, GL_ONE, (-1.0f - 0.01f*z));  // negative distance because always in foreground
+//    }
+
  
-    vmml::Matrix4f modelMatrix;
+//    vmml::Matrix4f modelMatrix;
     
     
     // Touch controls TODO: Implement more directions, implement Collision Detection, adjust Camera according to player character
@@ -157,117 +185,6 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     
     controller.update(0.04f,direction);
     
-    
-    
-    // ---------> Prints BoundingBox Size of a given model in console
-    std::cout << "BB: " << bRenderer().getObjects()->getModel("minecraftcharacter")->getBoundingBoxObjectSpace();
-   
-
-    
-
-
-//    int ButtonPress = ;bRenderer().getInput()->getCursorPositionX()
-    
-//    printf("%d",ButtonPress);
-    //Renderer().getInput()->getTouches().map::
-    
-//    printf("%d",Renderer().getInput()->doubleTapRecognized());
-//
-//    if (bRenderer().getInput()->singleTapRecognized())
-//{
-//        
-//        
-//        
-//        modelMatrix = vmml::create_translation(vmml::Vector3f(elapsedTime,0,0)) * player_character.getPos();
-//        
-//        
-//    }
-//    else{
-//        
-//       modelMatrix = player_character.getPos();
-//    }
-//
-//    
-//    /*** solar system ***/
-//    
-//    // TODO: implement solar system here
-//    
-//    
-//    elapsedTime = elapsedTime+deltaTime;
-//    
-//    
-//    //Assign Block Positions
-//    
-//    vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(5,0,0)) *  player_character.getPos();
-//
-//    
-//    
-//    vmml::Matrix4f viewMatrix = bRenderer().getObjects()->getCamera("camera")->getViewMatrix();
-//    
-//    ShaderPtr shader = bRenderer().getObjects()->getShader("guy");
-//    
-//    if (shader.get())
-//    {
-//        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-//        shader->setUniform("ViewMatrix", viewMatrix);
-//        shader->setUniform("ModelMatrix", modelMatrix);
-//        
-//        vmml::Matrix3f normalMatrix;
-//        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
-//        shader->setUniform("NormalMatrix", normalMatrix);
-//        
-//        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
-//        shader->setUniform("EyePos", eyePos);
-//        
-//        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
-//        shader->setUniform("Ia", vmml::Vector3f(1.f));
-//        shader->setUniform("Id", vmml::Vector3f(1.f));
-//        shader->setUniform("Is", vmml::Vector3f(1.f));
-//    }
-//    else
-//    {
-//        bRenderer::log("No shader available.");
-//    }
-//     
-//    
-//
-//    
-//    //shader->setUniform("NormalMatrix", vmml::Matrix3f(modelMatrix));
-//    
-//    
-//    bRenderer().getModelRenderer()->drawModel("minecraftcharacter", "camera", modelMatrix, std::vector<std::string>({ }));
-//    
-//
-//    
-//    shader = bRenderer().getObjects()->getShader("guy");
-//    
-//    if (shader.get())
-//    {
-//        shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-//        shader->setUniform("ViewMatrix", viewMatrix);
-//        shader->setUniform("ModelMatrix", modelMatrix2);
-//        
-//        vmml::Matrix3f normalMatrix;
-//        vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix2)), normalMatrix);
-//        shader->setUniform("NormalMatrix", normalMatrix);
-//        
-//        vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
-//        shader->setUniform("EyePos", eyePos);
-//        
-//        shader->setUniform("LightPos", vmml::Vector4f(0.f, 1.f, .5f, 1.f));
-//        shader->setUniform("Ia", vmml::Vector3f(1.f));
-//        shader->setUniform("Id", vmml::Vector3f(1.f));
-//        shader->setUniform("Is", vmml::Vector3f(1.f));
-//    }
-//    else
-//    {
-//        bRenderer::log("No shader available.");
-//    }
-//    
-//    
-//    bRenderer().getModelRenderer()->drawModel("block", "camera", modelMatrix2, std::vector<std::string>({ }));
-//    
-//    
     
 
 }

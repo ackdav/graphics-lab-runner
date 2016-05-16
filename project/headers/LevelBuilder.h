@@ -56,9 +56,9 @@ private:
             builder.setObjectName("block").setShaderName("guy");
         } else if (std::strcmp(index.c_str(),"2") ==0) {
             PlayerMovement movement;
-            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(&movement);
+            builder.setObjectName("player").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(&movement);
         } else if (std::strcmp(index.c_str(),"3") ==0) {
-            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(1);
+            builder.setObjectName("player").setShaderName("guy").setIsMoving(true).setFacing(1);
         }
         //There is an element
         if (std::strcmp(index.c_str(),"0") !=0) {
@@ -94,7 +94,7 @@ public:
             row--;
         }
         EntityBuilder builder;
-        builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(1,1,10)).setFacing(1);
+        builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(0.,0.,0.)).setFacing(1);
         skyplane = builder.createEntity();
         
     }
