@@ -30,6 +30,8 @@ private:
         vmml::Vector3f translation;
         std::string shaderName;
         std::string objectName;
+        std::string imageName;
+        vmml::Matrix4f viewMatrix;
         Movement *movement;
         bool isMoving;
         bool setValue;
@@ -73,6 +75,16 @@ public:
         return *this;
     }
     
+    EntityBuilder& setImage(std::string _image) {
+        eProperties.imageName = _image;
+        return *this;
+    }
+    
+    EntityBuilder& setViewMatrix(vmml::Matrix4f _viewMatrix) {
+        eProperties.viewMatrix = _viewMatrix;
+        return *this;
+    }
+    
     //0 front, 1 left, 2 back, 3 right, -1 no rotation
     EntityBuilder& setFacing(int _facing) {
         eProperties.facing = _facing;
@@ -94,7 +106,7 @@ public:
     
     Entity createEntity() {
         if (eProperties.facing < 0) {
-            Entity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName);
+            Entity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.imageName,eProperties.viewMatrix);
             return result;
         }
         if (eProperties.isMoving) {

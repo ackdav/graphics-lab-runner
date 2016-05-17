@@ -27,6 +27,10 @@ public:
         movement = _movement;
     }
     
+    Movement* getMovement() {
+        return movement;
+    }
+    
     bool isMoving() {
         return true;
     }

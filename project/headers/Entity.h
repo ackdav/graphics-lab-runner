@@ -22,8 +22,10 @@ private:
     vmml::Vector3f translation;
     vmml::Matrix4f _startPos;
     vmml::Matrix4f _currentPos;
+    vmml::Matrix4f viewMatrix;
     std::string shaderName;
     std::string objName;
+    std::string image;
     
 public:
     
@@ -69,7 +71,11 @@ public:
         return objName;
     }
     
-    Entity(vmml::Vector3f scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName):translation(_translation),shaderName(_shaderName),objName(_objName){
+    vmml::Matrix4f getViewMatrix() {
+        return viewMatrix;
+    }
+    
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName,std::string _image,vmml::Matrix4f _viewMatrix):translation(_translation),shaderName(_shaderName),objName(_objName),image(_image),viewMatrix(_viewMatrix){
         _startPos = vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
     }

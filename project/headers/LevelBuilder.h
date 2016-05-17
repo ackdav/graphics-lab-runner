@@ -25,9 +25,12 @@ private:
     Entity player;
     Entity skyplane;
     
-    std::list<Entity> entities;
-    std::list<Entity> moveableEntities;
+    std::list<Entity> buttons;
     
+    std::list<Entity> entities;
+    std::list<MoveableEntity> moveableEntities;
+    
+    GLfloat imageScale;
     
     std::string level;
     // Center of first screen
@@ -55,10 +58,10 @@ private:
         if (std::strcmp(index.c_str(),"1") ==0) {
             builder.setObjectName("block").setShaderName("guy");
         } else if (std::strcmp(index.c_str(),"2") ==0) {
-            PlayerMovement movement;
-            builder.setObjectName("player").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(&movement);
+            //PlayerMovement movement;
+            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"3") ==0) {
-            builder.setObjectName("player").setShaderName("guy").setIsMoving(true).setFacing(1);
+            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(1);
         }
         //There is an element
         if (std::strcmp(index.c_str(),"0") !=0) {
@@ -77,22 +80,49 @@ private:
         }
     }
     
+    void addButton(std::string name, std::string image, vmml::Vector3f translation) {
+        bRenderer.getObjects()->createSprite(name, image);
+        EntityBuilder builder;
+        vmml::Matrix4f _viewMatrixHUD = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
+        builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio(), imageScale, imageScale)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image);
+        buttons.push_back(builder.createEntity());
+    }
+    
 public:
     
     LevelBuilder(Renderer _brenderer):bRenderer(_brenderer){
-        // TODO: Load level from txt file
-        level = "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 2 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 3 0 0 0 0\n1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0";
-        std::vector<std::string> rows = split(level,'\n');
-        int row = 0;
-        for(std::vector<std::string>::iterator it = rows.begin(); it != rows.end(); ++it) {
-            int column = 0;
-            std::vector<std::string> elements = split(*it,' ');
-            for(std::vector<std::string>::iterator it2 = elements.begin(); it2 != elements.end(); ++it2) {
-                addElement(*it2,row,column);
-                column++;
+        
+        imageScale = 0.1f;
+        
+        addButton("bLeft","arrowL.png",vmml::Vector3f(0.55f, -0.9f, -0.00f));
+        addButton("bRight","arrowR.png",vmml::Vector3f(0.85f, -0.9f, -0.00f));
+        addButton("bUp","arrowU.png",vmml::Vector3f(-0.55f, -0.9f, -0.00f));
+        addButton("bTarget","target.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
+        
+        
+        std::string line;
+        std::ifstream myfile (bRenderer::getFilePath("level.txt"));
+        if (myfile.is_open())
+        {
+            int row = 0;
+            while ( std::getline (myfile,line) )
+            {
+                int column = 0;
+                std::vector<std::string> elements = split(line,' ');
+                for(std::vector<std::string>::iterator it2 = elements.begin(); it2 != elements.end(); ++it2) {
+                    addElement(*it2,row,column);
+                    column++;
+                }
+                row--;
             }
-            row--;
+            myfile.close();
         }
+        
+        //_brenderer.getObjects()->createSprite("bLeft", "arrowL.png");
+        //_brenderer.getObjects()->createSprite("bRight", "arrowR.png");
+        //_brenderer.getObjects()->createSprite("bUp", "arrowU.png");
+        
+        
         EntityBuilder builder;
         builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(0.,0.,0.)).setFacing(1);
         skyplane = builder.createEntity();
@@ -107,8 +137,12 @@ public:
         return entities;
     }
     
-    std::list<Entity> getMoveableEntities() {
+    std::list<MoveableEntity> getMoveableEntities() {
         return moveableEntities;
+    }
+    
+    std::list<Entity> getButtons() {
+        return buttons;
     }
     
     Entity getPlayer() {
@@ -118,6 +152,8 @@ public:
     Entity getSkyplane() {
         return skyplane;
     }
+    
+    
     
 };
 

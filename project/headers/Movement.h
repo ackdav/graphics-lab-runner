@@ -15,9 +15,19 @@ class Movement {
     
 private:
     
+    double durationFlying;
+    
 public:
 
-    virtual vmml::Vector<4, bool > GetMove() = 0;
+    virtual vmml::Vector<4, bool > getMove() = 0;
+    
+    void setDurationFlying(double _durationFlying) {
+        durationFlying = _durationFlying;
+    }
+    
+    double getDurationFlying() {
+        return durationFlying;
+    }
     
 };
 
