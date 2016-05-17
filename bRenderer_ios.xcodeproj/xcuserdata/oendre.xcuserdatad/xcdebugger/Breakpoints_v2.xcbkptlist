@@ -29,8 +29,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "class Entity"
-            landmarkType = "3">
+            landmarkName = "getCurrentXPos()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -59,7 +59,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "initialize(Renderer _brenderer)"
+            landmarkName = "checkCollision(vmml::AABBf box, vmml::AABBf oldPosition,vmml::AABBf newPosition)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

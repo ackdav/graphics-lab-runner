@@ -48,15 +48,11 @@ void main()
     mediump mat3 tbn = mat3(tM, bM, nM);
     
     // TODO: read and correctly transform normals from normal map, then use them for lighting
-    mediump vec3 nTemp = texture2D(NormalMap, texCoordVarying.st).rgb;
-    nTemp = normalize(nTemp * 2.0 - 1.0);
-    nTemp = normalize(tbn * nTemp);
-    n = nTemp;
-    
+ 
     
     mediump vec3 l = normalize(LightPos - pos).xyz;
     
-    lowp float intensity = dot(n, l);
+    lowp float intensity = max(dot(n, l),0.0);
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
     lowp vec4 diffuseResult = vec4(clamp(diffuse, 0.0, 1.0), 1.0);
     
@@ -86,16 +82,16 @@ void main()
     
     
     if (sil > 0.95)
-        color *= 0.95*vec4(1.0,1.0,1.0,1.0);
+        color *= 1.0*vec4(1.0,1.0,1.0,1.0);
     else if (sil > 0.8)
-        color *= 0.8*vec4(1.0,1.0,1.0,1.0);
+        color *= 0.9*vec4(1.0,1.0,1.0,1.0);
     else if (sil > 0.7)
-        color *= 0.7*vec4(1.0,1.0,1.0,1.0);
+        color *= 0.8*vec4(1.0,1.0,1.0,1.0);
     else if (sil > 0.6)
+        color *= 0.7*vec4(1.0,1.0,1.0,1.0);
+    else 
         color *= 0.6*vec4(1.0,1.0,1.0,1.0);
-    else
-        color *= 0.5*vec4(1.0,1.0,1.0,1.0);
-
+ 
     
    
 

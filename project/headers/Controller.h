@@ -57,7 +57,7 @@ private:
             
             shader->setUniform("EyePos", eyePos);
             
-            shader->setUniform("LightPos", vmml::Vector4f(player.getPos().x(), player.getPos().y(), player.getPos().z(), 1.0));
+            shader->setUniform("LightPos", -eyePos);
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
             shader->setUniform("Is", vmml::Vector3f(1.f));
