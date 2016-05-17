@@ -73,7 +73,6 @@ private:
     }
     
     vmml::Vector<4,bool> checkCollision(vmml::AABBf box, vmml::AABBf oldPosition,vmml::AABBf newPosition) {
-        vmml::Vector3f movedBy = newPosition.getCenter() - oldPosition.getCenter();
         vmml::Vector3f boxMax = box.getMax();
         vmml::Vector3f boxMin = box.getMin();
         vmml::Vector3f posMax = newPosition.getMax();
@@ -102,36 +101,7 @@ private:
                 left = true;
             }
         }
-//        
-//        
-//        
-//        if (std::abs(x) > std::abs(y)) {
-//            //Movement in x direction
-//            if (x < 0) {
-//                return vmml::Vector<4,bool>(true,false,false,false);
-//            } else {
-//            }
-//        } else {
-//            //Movement in y direction
-//            if (y < 0) {
-//                std::cout<<"Y COLLISION "<<box.getMax().at(1)<<","<<box.getMin().at(1)<<std::endl;
-//                std::cout<<"Y COLLISION1 "<<newPosition.getMax().at(1)<<","<<newPosition.getMin().at(1)<<std::endl;
-//                std::cout<<"Y COLLISION2 "<<oldPosition.getMax().at(1)<<","<<oldPosition.getMin().at(1)<<std::endl;
-//                //To bottom
-//                return vmml::Vector3f(movedBy.at(0),box.getMax().at(1) - newPosition.getMin().at(1),0.0f);
-//            } else {
-//                //To Top
-//                return vmml::Vector3f(movedBy.at(0),box.getMin().at(1) - newPosition.getMin().at(1),0.0f);
-//            }
-//        }
         return vmml::Vector<4,bool>(left,right,top,bottom);
-//        vmml::Vector3f(
-//        std::cout<<"MAX: "<<box.getMax()<<std::endl;
-//        std::cout<<"MIN: "<<box.getMin()<<std::endl;
-//        std::cout<<"OLD POS: "<<oldPosition<<std::endl;
-//        std::cout<<"POS: "<<newPosition<<std::endl;
-//        std::cout<<"MOVED: "<<movedBy<<std::endl;
-//    }
     }
     
     
@@ -163,7 +133,7 @@ private:
                     ytrans = box2.getMax().at(1) - newbox.getMin().at(1)+0.001;
                 }
                 if (collision.at(1)) {
-                    xtrans = box2.getMax().at(0)-newbox.getMax().at(0)+0.001;
+                    xtrans = box2.getMax().at(0)-newbox.getMin().at(0)+ 0.001;
                 }
                 if (collision.at(0)) {
                     xtrans = box2.getMin().at(0)-newbox.getMin().at(0)-0.001;
