@@ -53,18 +53,23 @@ void main()
     
     // TODO: read and correctly transform normals from normal map, then use them for lighting
     
-    mediump vec3 l = normalize(-LightPos - pos).xyz;
+    mediump vec3 l = -normalize(LightPos - pos).xyz;
     
     lowp float intensity = dot(n, l);
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
     lowp vec4 diffuseResult = vec4(clamp(diffuse, 0.0, 1.0), 1.0);
 
     
-    lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.st);
-
-    lowp vec4 specColor = vec4(0.0);
     
-    vec3 LightDirection = -LightPos.xyz;
+    
+
+    
+    lowp vec4 NormalizedReflectedViewVector = vec4(l - 2.0 * ( l * n ) * n, 1.0);
+    
+    lowp float D = pow(dot(normalize(-EyePos-vVertex), NormalizedReflectedViewVector),1.0);
+    
+    lowp vec4 color = texture2D(DiffuseMap, (D*texCoordVarying).st);
+    
     
     tempColor = ambientResult+diffuseResult;
 
