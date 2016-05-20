@@ -12,6 +12,8 @@
 		22542B0A1CD75AC500C29FD7 /* grassTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 22542B071CD75AC500C29FD7 /* grassTop.png */; };
 		225A60C61CE6060C00424AF6 /* background.frag in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C41CE6060C00424AF6 /* background.frag */; };
 		225A60C71CE6060C00424AF6 /* background.vert in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C51CE6060C00424AF6 /* background.vert */; };
+		22A14CD91CEF6EA400B6CEF1 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A14CD81CEF6EA400B6CEF1 /* texture.png */; };
+		22A14CDB1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A14CDA1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png */; };
 		22BAD74B1CD8DD2E0070B4F2 /* clouds.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD7481CD8DD2E0070B4F2 /* clouds.mtl */; };
 		22BAD74C1CD8DD2E0070B4F2 /* clouds.obj in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD7491CD8DD2E0070B4F2 /* clouds.obj */; };
 		22BAD74D1CD8DD2E0070B4F2 /* cloudsDiff.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD74A1CD8DD2E0070B4F2 /* cloudsDiff.png */; };
@@ -150,6 +152,8 @@
 		22542B071CD75AC500C29FD7 /* grassTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grassTop.png; sourceTree = "<group>"; };
 		225A60C41CE6060C00424AF6 /* background.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.frag; sourceTree = "<group>"; };
 		225A60C51CE6060C00424AF6 /* background.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.vert; sourceTree = "<group>"; };
+		22A14CD81CEF6EA400B6CEF1 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		22A14CDA1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HLG_map3_orig_smut.png; sourceTree = "<group>"; };
 		22BAD7481CD8DD2E0070B4F2 /* clouds.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clouds.mtl; sourceTree = "<group>"; };
 		22BAD7491CD8DD2E0070B4F2 /* clouds.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clouds.obj; sourceTree = "<group>"; };
 		22BAD74A1CD8DD2E0070B4F2 /* cloudsDiff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudsDiff.png; sourceTree = "<group>"; };
@@ -424,11 +428,13 @@
 				6351C0861CE77FA3000DEB3E /* player.frag */,
 				6351C0801CE7381B000DEB3E /* block_diff.png */,
 				6351C0811CE7381B000DEB3E /* block.mtl */,
+				22A14CD81CEF6EA400B6CEF1 /* texture.png */,
 				6351C0821CE7381B000DEB3E /* block.obj */,
 				A83875401CE1D0EE004D88D9 /* level.txt */,
 				630FAC731CD687DA00AB6C23 /* characterdiffuse.png */,
 				630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */,
 				630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */,
+				22A14CDA1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png */,
 				A842B47B1CEAEEE1006A852A /* arrowL.png */,
 				A842B47C1CEAEEE1006A852A /* arrowR.png */,
 				A842B47D1CEAEEE1006A852A /* arrowU.png */,
@@ -788,6 +794,7 @@
 				6351C0831CE7381B000DEB3E /* block_diff.png in Resources */,
 				22BAD74B1CD8DD2E0070B4F2 /* clouds.mtl in Resources */,
 				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,
+				22A14CDB1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png in Resources */,
 				630FAC641CD632AD00AB6C23 /* norm.png in Resources */,
 				A83875411CE1D0EE004D88D9 /* level.txt in Resources */,
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,
@@ -804,6 +811,7 @@
 				540DDD7E1CA020B700DE3FCC /* diffuse3.png in Resources */,
 				22BAD7531CD8E24B0070B4F2 /* backgroundPlane.mtl in Resources */,
 				54B964A81CB259CE008843E2 /* normal3.png in Resources */,
+				22A14CD91CEF6EA400B6CEF1 /* texture.png in Resources */,
 				B4CB8CD01B72E43300FE041B /* Project-Info.plist in Resources */,
 				A842B47F1CEAEEE1006A852A /* arrowR.png in Resources */,
 				A842B4801CEAEEE1006A852A /* arrowU.png in Resources */,
