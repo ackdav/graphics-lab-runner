@@ -59,20 +59,39 @@ void main()
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
     lowp vec4 diffuseResult = vec4(clamp(diffuse, 0.0, 1.0), 1.0);
 
+    vec4 specular = vec4(0.0);
+    if (dot(normalVarying, l) > 0.0)
+    {
+        highp vec3 eyeVec = normalize((EyePos - posVarying).xyz);
+        highp vec3 h = normalize((l + eyeVec)/length(l+eyeVec));
+        highp vec3 spec = Ks * pow(dot(normalVarying,h), Ns) * Is;
+        specular = vec4(clamp(spec,0.0,1.0),1.0);
+    }
+    
+    vec4 VertexToCamera = EyePos+vVertex;
+    
+    float CameraFacingPercentage = dot(vec3(VertexToCamera), normalVarying);
     
     
+//    if(CameraFacingPercentage<0.1){
+//        
+//        gl_FragColor= vec4(0.0,1.0,0.0,1.0);
+//    }
     
+//    else{
 
     
     lowp vec4 NormalizedReflectedViewVector = vec4(l - 2.0 * ( l * n ) * n, 1.0);
     
-    lowp float D = pow(dot(normalize(-EyePos-vVertex), NormalizedReflectedViewVector),1.0);
+    lowp float D = pow(dot(normalize(EyePos-vVertex), NormalizedReflectedViewVector),1.0);
     
     lowp vec4 color = texture2D(DiffuseMap, (D*texCoordVarying).st);
     
     
     tempColor = ambientResult+diffuseResult;
 
-    gl_FragColor = tempColor * color ;
+    gl_FragColor = tempColor * color + specular;
+        
+//    }
     
 }

@@ -59,7 +59,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "checkCollision(vmml::AABBf box, vmml::AABBf oldPosition,vmml::AABBf newPosition)"
+            landmarkName = "getMax(vmml::Vector3f a,vmml::Vector3f b)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
