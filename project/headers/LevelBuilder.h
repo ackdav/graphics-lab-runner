@@ -9,6 +9,7 @@
 #ifndef bRenderer_ios_LevelBuilder_h
 #define bRenderer_ios_LevelBuilder_h
 
+
 #include "bRenderer.h"
 #include "EntityBuilder.h"
 #include "PlayerMovement.h"
@@ -18,6 +19,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iterator>
+#include <stdlib.h>
 
 class LevelBuilder {
 private:
@@ -61,19 +63,51 @@ private:
             //PlayerMovement movement;
             builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"3") ==0) {
-            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(1);
+            
+            //set rotation !! Doesnt work yet
+            builder.setObjectName("coin50").setShaderName("guy").setIsMoving(false).setFacing(2);
+        }
+        else if (std::strcmp(index.c_str(),"4") ==0) {
+            
+            //set rotation !!
+            builder.setObjectName("coin20").setShaderName("guy").setIsMoving(false).setFacing(2);
+        }
+        else if (std::strcmp(index.c_str(),"A") ==0) {
+            //set rotation !!
+            builder.setObjectName("floating_tree1").setShaderName("guy").setIsMoving(false).setFacing(2);
+        }
+        else if (std::strcmp(index.c_str(),"C") ==0) {
+            //set rotation !!
+            builder.setObjectName("clouds").setShaderName("guy").setIsMoving(false).setFacing(2);
+        }
+        else if (std::strcmp(index.c_str(),"F") ==0) {
+            //set rotation !!
+//            builder.setObjectName("frog").setShaderName("guy").setIsMoving(true).setFacing(4);
         }
         //There is an element
         if (std::strcmp(index.c_str(),"0") !=0) {
-            std::cout<<builder.getObjectName()<<std::endl;
             vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(builder.getObjectName())->getBoundingBoxObjectSpace();
-            builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,0));
+            //Set Translation differently for background Stuff
+            if (std::strcmp(index.c_str(),"A")==0){
+                builder.setScale(vmml::Vector3f(1.f + 1./(arc4random_uniform(1.) + 1.))).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,8. + arc4random_uniform(4.) ));
+                }
+                else if(std::strcmp(index.c_str(),"C")==0){
+                     builder.setScale(vmml::Vector3f(1.f + 1/(arc4random_uniform(1.) + 1.) )).setTranslation(vmml::Vector3f(-3. + column-colCenter,5.+ row+rowCenter,8. + arc4random_uniform(4.) ));
+                }
+                else{
+                builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,0));
+                }
+                
             if (builder.isMoving()) {
                 MoveableEntity entity = builder.createMoveableEntity();
                 moveableEntities.push_back(entity);
                 if (std::strcmp(index.c_str(),"2") ==0) {
                     player = entity;
                 }
+//                else if(std::strcmp(index.c_str(),"3") ==0) {
+//
+//                }
+                
             } else {
                 entities.push_back(builder.createEntity());
             }
@@ -117,16 +151,26 @@ public:
             }
             myfile.close();
         }
-        
-        //_brenderer.getObjects()->createSprite("bLeft", "arrowL.png");
-        //_brenderer.getObjects()->createSprite("bRight", "arrowR.png");
-        //_brenderer.getObjects()->createSprite("bUp", "arrowU.png");
-        
-        
+//        std::ifstream myfile2 (bRenderer::getFilePath("backgroundlevel.txt"));
+//        if (myfile2.is_open())
+//        {
+//            int row = 0;
+//            while ( std::getline (myfile,line) )
+//            {
+//                int column = 0;
+//                std::vector<std::string> elements = split(line,' ');
+//                for(std::vector<std::string>::iterator it2 = elements.begin(); it2 != elements.end(); ++it2) {
+//                    addElement(*it2,row,column);
+//                    column++;
+//                }
+//                row--;
+//            }
+//            myfile2.close();
+//        }
+
         EntityBuilder builder;
-        builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(3.0f)).setTranslation(vmml::Vector3f(0.,0.,0.)).setFacing(1);
+        builder.setObjectName("backgroundPlane").setShaderName("background").setScale(vmml::Vector3f(4.8f)).setFacing(1);
         skyplane = builder.createEntity();
-        
     }
     
     ~LevelBuilder(){

@@ -11,6 +11,6 @@ vt 0.0000 0.0000
 vt 1.0000 0.0000
 vt 1.0000 1.0000
 vn 1.0000 0.0000 0.0000
-usemtl Material.001
+usemtl backgroundMat
 s off
 f 1/1/1 2/2/1 4/3/1 3/4/1

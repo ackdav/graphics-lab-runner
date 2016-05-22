@@ -59,6 +59,11 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, backgroundShader, backgroundProperties);
+    bRenderer().getObjects()->loadObjModel("coin50.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("coin20.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("floating_tree1.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("frog.obj", false, true, guyShader, guyProperties);
 
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)
@@ -182,6 +187,8 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     if(isTouching==false){
         direction=5;
     }
+    
+
     
     controller.update(0.04f,direction);
     

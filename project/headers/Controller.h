@@ -12,6 +12,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
+
 
 #include "GameController.h"
 #include "bRenderer.h"
@@ -37,7 +39,7 @@ private:
         vmml::Matrix4f modelMatrix = entity.getPos();
         std::string shaderName = entity.getShaderName();
         std::string objName = entity.getObjName();
-        std::cout<<"SHADER: "<<shaderName<<std::endl;
+//        std::cout<<"SHADER: "<<shaderName<<std::endl;
         vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
         
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
@@ -52,12 +54,16 @@ private:
             vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
             shader->setUniform("NormalMatrix", normalMatrix);
             
-            vmml::Vector4f eyePos = vmml::Vector4f(-brenderer.getObjects()->getCamera("camera")->getPosition().x()-16.5f,brenderer.getObjects()->getCamera("camera")->getPosition().y()+22.f,brenderer.getObjects()->getCamera("camera")->getPosition().z(), 1.0f);
-//            vmml::Vector4f eyePos = vmml::Vector4f(brenderer.getObjects()->getCamera("camera")->getPosition().x(),brenderer.getObjects()->getCamera("camera")->getPosition().y(),brenderer.getObjects()->getCamera("camera")->getPosition().z(), 1.0f);
+            //This is the same as setting the camera
+            vmml::Vector4f eyePos = getPlayerTrans() - vmml::Vector3f(0.0f,0.0f,-10.0f);
             
             shader->setUniform("EyePos", eyePos);
             
-            shader->setUniform("LightPos", -eyePos);
+            //Setting up the sun - so it walks with him just a little bit
+            vmml::Vector4f lightPos = vmml::Vector4f(-30.f + eyePos.x()/2 , 25.f , 1.f  );
+
+            shader->setUniform("LightPos", lightPos);            
+            
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
             shader->setUniform("Is", vmml::Vector3f(1.f));
@@ -169,7 +175,12 @@ public:
     
     vmml::Vector3f getPlayerPosition() {
 //        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
-        return vmml::Vector3f(-moveableEntities.begin()->getCurrentXPos(), 0.f,0.f);
+        return vmml::Vector3f(-moveableEntities.begin()->getPos().x(), 0.f,0.f);
+    }
+    
+    vmml::Vector3f getPlayerTrans() {
+        //        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
+        return vmml::Vector3f(moveableEntities.begin()->getPos().x(), 0.f, 0.f);
     }
     
     void initialize(Renderer _brenderer) {
@@ -190,10 +201,30 @@ public:
         std::list<MoveableEntity>::iterator moveableIterator;
         std::list<Entity>::iterator buttonIterator;
         
-        drawEntity(skyplane);
         
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            std::cout<<iterator->getTranslate()<<std::endl;
+//            std::cout<<iterator->getTranslate()<<std::endl;
+            std::string name = iterator->getObjName();
+            if( std::strcmp(name.c_str(),"coin50") ==0) {
+             //Implement Coin Rotation here
+            }
+            if( std::strcmp(name.c_str(),"coin20") ==0) {
+                //Implement Coin Rotation here
+            }
+            if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
+                
+                //Todo: do some movement!!!!!
+//                std::cout <<  " WHYY " << iterator->getTranslate() << std::endl;
+//                float y = iterator->getTranslate().y();
+//                float x = iterator -> getTranslate().x();
+//                iterator->move(vmml::Vector3f(x*cos(0.1)-sin(0.1)*x,y*sin(0.1)-y*cos(0.1) ,0.f));
+                //
+//                int r = arc4random_uniform(2.);
+//                float move = 0.0;
+//                if (r%2==0){ move = 0.01;iterator->move(vmml::Vector3f(-move,move,0.f));}
+//                else{ move = -0.005;iterator->move(vmml::Vector3f(move,-move,0.f));}
+                
+            }
             drawEntity(*iterator);
         }
         // Move default -0.9 to floor
@@ -234,49 +265,22 @@ public:
             }
             
             
-            //?
-//            vmml::Vector4f pos = moveableIterator->getPos().get_column(3);
-//            for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-//                
-//                vmml::AABBf boundingBox2 = brenderer.getObjects()->getModel(iterator->getObjName())->getBoundingBoxObjectSpace();
-//                vmml::AABBf box2(iterator->getPos() * boundingBox2.getMin(),iterator->getPos() * boundingBox2.getMax());
-//                
-//                vmml::Vector<4,bool> collision = checkCollision(box2,oldbox,newbox);
-//                // Upon collision, move 0.01 up, until no collision is detected (still need to check with all other objects for collision, therefore no break)
-//                if (box2.isIn2d(newbox.getMin()) || box2.isIn2d(newbox.getMax())){
-//                    vmml::Vector<4,bool> collision = checkCollision(box2,oldbox,newbox);
-//                    std::cout<<"COLLISION BEFORE "<<collision<<std::endl;
-//                    float xtrans = 0;
-//                    float ytrans = 0;
-//                    if (collision.at(2)) {
-//                        ytrans = box2.getMax().at(1) - newbox.getMin().at(1);
-//                    }
-//                    if (collision.at(0)) {
-//                        xtrans = newbox.getMax().at(0) - box2.getMin().at(0);
-//                    }
-//                    if (xtrans != 0 || ytrans != 0) {
-//                        moveableIterator->move(vmml::Vector3f(xtrans,ytrans,0.0f));
-//                    }
-//                    newbox.set(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
-//                    collision = checkCollision(box2,oldbox,newbox);
-//                    std::cout<<"COLLISION AFTER "<<collision<<std::endl;
-//                }
-//
-//                
-//            }
+            std::cout << moveableIterator->getObjName();
+            
+            //Todo: move skyplane with player
+            skyplane.setTranslate(vmml::Vector3f(getPlayerTrans().x()/2.f,0.,0.));
+            skyplane.move(skyplane.getTranslate());
+        
+            drawEntity(skyplane);
             drawEntity(*moveableIterator);
+
         }
         
         
         for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator) {
             brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(buttonIterator->getObjName()), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
         }
-        
-
-        
-        
-        //gameController.update(elapsedTime,direction);
-        
+  
     }
     
     

@@ -1,0 +1,35 @@
+# Blender MTL File: 'floating_tree1.blend'
+# Material Count: 3
+
+newmtl IslandTopMaterial
+Ns 94.117647
+Ka 1.000000 1.000000 1.000000
+Kd 0.027748 0.609017 0.085130
+Ks 0.005155 0.005155 0.005155
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd HLG_map3_orig_smut.png
+
+newmtl IslandTreeMaterial
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.121714 0.081113 0.048310
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd HLG_map3_orig_smut.png
+
+newmtl IslandBottomMaterial
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.015807 0.065582 0.018830
+Ks 0.004782 0.004782 0.004782
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd HLG_map3_orig_smut.png

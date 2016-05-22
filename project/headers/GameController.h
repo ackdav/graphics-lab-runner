@@ -28,41 +28,41 @@ private:
     float ycoordinate = 0.f;
 
     
-    void drawEntity(Entity entity) {
-        vmml::Matrix4f modelMatrix = entity.getPos();
-        std::string shaderName = entity.getShaderName();
-        std::string objName = entity.getObjName();
+//    void drawEntity(Entity entity) {
+//        vmml::Matrix4f modelMatrix = entity.getPos();
+//        std::string shaderName = entity.getShaderName();
+//        std::string objName = entity.getObjName();
+//        
+//        vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
+//        
+//        ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
+    
+//        if (shader.get())
+//        {
+//            shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
+//            shader->setUniform("ViewMatrix", viewMatrix);
+//            shader->setUniform("ModelMatrix", modelMatrix);
+//            
+//            vmml::Matrix3f normalMatrix;
+//            vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
+//            shader->setUniform("NormalMatrix", normalMatrix);
+//            
+//            vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
+//            shader->setUniform("EyePos", eyePos);
+//            
+//            shader->setUniform("LightPos", vmml::Vector4f(0.f, 0.f, 0.0, 0.0));
+//            shader->setUniform("Ia", vmml::Vector3f(1.f));
+//            shader->setUniform("Id", vmml::Vector3f(1.f));
+//            shader->setUniform("Is", vmml::Vector3f(1.f));
+//        }
+//        else
+//        {
+//            bRenderer::log("No shader available.");
+//        }
         
-        vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
+//        brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
         
-        ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
-        
-        if (shader.get())
-        {
-            shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-            shader->setUniform("ViewMatrix", viewMatrix);
-            shader->setUniform("ModelMatrix", modelMatrix);
-            
-            vmml::Matrix3f normalMatrix;
-            vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
-            shader->setUniform("NormalMatrix", normalMatrix);
-            
-            vmml::Vector4f eyePos = vmml::Vector4f(0.0f, 0.0f, 0.0f, 1.0f);
-            shader->setUniform("EyePos", eyePos);
-            
-            shader->setUniform("LightPos", vmml::Vector4f(0.f, 0.f, 0.0, 0.0));
-            shader->setUniform("Ia", vmml::Vector3f(1.f));
-            shader->setUniform("Id", vmml::Vector3f(1.f));
-            shader->setUniform("Is", vmml::Vector3f(1.f));
-        }
-        else
-        {
-            bRenderer::log("No shader available.");
-        }
-        
-        brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
-        
-    }
+//    }
     
     
 public:

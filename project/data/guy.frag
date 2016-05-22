@@ -33,6 +33,7 @@ varying mediump vec3 tangentVarying;    // tangent in world space
 
 varying vec4 vVertex;
 
+lowp vec4 fogColor;
 
 
 void main()
@@ -68,13 +69,13 @@ void main()
         specular = vec4(clamp(spec,0.0,1.0),1.0);
     }
     
-    vec4 VertexToCamera = EyePos+vVertex;
+    vec4 VertexToCamera = EyePos;
     
     float CameraFacingPercentage = dot(vec3(VertexToCamera), normalVarying);
     
     
-//    if(CameraFacingPercentage<0.1){
-//        
+//    if(CameraFacing Percentage<1){
+    
 //        gl_FragColor= vec4(0.0,1.0,0.0,1.0);
 //    }
     
@@ -88,10 +89,28 @@ void main()
     lowp vec4 color = texture2D(DiffuseMap, (D*texCoordVarying).st);
     
     
+//      fogColor = vec4(1.0f);
     tempColor = ambientResult+diffuseResult;
 
+//    
+//    float sil = dot(normalize(EyePos.xyz), normalVarying);
+//    
+//    
+//    if (EyePos.z + (pos.z+0.1))
+//        color *= vec4(0.0,0.0,0.0,0.0);
+// 
+   
+//    const float LOG2 = 1.442695;
+//    float z = length(vVertex);
+//    fogFactor = exp2( -gl_Fog.density *
+//                     gl_Fog.density *
+//                     z *
+//                     z *
+//                     LOG2 );
+//    fogFactor = clamp(fogFactor, 0.0, 1.0);
+    
     gl_FragColor = tempColor * color + specular;
-        
+//        gl_FragColor = tempColor * color ;
 //    }
     
 }

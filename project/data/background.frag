@@ -78,7 +78,7 @@ void main()
 
 
     
-    float sil = dot(normalize(EyePos.xyz - pos.xyz), normalVarying);
+    float sil = dot(normalize(LightPos.xyz - pos.xyz), normalVarying);
     
     
     if (sil > 0.95)
