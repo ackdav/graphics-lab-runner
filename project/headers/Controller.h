@@ -34,6 +34,8 @@ private:
     Entity skyplane;
     bool jumpable;
     double timeSinceLast;
+    float GameTime = 0.0;
+    bool goingUp = true;
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -43,6 +45,7 @@ private:
         vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
         
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
+        
         
         if (shader.get())
         {
@@ -67,12 +70,20 @@ private:
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
             shader->setUniform("Is", vmml::Vector3f(1.f));
+            
+            shader->setUniform("GameTime", GameTime);
+            
+            vmml::Vector4f PlayerPos = -getPlayerPosition();
+            
+            shader->setUniform("PlayerPosition", PlayerPos);
+            
+            std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
+            
         }
         else
         {
             bRenderer::log("No shader available.");
         }
-        
         brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
         //         std::cout << "object " << objName << brenderer.getObjects()->getModel("block")->getBoundingBoxObjectSpace();
         
@@ -200,6 +211,21 @@ public:
         std::list<Entity>::iterator iterator;
         std::list<MoveableEntity>::iterator moveableIterator;
         std::list<Entity>::iterator buttonIterator;
+        
+        if(GameTime<=2.0 && goingUp == true) {
+            GameTime += 0.1;
+        }
+        if(GameTime>=2.0 && goingUp == true){
+            goingUp = false;
+        }
+        if(GameTime<=2.0 && goingUp == false){
+            GameTime -= 0.1;
+        }
+        if(GameTime<=0.0 && goingUp == false){
+            goingUp = true;
+        }
+        
+        std::cout<<"GameTime: "<<GameTime<<std::endl;
         
         
         

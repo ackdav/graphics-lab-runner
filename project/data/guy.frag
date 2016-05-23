@@ -27,9 +27,13 @@ varying lowp vec4 diffuseVarying;
 varying lowp vec4 specularVarying;
 varying lowp vec4 texCoordVarying;
 
+uniform mediump vec4 PlayerPosition;
+
 varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
+
+
 
 varying vec4 vVertex;
 
@@ -114,10 +118,16 @@ void main()
 
     tempColor = ambientResult+diffuseResult;
 
-
+    float deltax=abs(PlayerPosition.x-pos.x);
+    float deltay=abs(PlayerPosition.y-pos.y);
+    float deltaz=abs(PlayerPosition.z-pos.z);
+    float deltaxcir=sqrt(deltax*deltax*deltaz*deltaz);
+    //float deltax=PlayerPosition.x-posVarying;
+    
+    
+    
     
     gl_FragColor = tempColor * color + specular;
-    
     
     
     
@@ -135,10 +145,16 @@ void main()
     float depth = pos.y;
     float fogFactorIntensity = (1.0-(1.0/(-depth))+0.2);
     
+    if(deltax<0.2&&deltaz<0.2&&deltay>2.0 && deltaxcir<0.02){
+        gl_FragColor = mix(gl_FragColor, vec4(0.0,0.0,0.0,1.0),1.0);
+    }
+    
     
     if(pos.y<-1.0){
     gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.2);
     }
+    
+    
     
 
 

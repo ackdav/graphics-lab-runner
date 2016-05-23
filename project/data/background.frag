@@ -31,6 +31,10 @@ varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
+uniform mediump float GameTime;
+
+varying mediump float GameTimeVarying;
+
 
 //fogParameters
 
@@ -102,25 +106,30 @@ void main()
     //gl_FragColor = (ambientResult + diffuseResult) * color + specularResult;
 
 
+    float randomized = fract(sin(dot(texCoordVarying.xy ,vec2(12.9898,78.233))) * 43758.5453);
     
     float sil = dot(normalize(LightPos.xyz - pos.xyz), normalVarying);
     
     
-    if (sil > 0.95)
+    
+    if (GameTimeVarying < 1.0){
+    
+    if (sil > 0.95 * 1.0/GameTimeVarying)
         color *= 1.0*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.8)
+    else if (sil > 0.8 * 1.0/GameTimeVarying)
         color *= 0.9*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.7)
+    else if (sil > 0.7 * 1.0/GameTimeVarying)
         color *= 0.8*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.6)
+    else if (sil > 0.6 * 1.0/GameTimeVarying)
         color *= 0.7*vec4(1.0,1.0,1.0,1.0);
     else 
         color *= 0.6*vec4(1.0,1.0,1.0,1.0);
- 
-    
+        
+    }
+
    
 
-    gl_FragColor = (ambientResult+diffuseResult ) * color ;
+    gl_FragColor = (ambientResult+diffuseResult ) * color;
     
     
     float fFogCoord = abs(EyePos.z/EyePos.w);
@@ -138,6 +147,7 @@ void main()
     fResult = 1.0-clamp(fResult, 0.0, 1.0);
     
     fogFactor = fResult;
+    
     
     gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactor);
 

@@ -32,6 +32,9 @@ varying mediump vec4 posVarying;        // pos in world space
 varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
+uniform mediump float GameTime;
+
+varying mediump float GameTimeVarying;
 
 
 void main()
@@ -40,6 +43,7 @@ void main()
     normalVarying = normalize(NormalMatrix * Normal);
     tangentVarying = normalize(NormalMatrix * Tangent);
     texCoordVarying = TexCoord;
+    GameTimeVarying = GameTime;
 
     
     gl_Position = ProjectionMatrix * ViewMatrix * posVarying;
