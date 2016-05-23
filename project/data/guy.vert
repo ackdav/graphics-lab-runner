@@ -34,7 +34,7 @@ varying mediump vec3 tangentVarying;    // tangent in world space
 
 varying vec4 vVertex;
 
-
+varying mediump vec4 PlayerPosVarying;
 
 void main()
 {
@@ -42,6 +42,8 @@ void main()
     normalVarying = normalize(NormalMatrix * Normal);
     tangentVarying = normalize(NormalMatrix * Tangent);
     texCoordVarying = TexCoord;
+    
+    PlayerPosVarying = PlayerPosVarying;
     
 
     

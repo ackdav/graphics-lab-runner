@@ -35,9 +35,35 @@ varying vec4 vVertex;
 
 lowp vec4 fogColor;
 
+varying mediump vec4 PlayerPosVarying;
+
+// FogParameters
+
+struct fogParameters{
+
+float fDensity;
+float fStart;
+float fEnd;
+vec4 fogColor;
+int iFogEquation;
+} fogParams;
+
+
+
+
 
 void main()
 {
+    
+    //fogParameters
+    fogParams.fDensity = 0.04;
+    fogParams.fStart = 10.0;
+    fogParams.fEnd = 20.0;
+    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
+    fogParams.iFogEquation = 2;
+    
+    
+    
     lowp vec4 tempColor;
     
     lowp vec4 ambientResult = vec4(Ka * Ia, 1.0);
@@ -74,43 +100,49 @@ void main()
     float CameraFacingPercentage = dot(vec3(VertexToCamera), normalVarying);
     
     
-//    if(CameraFacing Percentage<1){
-    
-//        gl_FragColor= vec4(0.0,1.0,0.0,1.0);
-//    }
-    
-//    else{
+
 
     
     lowp vec4 NormalizedReflectedViewVector = vec4(l - 2.0 * ( l * n ) * n, 1.0);
     
     lowp float D = pow(dot(normalize(EyePos-vVertex), NormalizedReflectedViewVector),1.0);
     
+    
     lowp vec4 color = texture2D(DiffuseMap, (D*texCoordVarying).st);
     
     
-//      fogColor = vec4(1.0f);
+
     tempColor = ambientResult+diffuseResult;
 
-//    
-//    float sil = dot(normalize(EyePos.xyz), normalVarying);
-//    
-//    
-//    if (EyePos.z + (pos.z+0.1))
-//        color *= vec4(0.0,0.0,0.0,0.0);
-// 
-   
-//    const float LOG2 = 1.442695;
-//    float z = length(vVertex);
-//    fogFactor = exp2( -gl_Fog.density *
-//                     gl_Fog.density *
-//                     z *
-//                     z *
-//                     LOG2 );
-//    fogFactor = clamp(fogFactor, 0.0, 1.0);
+
     
     gl_FragColor = tempColor * color + specular;
-//        gl_FragColor = tempColor * color ;
-//    }
+    
+    
+    
+    
+    float fFogCoord = abs(EyePos.y/EyePos.w);
+    
+    float fogFactor;
+    
+    float fResult = 0.0;
+    
+    fResult = exp(-fogParams.fDensity*fFogCoord);
+
+    fogFactor = fResult;
+
+    
+    float depth = pos.y;
+    float fogFactorIntensity = (1.0-(1.0/(-depth))+0.2);
+    
+    
+    if(pos.y<-1.0){
+    gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.2);
+    }
+    
+
+
+
+
     
 }

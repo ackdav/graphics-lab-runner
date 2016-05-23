@@ -61,7 +61,7 @@ private:
             builder.setObjectName("block").setShaderName("guy");
         } else if (std::strcmp(index.c_str(),"2") ==0) {
             //PlayerMovement movement;
-            builder.setObjectName("minecraftcharacter").setShaderName("guy").setIsMoving(true).setFacing(2).setMovement(new PlayerMovement(bRenderer,buttons));
+            builder.setObjectName("minecraftcharacter").setShaderName("player").setIsMoving(true).setFacing(3).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"3") ==0) {
             
             //set rotation !! Doesnt work yet
@@ -89,7 +89,7 @@ private:
             vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(builder.getObjectName())->getBoundingBoxObjectSpace();
             //Set Translation differently for background Stuff
             if (std::strcmp(index.c_str(),"A")==0){
-                builder.setScale(vmml::Vector3f(1.f + 1./(arc4random_uniform(1.) + 1.))).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,8. + arc4random_uniform(4.) ));
+                builder.setScale(vmml::Vector3f(1.f + 1./(arc4random_uniform(1.) + 1.))).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,13. + arc4random_uniform(4.) ));
                 }
                 else if(std::strcmp(index.c_str(),"C")==0){
                      builder.setScale(vmml::Vector3f(1.f + 1/(arc4random_uniform(1.) + 1.) )).setTranslation(vmml::Vector3f(-3. + column-colCenter,5.+ row+rowCenter,8. + arc4random_uniform(4.) ));

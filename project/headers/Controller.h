@@ -202,6 +202,7 @@ public:
         std::list<Entity>::iterator buttonIterator;
         
         
+        
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
 //            std::cout<<iterator->getTranslate()<<std::endl;
             std::string name = iterator->getObjName();
@@ -273,6 +274,7 @@ public:
         
             drawEntity(skyplane);
             drawEntity(*moveableIterator);
+            
 
         }
         

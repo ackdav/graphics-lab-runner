@@ -1,5 +1,6 @@
 #include "RenderProject.h"
 
+
 /* Initialize the Project */
 vmml::AABBf aabb;
 void RenderProject::init()
@@ -20,6 +21,9 @@ void RenderProject::init()
 /* This function is executed when initializing the renderer */
 void RenderProject::initFunction()
 {
+    
+    
+    
     // get OpenGL and shading language version
     bRenderer::log("OpenGL Version: ", glGetString(GL_VERSION));
     bRenderer::log("Shading Language Version: ", glGetString(GL_SHADING_LANGUAGE_VERSION));
