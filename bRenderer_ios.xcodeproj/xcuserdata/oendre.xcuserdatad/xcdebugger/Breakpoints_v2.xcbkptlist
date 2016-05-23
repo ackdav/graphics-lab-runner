@@ -54,12 +54,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "project/headers/Controller.h"
-            timestampString = "485708973.152407"
+            timestampString = "485710347.23388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "hasCollision(vmml::Vector&lt;4,bool&gt; collision)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "isIn(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
