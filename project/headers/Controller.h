@@ -34,6 +34,7 @@ private:
     Entity skyplane;
     bool jumpable;
     double timeSinceLast;
+    float timeRunning;
     
     void drawEntity(Entity entity) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -200,7 +201,7 @@ public:
         std::list<Entity>::iterator iterator;
         std::list<MoveableEntity>::iterator moveableIterator;
         std::list<Entity>::iterator buttonIterator;
-        
+        timeRunning += elapsedTime;
         
         
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
@@ -208,23 +209,16 @@ public:
             std::string name = iterator->getObjName();
             if( std::strcmp(name.c_str(),"coin50") ==0) {
              //Implement Coin Rotation here
+                iterator->setRotation(2.*timeRunning);
+
             }
             if( std::strcmp(name.c_str(),"coin20") ==0) {
-                //Implement Coin Rotation here
+                iterator->setRotation(2.*timeRunning);
+
             }
             if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
                 
-                //Todo: do some movement!!!!!
-//                std::cout <<  " WHYY " << iterator->getTranslate() << std::endl;
-//                float y = iterator->getTranslate().y();
-//                float x = iterator -> getTranslate().x();
-//                iterator->move(vmml::Vector3f(x*cos(0.1)-sin(0.1)*x,y*sin(0.1)-y*cos(0.1) ,0.f));
-                //
-//                int r = arc4random_uniform(2.);
-//                float move = 0.0;
-//                if (r%2==0){ move = 0.01;iterator->move(vmml::Vector3f(-move,move,0.f));}
-//                else{ move = -0.005;iterator->move(vmml::Vector3f(move,-move,0.f));}
-                
+                iterator -> setTranslate(vmml::Vector3f(0., sin(timeRunning),0.));
             }
             drawEntity(*iterator);
         }
