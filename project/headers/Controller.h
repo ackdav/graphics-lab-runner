@@ -227,19 +227,19 @@ public:
         std::list<Entity>::iterator buttonIterator;
 
         
-        if(GameTime<=2.0 && goingUp == true) {
+        if(GameTime<1.5 && goingUp == true) {
             GameTime += 0.1;
         }
-        if(GameTime>=2.0 && goingUp == true){
+        if(GameTime>=1.5 && goingUp == true){
             goingUp = false;
         }
-        if(GameTime<=2.0 && goingUp == false){
+        if(goingUp==false){
             GameTime -= 0.1;
         }
-        if(GameTime<=0.0 && goingUp == false){
-            goingUp = true;
+        if(GameTime<=0.1){
+            goingUp=true;
         }
-        
+       
         std::cout<<"GameTime: "<<GameTime<<std::endl;
         
         

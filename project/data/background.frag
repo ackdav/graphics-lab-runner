@@ -114,16 +114,23 @@ void main()
     
     if (GameTimeVarying < 1.0){
     
-    if (sil > 0.95 * 1.0/GameTimeVarying)
-        color *= 1.0*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.8 * 1.0/GameTimeVarying)
+    if (sil > 0.95 * 0.5/GameTimeVarying)
+        color *= 0.95*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.8 * 0.5/GameTimeVarying)
         color *= 0.9*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.7 * 1.0/GameTimeVarying)
+    else if (sil > 0.7 * 0.5/GameTimeVarying)
+        color *= 0.85*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.6 * 0.5/GameTimeVarying)
         color *= 0.8*vec4(1.0,1.0,1.0,1.0);
-    else if (sil > 0.6 * 1.0/GameTimeVarying)
+    else if (sil > 0.5 * 0.5/GameTimeVarying)
+        color *= 0.75*vec4(1.0,1.0,1.0,1.0);
+    else if (sil > 0.4 * 0.5/GameTimeVarying)
         color *= 0.7*vec4(1.0,1.0,1.0,1.0);
-    else 
+    else if (sil > 0.3 * 0.5/GameTimeVarying)
+        color *= 0.65*vec4(1.0,1.0,1.0,1.0);
+    else
         color *= 0.6*vec4(1.0,1.0,1.0,1.0);
+
         
     }
 

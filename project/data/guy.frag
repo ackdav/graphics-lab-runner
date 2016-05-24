@@ -66,6 +66,10 @@ void main()
     fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
     fogParams.iFogEquation = 2;
     
+    mediump vec3 sunpos = vec3(-20.0, 20.0, 0);
+    mediump vec3 sunlightdirection = -sunpos.xyz;
+    mediump vec4 sunlightcolor = vec4(1.0,1.0,0.5,0.1);
+    
     
     
     lowp vec4 tempColor;
@@ -99,13 +103,6 @@ void main()
         specular = vec4(clamp(spec,0.0,1.0),1.0);
     }
     
-    vec4 VertexToCamera = EyePos;
-    
-    float CameraFacingPercentage = dot(vec3(VertexToCamera), normalVarying);
-    
-    
-
-
     
     lowp vec4 NormalizedReflectedViewVector = vec4(l - 2.0 * ( l * n ) * n, 1.0);
     
@@ -125,11 +122,17 @@ void main()
     //float deltax=PlayerPosition.x-posVarying;
     
     
+    float sunlightangle = acos(dot(sunlightdirection.xyz, normalVarying.xyz)/(length(sunlightdirection.xyz)*length(normalVarying.xyz)));
+    
+    
+    
     
     
     gl_FragColor = tempColor * color + specular;
     
-    
+    if(sunlightangle>0.0 && sunlightangle < 3.141 && normalVarying.x > 0.0){
+        gl_FragColor = gl_FragColor * sunlightcolor;
+    }
     
     float fFogCoord = abs(EyePos.y/EyePos.w);
     
@@ -151,7 +154,7 @@ void main()
     
     
     if(pos.y<-1.0){
-    gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.2);
+    gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.1);
     }
     
     
