@@ -68,7 +68,7 @@ void main()
     
     mediump vec3 sunpos = vec3(-20.0, 20.0, 0);
     mediump vec3 sunlightdirection = -sunpos.xyz;
-    mediump vec4 sunlightcolor = vec4(1.0,1.0,0.5,0.1);
+    mediump vec4 sunlightcolor = vec4(0.5,0.5,0.5,0.5);
     
     
     
@@ -127,12 +127,13 @@ void main()
     
     
     
-    
     gl_FragColor = tempColor * color + specular;
+    
     
     if(sunlightangle>0.0 && sunlightangle < 3.141 && normalVarying.x > 0.0){
         gl_FragColor = gl_FragColor * sunlightcolor;
     }
+    
     
     float fFogCoord = abs(EyePos.y/EyePos.w);
     
