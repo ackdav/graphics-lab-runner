@@ -68,8 +68,10 @@ private:
             shader->setUniform("EyePos", eyePos);
             
             //Setting up the sun - so it walks with him just a little bit
-            vmml::Vector4f lightPos = vmml::Vector4f(-30.f + eyePos.x()/2 , 25.f , 1.f  );
-
+            float f = (GameTime - 0.1)*(1/0.8);
+            std::cout<<"SUN POSITION: "<<f<<std::endl;
+            vmml::Vector4f lightPos = vmml::Vector4f((getPlayerPosition().x()- 25.f) + (GameTime *0.1*brenderer.getView()->getScreenWidth()) , 25.f , 1.f  );
+            
             shader->setUniform("LightPos", lightPos);            
             
             shader->setUniform("Ia", vmml::Vector3f(1.f));
@@ -121,12 +123,7 @@ private:
     }
     
     bool isIn(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
-        float newwidth = posMax.at(0) - posMin.at(0);
-        float oldwidth = boxMax.at(0) - boxMin.at(0);
-        float newheight = posMax.at(1) - posMin.at(1);
-        float oldheight = boxMax.at(1) - boxMin.at(1);
-        float newdepth = posMax.at(2) - posMin.at(2);
-        float olddepth = boxMax.at(2) - boxMin.at(2);
+    
         //return oldCenter.at(0) < newCenter.at(0) + newwidth && oldCenter.at(0) + oldwidth > newCenter.at(0) && oldCenter.at(1) < newCenter.at(1) + newheight && oldheight + oldCenter.at(1) > newCenter.at(1) && oldCenter.at(2) < newCenter.at(2) + newdepth && olddepth + oldCenter.at(2) > newCenter.at(2);
         return (((boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) || (boxMax.at(0) > posMax.at(0) && boxMin.at(0) < posMax.at(0))) &&
                 ((boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) || (boxMax.at(1) > posMax.at(1) && boxMin.at(1) < posMax.at(1))) &&
@@ -228,20 +225,21 @@ public:
     void update(double elapsedTime, int direction) {
         int silvercoins = 0;
         int goldcoins = 0;
+        timeRunning += elapsedTime;
         timeSinceLast = elapsedTime - timeSinceLast;
         std::list<Entity>::iterator iterator;
         std::list<MoveableEntity>::iterator moveableIterator;
         std::list<Entity>::iterator buttonIterator;
 
         
-        if(GameTime<1.5 && goingUp == true) {
-            GameTime += 0.1;
+        if(GameTime<.55 && goingUp == true) {
+            GameTime += 0.001;
         }
-        if(GameTime>=1.5 && goingUp == true){
+        if(GameTime>=.55 && goingUp == true){
             goingUp = false;
         }
         if(goingUp==false){
-            GameTime -= 0.1;
+            GameTime -= 0.001;
         }
         if(GameTime<=0.1){
             goingUp=true;
@@ -278,6 +276,7 @@ public:
             vmml::Vector<4, bool > move = movement->getMove();
             float x = 0.0f;
             float y = 0.0f;
+            std::cout<<"MOVE "<<move<<std::endl;
             if (move.at(0)) {
                 x -= 0.1f;
             }

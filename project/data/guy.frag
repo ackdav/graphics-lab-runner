@@ -127,7 +127,7 @@ void main()
     
     
     
-    gl_FragColor = tempColor * color + specular;
+    gl_FragColor = tempColor * color ;
     
     
     if(sunlightangle>0.0 && sunlightangle < 3.141 && normalVarying.x > 0.0){
