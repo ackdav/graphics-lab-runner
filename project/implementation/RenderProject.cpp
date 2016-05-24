@@ -40,7 +40,7 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->setShaderVersionES("#version 100");
     
     // load materials and shaders before loading the model
-    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 1, false, false, false, false, false);
+    ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 1, true, true, false, false, false);
 	
     ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 1, false, false, false, false, false);
     ShaderPtr playerShader = bRenderer().getObjects()->loadShaderFile("player", 0, false, true, true, false, false);

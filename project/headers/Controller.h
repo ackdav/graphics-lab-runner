@@ -97,17 +97,20 @@ private:
         bool right = false;
         bool top = false;
         bool bottom = false;
-        bool yCollision = boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMax.at(1);
-        bool xCollision = boxMax.at(0) > posMin.at(0);
+        //bool yCollision = boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMax.at(1);
+        //bool xCollision = boxMax.at(0) > posMin.at(0);
+        bool xCollision = (boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) || (boxMax.at(0) > posMax.at(0) && boxMin.at(0) < posMax.at(0));
+        bool yCollision = (boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) || (boxMax.at(1) > posMax.at(1) && boxMin.at(1) < posMax.at(1));
         if (yCollision) {
-            if (oldCenter.at(1) > newCenter.at(1)) {
+            if (boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) {
                 top = true;
             } else {
+                std::cout<<"BOTTTTTTTTOOOOOOOOOMMMMM"<<std::endl;
                 bottom = true;
             }
         }
         if (xCollision) {
-            if (oldCenter.at(0) > newCenter.at(0)) {
+            if (boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) {
                 right = true;
             } else {
                 left = true;
@@ -121,7 +124,12 @@ private:
         float oldwidth = boxMax.at(0) - boxMin.at(0);
         float newheight = posMax.at(1) - posMin.at(1);
         float oldheight = boxMax.at(1) - boxMin.at(1);
-        return oldCenter.at(0) < newCenter.at(0) + newwidth && oldCenter.at(0) + oldwidth > newCenter.at(0) && oldCenter.at(1) < newCenter.at(1) + newheight && oldheight + oldCenter.at(1) > newCenter.at(1);
+        float newdepth = posMax.at(2) - posMin.at(2);
+        float olddepth = boxMax.at(2) - boxMin.at(2);
+        //return oldCenter.at(0) < newCenter.at(0) + newwidth && oldCenter.at(0) + oldwidth > newCenter.at(0) && oldCenter.at(1) < newCenter.at(1) + newheight && oldheight + oldCenter.at(1) > newCenter.at(1) && oldCenter.at(2) < newCenter.at(2) + newdepth && olddepth + oldCenter.at(2) > newCenter.at(2);
+        return (((boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) || (boxMax.at(0) > posMax.at(0) && boxMin.at(0) < posMax.at(0))) &&
+                ((boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) || (boxMax.at(1) > posMax.at(1) && boxMin.at(1) < posMax.at(1))) &&
+                ((boxMax.at(2) > posMin.at(2) && boxMin.at(2) < posMin.at(2)) || (boxMax.at(2) > posMax.at(2) && boxMin.at(2) < posMax.at(2))));
     }
     
     bool hasCollision(vmml::Vector<4,bool> collision) {
@@ -154,6 +162,9 @@ private:
             // Upon collision, move 0.01 up, until no collision is detected (still need to check with all other objects for collision, therefore no break)
             if (isIn(box2.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax)){
                 vmml::Vector<4,bool> collision = checkCollision(oldbox.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax );
+                if (collision.at(3)) {
+                    ytrans = box2.getMin().at(1) - newbox.getMax().at(1)-0.001;
+                }
                 if (collision.at(2)) {
                     ytrans = box2.getMax().at(1) - newbox.getMin().at(1)+0.001;
                 }
@@ -285,6 +296,7 @@ public:
                 moveableIterator->move(col);
                 newbox.set(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
                 col = getCollision(oldbox,newbox);
+                std::cout<<"COLLISION "<<col<<std::endl;
             }
             
             
