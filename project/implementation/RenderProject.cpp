@@ -41,6 +41,8 @@ void RenderProject::initFunction()
     
     // load materials and shaders before loading the model
     ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 1, true, true, false, false, false);
+    
+    ShaderPtr cloudShader = bRenderer().getObjects()->loadShaderFile("cloud", 1, false, false, false, false, false);
 	
     ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 1, false, false, false, false, false);
     ShaderPtr playerShader = bRenderer().getObjects()->loadShaderFile("player", 0, false, true, true, false, false);
@@ -51,6 +53,8 @@ void RenderProject::initFunction()
     // create additional properties for a model
     PropertiesPtr guyProperties = bRenderer().getObjects()->createProperties("guyProperties");
     PropertiesPtr playerProperties = bRenderer().getObjects()->createProperties("playerProperties");
+    
+    PropertiesPtr cloudProperties = bRenderer().getObjects()->createProperties("cloudProperties");
 
     PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
     
@@ -61,12 +65,11 @@ void RenderProject::initFunction()
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
-    bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
+    bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, cloudShader, cloudProperties);
     bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, backgroundShader, backgroundProperties);
     bRenderer().getObjects()->loadObjModel("coin50.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("coin20.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("floating_tree1.obj", false, true, guyShader, guyProperties);
-    bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("frog.obj", false, true, guyShader, guyProperties);
 
     

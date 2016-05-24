@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		225A60C61CE6060C00424AF6 /* background.frag in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C41CE6060C00424AF6 /* background.frag */; };
 		225A60C71CE6060C00424AF6 /* background.vert in Resources */ = {isa = PBXBuildFile; fileRef = 225A60C51CE6060C00424AF6 /* background.vert */; };
+		22842C0E1CF4708100F0D9EB /* cloud.frag in Resources */ = {isa = PBXBuildFile; fileRef = 22842C0C1CF4708100F0D9EB /* cloud.frag */; };
+		22842C0F1CF4708100F0D9EB /* cloud.vert in Resources */ = {isa = PBXBuildFile; fileRef = 22842C0D1CF4708100F0D9EB /* cloud.vert */; };
 		22A14CD91CEF6EA400B6CEF1 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A14CD81CEF6EA400B6CEF1 /* texture.png */; };
 		22A14CDB1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A14CDA1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png */; };
 		22BAD7521CD8E24B0070B4F2 /* backgroundDiff.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAD74F1CD8E24B0070B4F2 /* backgroundDiff.png */; };
@@ -158,6 +160,8 @@
 		22542B031CD755F800C29FD7 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		225A60C41CE6060C00424AF6 /* background.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.frag; sourceTree = "<group>"; };
 		225A60C51CE6060C00424AF6 /* background.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = background.vert; sourceTree = "<group>"; };
+		22842C0C1CF4708100F0D9EB /* cloud.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = cloud.frag; sourceTree = "<group>"; };
+		22842C0D1CF4708100F0D9EB /* cloud.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = cloud.vert; sourceTree = "<group>"; };
 		22A14CD81CEF6EA400B6CEF1 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
 		22A14CDA1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HLG_map3_orig_smut.png; sourceTree = "<group>"; };
 		22BAD74F1CD8E24B0070B4F2 /* backgroundDiff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundDiff.png; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 				225A60C41CE6060C00424AF6 /* background.frag */,
 				54B964A61CB259CE008843E2 /* normal3.png */,
 				54B964A71CB259CE008843E2 /* specular.png */,
+				22842C0C1CF4708100F0D9EB /* cloud.frag */,
+				22842C0D1CF4708100F0D9EB /* cloud.vert */,
 				540DDD7D1CA020B700DE3FCC /* diffuse3.png */,
 				540DDD7B1CA0058A00DE3FCC /* guy.mtl */,
 				540DDD751CA0024A00DE3FCC /* guy.frag */,
@@ -806,6 +812,7 @@
 				A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */,
 				63C674F11CF212E500E911C4 /* coin20.mtl in Resources */,
 				63C674F41CF2146700E911C4 /* backgroundlevel.txt in Resources */,
+				22842C0E1CF4708100F0D9EB /* cloud.frag in Resources */,
 				630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */,
 				225A60C61CE6060C00424AF6 /* background.frag in Resources */,
 				540DDD7C1CA0058A00DE3FCC /* guy.mtl in Resources */,
@@ -823,6 +830,7 @@
 				225A60C71CE6060C00424AF6 /* background.vert in Resources */,
 				63C674FA1CF21C1F00E911C4 /* silver.png in Resources */,
 				63C675061CF2538500E911C4 /* cloud_diff.png in Resources */,
+				22842C0F1CF4708100F0D9EB /* cloud.vert in Resources */,
 				540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */,
 				6351C0831CE7381B000DEB3E /* block_diff.png in Resources */,
 				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,

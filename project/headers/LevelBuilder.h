@@ -78,7 +78,7 @@ private:
         }
         else if (std::strcmp(index.c_str(),"C") ==0) {
             //set rotation !!
-            builder.setObjectName("clouds").setShaderName("guy").setIsMoving(false).setFacing(2);
+            builder.setObjectName("clouds").setShaderName("cloud").setIsMoving(false).setFacing(2);
         }
         else if (std::strcmp(index.c_str(),"F") ==0) {
             //set rotation !!
