@@ -59,13 +59,6 @@ int iFogEquation;
 void main()
 {
     
-    //fogParameters
-    fogParams.fDensity = 0.04;
-    fogParams.fStart = 10.0;
-    fogParams.fEnd = 20.0;
-    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
-    fogParams.iFogEquation = 2;
-    
     
     lowp vec4 tempColor;
     
@@ -83,7 +76,7 @@ void main()
     
     // TODO: read and correctly transform normals from normal map, then use them for lighting
     
-    mediump vec3 l = -normalize(LightPos - pos).xyz;
+    mediump vec3 l = normalize(LightPos - pos).xyz;
     
     lowp float intensity = dot(n, l);
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
@@ -110,43 +103,12 @@ void main()
 
     tempColor = ambientResult+diffuseResult;
 
-    float deltax=abs(PlayerPosition.x-pos.x);
-    float deltay=abs(PlayerPosition.y-pos.y);
-    float deltaz=abs(PlayerPosition.z-pos.z);
-    float deltaxcir=sqrt(deltax*deltax*deltaz*deltaz);
-    //float deltax=PlayerPosition.x-posVarying;
-    
-    
-
     
     
     
     gl_FragColor = tempColor * color + specular;
     
     
-    
-    float fFogCoord = abs(EyePos.y/EyePos.w);
-    
-    float fogFactor;
-    
-    float fResult = 0.0;
-    
-    fResult = exp(-fogParams.fDensity*fFogCoord);
-
-    fogFactor = fResult;
-
-    
-    float depth = pos.y;
-    float fogFactorIntensity = (1.0-(1.0/(-depth))+0.2);
-    
-    if(deltax<0.2&&deltaz<0.2&&deltay>2.0 && deltaxcir<0.02){
-        gl_FragColor = mix(gl_FragColor, vec4(0.0,0.0,0.0,1.0),1.0);
-    }
-    
-    
-    if(pos.y<-1.0){
-    gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.1);
-    }
     
     
     
