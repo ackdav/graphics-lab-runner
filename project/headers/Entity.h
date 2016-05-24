@@ -27,6 +27,7 @@ private:
     std::string shaderName;
     std::string objName;
     std::string image;
+    bool isCollectible;
     
 public:
     
@@ -52,6 +53,10 @@ public:
     
     bool isMoving() {
         return false;
+    }
+    
+    bool getIsCollectible(){
+        return isCollectible;
     }
     
     
@@ -82,13 +87,13 @@ public:
     }
     
     
-    Entity(vmml::Vector3f scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName,std::string _image,vmml::Matrix4f _viewMatrix):translation(_translation),shaderName(_shaderName),objName(_objName),image(_image),viewMatrix(_viewMatrix){
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName,std::string _image,vmml::Matrix4f _viewMatrix):translation(_translation),shaderName(_shaderName),objName(_objName),image(_image),viewMatrix(_viewMatrix),isCollectible(false){
         this->scale = scale;
         _startPos = vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
     }
     
-    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,vmml::Vector3f axis,float angle, std::string _shaderName, std::string _objName):translation(_translation),shaderName(_shaderName),objName(_objName){
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,vmml::Vector3f axis,float angle, std::string _shaderName, std::string _objName, bool _isCollectible):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible){
         this->scale = scale;
         _startPos =  vmml::create_rotation(angle, axis) *vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;

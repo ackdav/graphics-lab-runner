@@ -34,6 +34,8 @@ private:
     Entity skyplane;
     bool jumpable;
     double timeSinceLast;
+    int totalGoldcoins;
+    int totalSilvercoins;
 
     float GameTime = 0.0;
     bool goingUp = true;
@@ -105,7 +107,6 @@ private:
             if (boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) {
                 top = true;
             } else {
-                std::cout<<"BOTTTTTTTTOOOOOOOOOMMMMM"<<std::endl;
                 bottom = true;
             }
         }
@@ -161,6 +162,10 @@ private:
             vmml::Vector3f posMin = getMin(newbox.getMax(),newbox.getMin());
             // Upon collision, move 0.01 up, until no collision is detected (still need to check with all other objects for collision, therefore no break)
             if (isIn(box2.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax)){
+                if (iterator->getIsCollectible()) {
+                    entities.erase(iterator++);
+                    continue;
+                }
                 vmml::Vector<4,bool> collision = checkCollision(oldbox.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax );
                 if (collision.at(3)) {
                     ytrans = box2.getMin().at(1) - newbox.getMax().at(1)-0.001;
@@ -190,7 +195,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1){
         
     }
     
@@ -221,6 +226,8 @@ public:
     }
     
     void update(double elapsedTime, int direction) {
+        int silvercoins = 0;
+        int goldcoins = 0;
         timeSinceLast = elapsedTime - timeSinceLast;
         std::list<Entity>::iterator iterator;
         std::list<MoveableEntity>::iterator moveableIterator;
@@ -249,10 +256,12 @@ public:
             if( std::strcmp(name.c_str(),"coin50") ==0) {
              //Implement Coin Rotation here
                 iterator->setRotation(2.*timeRunning);
+                goldcoins+=1;
 
             }
             if( std::strcmp(name.c_str(),"coin20") ==0) {
                 iterator->setRotation(2.*timeRunning);
+                silvercoins+=1;
 
             }
             if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
@@ -311,11 +320,28 @@ public:
             
 
         }
+        if (totalSilvercoins < 0) {
+            totalSilvercoins = silvercoins;
+            totalGoldcoins = goldcoins;
+        }
         
         
         for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator) {
             brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(buttonIterator->getObjName()), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
         }
+        
+        GLfloat scale = 0.1f;
+        vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
+        vmml::Matrix4f modelMatrix = vmml::create_translation(vmml::Vector3f(0.85f, 0.85f, 0.f)) * scalingMatrix;
+        vmml::Matrix4f viewMatrix = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
+        vmml::Matrix4f projectionMatrix = vmml::Matrix4f::IDENTITY;
+        brenderer.getObjects()->getTextSprite("totalGoldCoins")->setText(std::to_string(totalGoldcoins-goldcoins) + "/" + std::to_string(totalGoldcoins));
+        
+        brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("totalGoldCoins"), modelMatrix, viewMatrix, projectionMatrix, std::vector<std::string>({}));
+        
+        vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(0.65f, 0.85f, 0.f)) * scalingMatrix;
+        brenderer.getObjects()->getTextSprite("totalSilverCoins")->setText(std::to_string(totalSilvercoins-silvercoins) + "/" + std::to_string(totalSilvercoins));
+        brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("totalSilverCoins"), modelMatrix2, viewMatrix, projectionMatrix, std::vector<std::string>({}));
   
     }
     

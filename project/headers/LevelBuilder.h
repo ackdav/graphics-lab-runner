@@ -63,14 +63,16 @@ private:
             //PlayerMovement movement;
             builder.setObjectName("minecraftcharacter").setShaderName("player").setIsMoving(true).setFacing(3).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"3") ==0) {
-            
+            vmml::AABBf boundingBox = bRenderer.getObjects()->getModel("coin50")->getBoundingBoxObjectSpace();
             //set rotation !! Doesnt work yet
-            builder.setObjectName("coin50").setShaderName("guy").setIsMoving(false).setFacing(2);
+            builder.setObjectName("coin50").setShaderName("guy").setIsMoving(false).setFacing(2).setIsCollectible(true).setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,-0.5));
+;
         }
         else if (std::strcmp(index.c_str(),"4") ==0) {
-            
+            vmml::AABBf boundingBox = bRenderer.getObjects()->getModel("coin20")->getBoundingBoxObjectSpace();
             //set rotation !!
-            builder.setObjectName("coin20").setShaderName("guy").setIsMoving(false).setFacing(2);
+            builder.setObjectName("coin20").setShaderName("guy").setIsMoving(false).setFacing(2).setIsCollectible(true).setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,-0.5));
+;
         }
         else if (std::strcmp(index.c_str(),"A") ==0) {
             //set rotation !!
@@ -94,7 +96,7 @@ private:
                 else if(std::strcmp(index.c_str(),"C")==0){
                      builder.setScale(vmml::Vector3f(1.f + 1/(arc4random_uniform(1.) + 1.) )).setTranslation(vmml::Vector3f(-3. + column-colCenter,5.+ row+rowCenter,8. + arc4random_uniform(4.) ));
                 }
-                else{
+                else if(std::strcmp(index.c_str(),"3")!=0&&std::strcmp(index.c_str(),"4")!=0){
                 builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,0));
                 }
                 

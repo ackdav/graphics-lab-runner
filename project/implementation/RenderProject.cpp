@@ -49,6 +49,10 @@ void RenderProject::initFunction()
     // load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
     MaterialPtr playerMaterial = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
     
+    FontPtr font = bRenderer().getObjects()->loadFont("arial.ttf", 50);
+    
+    bRenderer().getObjects()->createTextSprite("totalGoldCoins", vmml::Vector3f(0.93333f,0.90980f,0.66667f), "0", font);
+    bRenderer().getObjects()->createTextSprite("totalSilverCoins", vmml::Vector3f(0.5f), "0", font);
     
     // create additional properties for a model
     PropertiesPtr guyProperties = bRenderer().getObjects()->createProperties("guyProperties");

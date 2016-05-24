@@ -50,6 +50,7 @@
 		63C6750B1CF25F1500E911C4 /* frog.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 63C675091CF25F1500E911C4 /* frog.mtl */; };
 		63C6750C1CF25F1500E911C4 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 63C6750A1CF25F1500E911C4 /* frog.obj */; };
 		A81653571CE083FA00577BF2 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81653561CE083FA00577BF2 /* GameObject.cpp */; };
+		A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8337E9F1CF473FF0048BD70 /* arial.ttf */; };
 		A83875411CE1D0EE004D88D9 /* level.txt in Resources */ = {isa = PBXBuildFile; fileRef = A83875401CE1D0EE004D88D9 /* level.txt */; };
 		A842B47E1CEAEEE1006A852A /* arrowL.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B47B1CEAEEE1006A852A /* arrowL.png */; };
 		A842B47F1CEAEEE1006A852A /* arrowR.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B47C1CEAEEE1006A852A /* arrowR.png */; };
@@ -207,6 +208,7 @@
 		A81635D71CE1FB0200ED1A8C /* PlayerMovement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerMovement.h; sourceTree = "<group>"; };
 		A81653561CE083FA00577BF2 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		A81653581CE0842600577BF2 /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		A8337E9F1CF473FF0048BD70 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		A83875401CE1D0EE004D88D9 /* level.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level.txt; sourceTree = "<group>"; };
 		A83875421CE1D11E004D88D9 /* LevelBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelBuilder.h; sourceTree = "<group>"; };
 		A83875431CE1D7B1004D88D9 /* EntityBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityBuilder.h; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				22BAD7501CD8E24B0070B4F2 /* backgroundPlane.mtl */,
 				22BAD7511CD8E24B0070B4F2 /* backgroundPlane.obj */,
 				225A60C51CE6060C00424AF6 /* background.vert */,
+				A8337E9F1CF473FF0048BD70 /* arial.ttf */,
 				225A60C41CE6060C00424AF6 /* background.frag */,
 				54B964A61CB259CE008843E2 /* normal3.png */,
 				54B964A71CB259CE008843E2 /* specular.png */,
@@ -831,6 +834,7 @@
 				63C674FA1CF21C1F00E911C4 /* silver.png in Resources */,
 				63C675061CF2538500E911C4 /* cloud_diff.png in Resources */,
 				22842C0F1CF4708100F0D9EB /* cloud.vert in Resources */,
+				A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */,
 				540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */,
 				6351C0831CE7381B000DEB3E /* block_diff.png in Resources */,
 				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,

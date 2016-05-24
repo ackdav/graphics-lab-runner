@@ -23,7 +23,8 @@ private:
         EntityProperties() : isMoving(false),
         shaderName(""),
         objectName(""),
-        facing(-1){
+        facing(-1),
+        isCollectible(false){
         }
         
         vmml::Vector3f scale;
@@ -36,6 +37,7 @@ private:
         bool isMoving;
         bool setValue;
         int facing;
+        bool isCollectible;
         
         friend class EntityBuilder;
     };
@@ -85,6 +87,11 @@ public:
         return *this;
     }
     
+    EntityBuilder& setIsCollectible(bool _isCollectible) {
+        eProperties.isCollectible = _isCollectible;
+        return *this;
+    }
+    
     //0 front, 1 left, 2 back, 3 right, -1 no rotation
     EntityBuilder& setFacing(int _facing) {
         eProperties.facing = _facing;
@@ -110,15 +117,15 @@ public:
             return result;
         }
         if (eProperties.isMoving) {
-            MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.movement);
+            MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
             return result;
         }
-        Entity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName);
+        Entity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible);
         return result;
     }
     
     MoveableEntity createMoveableEntity() {
-        MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.movement);
+        MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
         return result;
     }
 };
