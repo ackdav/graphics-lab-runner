@@ -43,16 +43,23 @@ public:
     }
 
     vmml::Vector<4, bool > getMove() {
-                TouchMap touchMap = bRenderer.getInput()->getTouches();
-                vmml::Vector<4,bool> result(false,false,false,false);
-                for (auto t = touchMap.begin(); t != touchMap.end(); ++t) {
-                    Touch touch = t->second;
-                    float x = (2.0f*((float)(touch.startPositionX-0)/(bRenderer.getView()->getScreenWidth()-0)))-1.0f;
-                    float y =1.0f-(2.0f*((float)(touch.startPositionY-0)/(bRenderer.getView()->getScreenHeight()-0)));
-                    vmml::Vector2f click = vmml::Vector2f(x,y);
-                    result = vmml::Vector<4,bool>(checkButton("bLeft",click),checkButton("bRight",click),checkButton("bUp",click),checkButton("bTarget",click));
-                }
-        return result;
+        TouchMap touchMap = bRenderer.getInput()->getTouches();
+        bool left = false;
+        bool right = false;
+        bool top = false;
+        bool target = false;
+        vmml::Vector<4,bool> result(false,false,false,false);
+        for (auto t = touchMap.begin(); t != touchMap.end(); ++t) {
+            Touch touch = t->second;
+            float x = (2.0f*((float)(touch.startPositionX-0)/(bRenderer.getView()->getScreenWidth()-0)))-1.0f;
+            float y =1.0f-(2.0f*((float)(touch.startPositionY-0)/(bRenderer.getView()->getScreenHeight()-0)));
+            vmml::Vector2f click = vmml::Vector2f(x,y);
+            left = left || checkButton("bLeft",click);
+            right = right || checkButton("bRight",click);
+            top = top || checkButton("bUp",click);
+            target = target || checkButton("bTarget",click);
+        }
+        return vmml::Vector<4,bool>(left,right,top,target);
     }
 };
 #endif

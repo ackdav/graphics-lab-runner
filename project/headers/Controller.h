@@ -249,16 +249,15 @@ public:
         
         
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-//            std::cout<<iterator->getTranslate()<<std::endl;
             std::string name = iterator->getObjName();
             if( std::strcmp(name.c_str(),"coin50") ==0) {
              //Implement Coin Rotation here
-                iterator->setRotation(2.*timeRunning);
+                iterator->setRotation(1.2*timeRunning);
                 goldcoins+=1;
 
             }
             if( std::strcmp(name.c_str(),"coin20") ==0) {
-                iterator->setRotation(2.*timeRunning);
+                iterator->setRotation(1.2*timeRunning);
                 silvercoins+=1;
 
             }
@@ -276,29 +275,47 @@ public:
             vmml::Vector<4, bool > move = movement->getMove();
             float x = 0.0f;
             float y = 0.0f;
+            float force = movement->getForce();
+            std::cout<<"BLUBBBB - AAAAA"<<std::endl;
             std::cout<<"MOVE "<<move<<std::endl;
             if (move.at(0)) {
                 x -= 0.1f;
+                force -= 0.1f;
+            } else {
+                if (force > -0.01f) {
+                    force = 0.0f;
+                } else {
+                    force =force/1.4f;
+                }
             }
             if (move.at(1)) {
                 x += 0.1f;
+                force+=0.1f;
+            } else {
+                if (force < 0.01f) {
+                    force = 0.0f;
+                } else {
+                    force =force/1.4f;
+                }
             }
-            if (move.at(2)) {
+            if (move.at(2) && movement->getDurationFlying() < 1.f) {
                 y += 0.1f;
             } else {
+                movement->setDurationFlying(1.f);
                 y += gravity;
             }
+            movement->setForce(force);
             vmml::AABBf boundingBox = brenderer.getObjects()->getModel(moveableIterator->getObjName())->getBoundingBoxObjectSpace();
             vmml::AABBf oldbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
             vmml::Vector3f oldPosition = moveableIterator->getTranslate();
-            moveableIterator->move(vmml::Vector3f(x,y,0.f));
+            moveableIterator->move(vmml::Vector3f(x+force,y,0.f));
             vmml::Vector3f newPosition = moveableIterator->getTranslate();
             vmml::AABBf newbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
             vmml::Vector3f col = getCollision(oldbox,newbox);
-            if (col.at(0) != 0 || col.at(1) != 0) {
+            if (col.at(1) != 0) {
                 movement->setDurationFlying(0);
             } else {
-                movement->setDurationFlying(movement->getDurationFlying() + timeSinceLast);
+                movement->setDurationFlying(movement->getDurationFlying() + elapsedTime);
             }
             while(col.at(0) != 0 || col.at(1) != 0) {
                 moveableIterator->move(col);
