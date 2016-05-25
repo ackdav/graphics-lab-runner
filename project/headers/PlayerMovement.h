@@ -33,7 +33,7 @@ private:
     
 public:
     
-    PlayerMovement(Renderer _bRenderer,std::list<Entity> _buttons):bRenderer(_bRenderer),buttons(_buttons){
+    PlayerMovement(Renderer _bRenderer,std::list<Entity> _buttons):Movement(),bRenderer(_bRenderer),buttons(_buttons){
         for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator){
             vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(buttonIterator->getObjName())->getBoundingBoxObjectSpace();
             vmml::AABBf box(buttonIterator->getPos() * boundingBox.getMin(),buttonIterator->getPos() * boundingBox.getMax());

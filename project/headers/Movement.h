@@ -16,9 +16,20 @@ class Movement {
 private:
     
     double durationFlying;
-    double force = 0.0f;
+    std::map <int, double> runTimes;
+    std::map <int, double> stepSizes;
+    std::map <int, double> decelerateTimes;
     
 public:
+    
+    Movement() {
+        runTimes[0] = 0.0f;
+        runTimes[1] = 0.0f;
+        stepSizes[0] = 0.0f;
+        stepSizes[1] = 0.0f;
+        decelerateTimes[0] = 0.0f;
+        decelerateTimes[1] = 0.0f;
+    }
 
     virtual vmml::Vector<4, bool > getMove() = 0;
     
@@ -30,13 +41,39 @@ public:
         return durationFlying;
     }
     
-    void setForce(double _force) {
-        force = _force;
+    double getStepAccellerate(double elapsedTime,int direction) {
+        double runTime = runTimes.find(direction)->second;
+        runTime += elapsedTime;
+        runTimes[direction] = runTime;
+        std::cout<<"ELAPSED TIME RUNNING: "<<runTime<<std::endl;
+        float step = .5/(1+exp(-0.5*(runTime-4)));
+        step = std::max(step,0.1f);
+        stepSizes[direction] = step;
+        return step;
     }
     
-    double getForce() {
-        std::cout<<"FORCE: "<<force<<std::endl;
-        return force;
+    double getStepDeccellerate(double elapsedTime,int direction) {
+        double lastStepSize = stepSizes.find(direction)->second;
+        if (lastStepSize == 0.0f) {
+            return lastStepSize;
+        }
+        double runTime = runTimes.find(direction)->second;
+        if (runTime > 0.0f) {
+            runTimes[direction] = 0.0f;
+        }
+        double decelerateTime = decelerateTimes.find(direction)->second;
+        decelerateTime += elapsedTime;
+        std::cout<<"ELAPSED TIME DECELERATING: "<<decelerateTime<<std::endl;
+        float step = .5/(1+exp(-0.6*(-decelerateTime-4)));
+        if (step < 0.01f){
+            lastStepSize = 0.0f;
+            decelerateTime = 0.0f;
+        } else {
+            lastStepSize = step;
+        }
+        decelerateTimes[direction] = decelerateTime;
+        stepSizes[direction] = lastStepSize;
+        return lastStepSize;
     }
     
 };

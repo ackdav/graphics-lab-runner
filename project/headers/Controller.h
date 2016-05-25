@@ -145,7 +145,6 @@ private:
     
     
     vmml::Vector3f getCollision(vmml::AABBf oldbox,vmml::AABBf newbox) {
-        vmml::Vector3f movedBy = newbox.getCenter() - oldbox.getCenter();
         std::list<Entity>::iterator iterator;
         float xtrans = 0;
         float ytrans = 0;
@@ -179,10 +178,19 @@ private:
 
             }
         }
-        if (std::abs(movedBy.at(0)) > std::abs(movedBy.at(1))) {
-            return vmml::Vector3f(xtrans,0.0f,0.0f);
+        //if (std::abs(movedBy.at(0)) > std::abs(movedBy.at(1))) {
+        //    return vmml::Vector3f(xtrans,0.0f,0.0f);
+        //}
+        float resX = 0.0f;
+        float resY = 0.0f;
+        
+        if (newbox.getCenter().at(1) != oldbox.getCenter().at(1)) {
+            resY = ytrans;
+        } else if (newbox.getCenter().at(0) != oldbox.getCenter().at(0)) {
+            resX = xtrans;
         }
-        return vmml::Vector3f(0.0f,ytrans,0.0f);
+        
+        return vmml::Vector3f(resX,resY,0.0f);
     }
     
     
@@ -275,28 +283,19 @@ public:
             vmml::Vector<4, bool > move = movement->getMove();
             float x = 0.0f;
             float y = 0.0f;
-            float force = movement->getForce();
-            std::cout<<"BLUBBBB - AAAAA"<<std::endl;
-            std::cout<<"MOVE "<<move<<std::endl;
             if (move.at(0)) {
-                x -= 0.1f;
-                force -= 0.1f;
+                x -= movement->getStepAccellerate(elapsedTime,0);
             } else {
-                if (force > -0.01f) {
-                    force = 0.0f;
-                } else {
-                    force =force/1.4f;
-                }
+                x -= movement->getStepDeccellerate(elapsedTime,0);
+                //std::cout<<"DECELERATE"<<std::endl;
+                //x += movement->getStepDeccellerate(elapsedTime,0);
             }
             if (move.at(1)) {
-                x += 0.1f;
-                force+=0.1f;
+                x += movement->getStepAccellerate(elapsedTime,1);
+                //x -= movement->getStepAccellerate(elapsedTime,1);
             } else {
-                if (force < 0.01f) {
-                    force = 0.0f;
-                } else {
-                    force =force/1.4f;
-                }
+                x += movement->getStepDeccellerate(elapsedTime,1);
+                //x -= movement->getStepDeccellerate(elapsedTime,1);
             }
             if (move.at(2) && movement->getDurationFlying() < 1.f) {
                 y += 0.1f;
@@ -304,12 +303,12 @@ public:
                 movement->setDurationFlying(1.f);
                 y += gravity;
             }
-            movement->setForce(force);
+            std::cout<<"STEP SIZE "<<x<<std::endl;
             vmml::AABBf boundingBox = brenderer.getObjects()->getModel(moveableIterator->getObjName())->getBoundingBoxObjectSpace();
             vmml::AABBf oldbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
-            vmml::Vector3f oldPosition = moveableIterator->getTranslate();
-            moveableIterator->move(vmml::Vector3f(x+force,y,0.f));
-            vmml::Vector3f newPosition = moveableIterator->getTranslate();
+            std::cout<<"BEFORE :"<<moveableIterator->getPos()<<std::endl;
+            moveableIterator->move(vmml::Vector3f(x,y,0.f));
+            std::cout<<"AFTER :"<<moveableIterator->getPos()<<std::endl;
             vmml::AABBf newbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
             vmml::Vector3f col = getCollision(oldbox,newbox);
             if (col.at(1) != 0) {
@@ -321,7 +320,6 @@ public:
                 moveableIterator->move(col);
                 newbox.set(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
                 col = getCollision(oldbox,newbox);
-                std::cout<<"COLLISION "<<col<<std::endl;
             }
             
             
