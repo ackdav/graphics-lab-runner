@@ -30,7 +30,7 @@ private:
     
     GameController gameController;
     Renderer brenderer;
-    Entity player;
+    MoveableEntity player;
     Entity skyplane;
     bool jumpable;
     double timeSinceLast;
@@ -41,13 +41,12 @@ private:
     bool goingUp = true;
 
     float timeRunning;
-
-    void drawEntity(Entity entity) {
+    
+    void drawEntity(Entity entity, vmml::Matrix4f viewMatrix, vmml::Matrix4f projectionMatrix,double seconds) {
         vmml::Matrix4f modelMatrix = entity.getPos();
         std::string shaderName = entity.getShaderName();
         std::string objName = entity.getObjName();
-//        std::cout<<"SHADER: "<<shaderName<<std::endl;
-        vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
+        //        std::cout<<"SHADER: "<<shaderName<<std::endl;
         
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
         
@@ -72,18 +71,21 @@ private:
             std::cout<<"SUN POSITION: "<<f<<std::endl;
             vmml::Vector4f lightPos = vmml::Vector4f((getPlayerPosition().x()- 25.f) + (GameTime *0.1*brenderer.getView()->getScreenWidth()) , 25.f , 1.f  );
             
-            shader->setUniform("LightPos", lightPos);            
+            shader->setUniform("LightPos", lightPos);
             
             shader->setUniform("Ia", vmml::Vector3f(1.f));
             shader->setUniform("Id", vmml::Vector3f(1.f));
+            shader->setUniform("borders", vmml::Vector4f(0.0f,0.5f,0.0f,0.5f));
             shader->setUniform("Is", vmml::Vector3f(1.f));
-            
+            std::cout<<"PRESSED FOR "<<seconds<<std::endl;
+            shader->setUniform("pressedSeconds",seconds*50);
             shader->setUniform("GameTime", GameTime);
             
             vmml::Vector4f PlayerPos = -getPlayerPosition();
             
             shader->setUniform("PlayerPosition", PlayerPos);
             
+            //std::cout<<"POSITION "<<shader->getAttribLocation("Position")<<std::endl;
             std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
             
         }
@@ -91,9 +93,19 @@ private:
         {
             bRenderer::log("No shader available.");
         }
-        brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
+        //GLfloat titleScale = 2.0f;
+        //vmml::Matrix4f scaling = vmml::create_scaling(vmml::Vector3f(titleScale / brenderer.getView()->getAspectRatio(), titleScale, titleScale));
+        //modelMatrix = vmml::create_translation(vmml::Vector3f(-0.4f, 0.0f, -10.0f)) * scaling;
+        brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(objName), modelMatrix,viewMatrix, projectionMatrix, std::vector<std::string>({ }),false,false);
+        //brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
         //         std::cout << "object " << objName << brenderer.getObjects()->getModel("block")->getBoundingBoxObjectSpace();
-        
+
+    }
+
+    void drawEntity(Entity entity) {
+        vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
+        vmml::Matrix4f projectionMatrix = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
+        drawEntity(entity,viewMatrix,projectionMatrix,0);
     }
     
     vmml::Vector<4,bool> checkCollision(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
@@ -303,12 +315,9 @@ public:
                 movement->setDurationFlying(1.f);
                 y += gravity;
             }
-            std::cout<<"STEP SIZE "<<x<<std::endl;
             vmml::AABBf boundingBox = brenderer.getObjects()->getModel(moveableIterator->getObjName())->getBoundingBoxObjectSpace();
             vmml::AABBf oldbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
-            std::cout<<"BEFORE :"<<moveableIterator->getPos()<<std::endl;
             moveableIterator->move(vmml::Vector3f(x,y,0.f));
-            std::cout<<"AFTER :"<<moveableIterator->getPos()<<std::endl;
             vmml::AABBf newbox(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
             vmml::Vector3f col = getCollision(oldbox,newbox);
             if (col.at(1) != 0) {
@@ -338,11 +347,69 @@ public:
             totalSilvercoins = silvercoins;
             totalGoldcoins = goldcoins;
         }
-        
+
         
         for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator) {
-            brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(buttonIterator->getObjName()), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
+            std::cout<<"PLAYER MOVEMENT"<<player.getMovement()->getDurationRight()<<std::endl;
+            drawEntity(*buttonIterator,buttonIterator->getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationRight());
+//            ShaderPtr shader = brenderer.getObjects()->getShader("sprite_shader");
+//            
+//            vmml::Vector4f pos = buttonIterator->getPos().get_column(3);
+//            if (shader.get())
+//            {
+//                vmml::Matrix4f modelMatrix = buttonIterator->getPos();
+//                //        std::cout<<"SHADER: "<<shaderName<<std::endl;
+//                vmml::Matrix4f viewMatrix = buttonIterator->getViewMatrix();
+//                std::cout<<"SET THE DAMN VALUE"<<std::endl;
+//                shader->setUniform("spriteRect", vmml::Vector4f(1.0f,1.0f,512.0f,512.0f));
+//                shader->setUniform("spriteWorld", vmml::Vector2f(pos.at(0),pos.at(1)));
+//                shader->setUniform("textureSize", vmml::Vector2f(512.0f,512.0f));
+//                shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
+//                shader->setUniform("ViewMatrix", viewMatrix);
+//                shader->setUniform("ModelMatrix", modelMatrix);
+//                
+//                vmml::Matrix3f normalMatrix;
+//                vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
+//                shader->setUniform("NormalMatrix", normalMatrix);
+//                
+//                //This is the same as setting the camera
+//                vmml::Vector4f eyePos = getPlayerTrans() - vmml::Vector3f(0.0f,0.0f,-10.0f);
+//                
+//                shader->setUniform("EyePos", eyePos);
+//                
+//                //Setting up the sun - so it walks with him just a little bit
+//                float f = (GameTime - 0.1)*(1/0.8);
+//                std::cout<<"SUN POSITION: "<<f<<std::endl;
+//                vmml::Vector4f lightPos = vmml::Vector4f((getPlayerPosition().x()- 25.f) + (GameTime *0.1*brenderer.getView()->getScreenWidth()) , 25.f , 1.f  );
+//                
+//                shader->setUniform("LightPos", lightPos);
+//                
+//                shader->setUniform("Ia", vmml::Vector3f(1.f));
+//                shader->setUniform("Id", vmml::Vector3f(1.f));
+//                shader->setUniform("Is", vmml::Vector3f(1.f));
+//                
+//                shader->setUniform("GameTime", GameTime);
+//                
+//                vmml::Vector4f PlayerPos = -getPlayerPosition();
+//                
+//                shader->setUniform("PlayerPosition", PlayerPos);
+//                
+//                std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
+//
+//            }
+//            else
+//            {
+//                bRenderer::log("No shader available.");
+//            }
+//
+//            brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(buttonIterator->getObjName()), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
+//            
+//            std::cout<<"SPRITE PLAYER "<<brenderer.getObjects()->getModel("plala")->getBoundingBoxObjectSpace()<<std::endl;
+//            std::cout<<"BUTTON "<<brenderer.getObjects()->getModel(buttonIterator->getObjName())->getBoundingBoxObjectSpace()<<std::endl;
+            //brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel("plala"), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
         }
+        
+        
         
         GLfloat scale = 0.1f;
         vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));

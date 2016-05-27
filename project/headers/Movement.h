@@ -41,6 +41,14 @@ public:
         return durationFlying;
     }
     
+    double getDurationLeft() {
+        return runTimes[0];
+    }
+    
+    double getDurationRight() {
+        return runTimes[1];
+    }
+    
     double getStepAccellerate(double elapsedTime,int direction) {
         double runTime = runTimes.find(direction)->second;
         runTime += elapsedTime;

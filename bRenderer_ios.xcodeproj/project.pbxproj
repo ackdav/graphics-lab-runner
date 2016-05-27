@@ -50,6 +50,9 @@
 		63C6750B1CF25F1500E911C4 /* frog.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 63C675091CF25F1500E911C4 /* frog.mtl */; };
 		63C6750C1CF25F1500E911C4 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 63C6750A1CF25F1500E911C4 /* frog.obj */; };
 		A81653571CE083FA00577BF2 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81653561CE083FA00577BF2 /* GameObject.cpp */; };
+		A828885E1CF82C76005F7055 /* sprite_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A828885D1CF82C76005F7055 /* sprite_shader.frag */; };
+		A82888601CF82CA5005F7055 /* sprite_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A828885F1CF82CA5005F7055 /* sprite_shader.vert */; };
+		A82888621CF831FB005F7055 /* sprite_pl.png in Resources */ = {isa = PBXBuildFile; fileRef = A82888611CF831FB005F7055 /* sprite_pl.png */; };
 		A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8337E9F1CF473FF0048BD70 /* arial.ttf */; };
 		A83875411CE1D0EE004D88D9 /* level.txt in Resources */ = {isa = PBXBuildFile; fileRef = A83875401CE1D0EE004D88D9 /* level.txt */; };
 		A842B47E1CEAEEE1006A852A /* arrowL.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B47B1CEAEEE1006A852A /* arrowL.png */; };
@@ -57,6 +60,8 @@
 		A842B4801CEAEEE1006A852A /* arrowU.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B47D1CEAEEE1006A852A /* arrowU.png */; };
 		A842B4821CEAEEE9006A852A /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B4811CEAEEE9006A852A /* target.png */; };
 		A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A3E73C1CF2F80200966CBB /* green-squared.png */; };
+		A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8BA855F1CF87024003C42F1 /* button_shader.frag */; };
+		A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8BA85601CF87024003C42F1 /* button_shader.vert */; };
 		B44186971BA331E300604D7F /* RenderProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B44186961BA331E300604D7F /* RenderProject.cpp */; };
 		B47949AF1BA6742B00B5E9DC /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B47949921BA6742B00B5E9DC /* config.json */; };
 		B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B47949C41BA6743D00B5E9DC /* LICENSE.txt */; };
@@ -208,6 +213,9 @@
 		A81635D71CE1FB0200ED1A8C /* PlayerMovement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerMovement.h; sourceTree = "<group>"; };
 		A81653561CE083FA00577BF2 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		A81653581CE0842600577BF2 /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		A828885D1CF82C76005F7055 /* sprite_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite_shader.frag; sourceTree = "<group>"; };
+		A828885F1CF82CA5005F7055 /* sprite_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite_shader.vert; sourceTree = "<group>"; };
+		A82888611CF831FB005F7055 /* sprite_pl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite_pl.png; sourceTree = "<group>"; };
 		A8337E9F1CF473FF0048BD70 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		A83875401CE1D0EE004D88D9 /* level.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level.txt; sourceTree = "<group>"; };
 		A83875421CE1D11E004D88D9 /* LevelBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelBuilder.h; sourceTree = "<group>"; };
@@ -217,6 +225,8 @@
 		A842B47D1CEAEEE1006A852A /* arrowU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowU.png; sourceTree = "<group>"; };
 		A842B4811CEAEEE9006A852A /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target.png; sourceTree = "<group>"; };
 		A8A3E73C1CF2F80200966CBB /* green-squared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-squared.png"; sourceTree = "<group>"; };
+		A8BA855F1CF87024003C42F1 /* button_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.frag; sourceTree = "<group>"; };
+		A8BA85601CF87024003C42F1 /* button_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.vert; sourceTree = "<group>"; };
 		B44186941BA331E300604D7F /* RenderProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderProject.h; sourceTree = "<group>"; };
 		B44186961BA331E300604D7F /* RenderProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderProject.cpp; sourceTree = "<group>"; };
 		B47949921BA6742B00B5E9DC /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -467,6 +477,8 @@
 				A842B4811CEAEEE9006A852A /* target.png */,
 				6351C0861CE77FA3000DEB3E /* player.frag */,
 				6351C0801CE7381B000DEB3E /* block_diff.png */,
+				A8BA855F1CF87024003C42F1 /* button_shader.frag */,
+				A8BA85601CF87024003C42F1 /* button_shader.vert */,
 				22A14CD81CEF6EA400B6CEF1 /* texture.png */,
 				6351C0811CE7381B000DEB3E /* block.mtl */,
 				6351C0821CE7381B000DEB3E /* block.obj */,
@@ -490,10 +502,13 @@
 				22842C0D1CF4708100F0D9EB /* cloud.vert */,
 				540DDD7D1CA020B700DE3FCC /* diffuse3.png */,
 				540DDD7B1CA0058A00DE3FCC /* guy.mtl */,
+				A82888611CF831FB005F7055 /* sprite_pl.png */,
 				540DDD751CA0024A00DE3FCC /* guy.frag */,
 				540DDD761CA0024A00DE3FCC /* guy.obj */,
 				540DDD771CA0024A00DE3FCC /* guy.vert */,
 				B47949921BA6742B00B5E9DC /* config.json */,
+				A828885D1CF82C76005F7055 /* sprite_shader.frag */,
+				A828885F1CF82CA5005F7055 /* sprite_shader.vert */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -820,6 +835,7 @@
 				225A60C61CE6060C00424AF6 /* background.frag in Resources */,
 				540DDD7C1CA0058A00DE3FCC /* guy.mtl in Resources */,
 				A842B4821CEAEEE9006A852A /* target.png in Resources */,
+				A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */,
 				B4794A311BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				540DDD781CA0024A00DE3FCC /* guy.frag in Resources */,
 				540DDD791CA0024A00DE3FCC /* guy.obj in Resources */,
@@ -827,6 +843,7 @@
 				63C674EC1CF2070100E911C4 /* coin50.obj in Resources */,
 				63C6750B1CF25F1500E911C4 /* frog.mtl in Resources */,
 				6351C08D1CE783F0000DEB3E /* player.mtl in Resources */,
+				A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */,
 				B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				6351C0911CE78849000DEB3E /* player.obj in Resources */,
 				6351C0841CE7381B000DEB3E /* block.mtl in Resources */,
@@ -843,6 +860,7 @@
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,
 				63C674FE1CF23E1300E911C4 /* floating_tree1.obj in Resources */,
 				6351C08F1CE784A6000DEB3E /* sprite_player.png in Resources */,
+				A82888621CF831FB005F7055 /* sprite_pl.png in Resources */,
 				22BAD7521CD8E24B0070B4F2 /* backgroundDiff.png in Resources */,
 				B47949AF1BA6742B00B5E9DC /* config.json in Resources */,
 				6351C0871CE77FA3000DEB3E /* player.frag in Resources */,
@@ -858,6 +876,7 @@
 				54B964A81CB259CE008843E2 /* normal3.png in Resources */,
 				63C674F81CF21BD000E911C4 /* gold.png in Resources */,
 				22A14CD91CEF6EA400B6CEF1 /* texture.png in Resources */,
+				A82888601CF82CA5005F7055 /* sprite_shader.vert in Resources */,
 				B4CB8CD01B72E43300FE041B /* Project-Info.plist in Resources */,
 				63C674FD1CF23E1300E911C4 /* floating_tree1.mtl in Resources */,
 				A842B47F1CEAEEE1006A852A /* arrowR.png in Resources */,
@@ -865,6 +884,7 @@
 				63C674F21CF212E500E911C4 /* coin20.obj in Resources */,
 				63C675021CF23FC600E911C4 /* green1.png in Resources */,
 				63C675081CF2538500E911C4 /* clouds.obj in Resources */,
+				A828885E1CF82C76005F7055 /* sprite_shader.frag in Resources */,
 				63C675071CF2538500E911C4 /* clouds.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

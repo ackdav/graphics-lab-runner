@@ -42,12 +42,18 @@ void RenderProject::initFunction()
     // load materials and shaders before loading the model
     ShaderPtr guyShader = bRenderer().getObjects()->loadShaderFile("guy", 1, true, true, false, false, false);
     
+    ShaderPtr spriteAnimShader = bRenderer().getObjects()->loadShaderFile("sprite_shader",1,true,true,false,false,false);
+    
+    ShaderPtr buttonShader = bRenderer().getObjects()->loadShaderFile("button_shader",1,true,true,false,false,false);
+    
     ShaderPtr cloudShader = bRenderer().getObjects()->loadShaderFile("cloud", 1, false, false, false, false, false);
 	
     ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 1, false, false, false, false, false);
     ShaderPtr playerShader = bRenderer().getObjects()->loadShaderFile("player", 0, false, true, true, false, false);
     // load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
     MaterialPtr playerMaterial = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
+    
+    MaterialPtr playerMjjj = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
     
     FontPtr font = bRenderer().getObjects()->loadFont("arial.ttf", 50);
     
@@ -62,9 +68,9 @@ void RenderProject::initFunction()
 
     PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
     
+    bRenderer().getObjects()->createSprite("plala", "sprite_pl.png", spriteAnimShader);
     // load models
     bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
-
     
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);
@@ -81,7 +87,6 @@ void RenderProject::initFunction()
     
     // create camera
     bRenderer().getObjects()->createCamera("camera", vmml::Vector3f(0.0f, 0.0f, 10.0f), vmml::Vector3f(0.f, 0.0f, 0.5f));
-    
     
     
     //Set starting position
