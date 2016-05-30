@@ -69,7 +69,7 @@ private:
             //Setting up the sun - so it walks with him just a little bit
             float f = (GameTime - 0.1)*(1/0.8);
             std::cout<<"SUN POSITION: "<<f<<std::endl;
-            vmml::Vector4f lightPos = vmml::Vector4f((getPlayerPosition().x()- 25.f) + (GameTime *0.1*brenderer.getView()->getScreenWidth()) , 25.f , 1.f  );
+            vmml::Vector4f lightPos = vmml::Vector4f(-30.0 + eyePos.x()/2 , 25.0 , 1.0 , 1.0 );
             
             shader->setUniform("LightPos", lightPos);
             
@@ -252,14 +252,14 @@ public:
         std::list<Entity>::iterator buttonIterator;
 
         
-        if(GameTime<.55 && goingUp == true) {
-            GameTime += 0.001;
+        if(GameTime<1.5 && goingUp == true) {
+            GameTime += 0.1;
         }
-        if(GameTime>=.55 && goingUp == true){
+        if(GameTime>=1.5 && goingUp == true){
             goingUp = false;
         }
         if(goingUp==false){
-            GameTime -= 0.001;
+            GameTime -= 0.1;
         }
         if(GameTime<=0.1){
             goingUp=true;
