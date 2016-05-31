@@ -16,6 +16,8 @@ class Movement {
 private:
     
     double durationFlying;
+    double targetClicked;
+    bool targetReleased;
     std::map <int, double> runTimes;
     std::map <int, double> stepSizes;
     std::map <int, double> decelerateTimes;
@@ -29,6 +31,8 @@ public:
         stepSizes[1] = 0.0f;
         decelerateTimes[0] = 0.0f;
         decelerateTimes[1] = 0.0f;
+        targetClicked = 0.0f;
+        targetReleased = true;
     }
 
     virtual vmml::Vector<4, bool > getMove() = 0;
@@ -53,11 +57,26 @@ public:
         double runTime = runTimes.find(direction)->second;
         runTime += elapsedTime;
         runTimes[direction] = runTime;
-        std::cout<<"ELAPSED TIME RUNNING: "<<runTime<<std::endl;
         float step = .5/(1+exp(-0.5*(runTime-4)));
         step = std::max(step,0.1f);
         stepSizes[direction] = step;
         return step;
+    }
+    
+    double getTargetClicked() {
+        return targetClicked;
+    }
+    
+    void setTargetClicked(double _targetClicked) {
+        targetClicked = _targetClicked;
+    }
+    
+    double getTargetReleased() {
+        return targetReleased;
+    }
+    
+    void setTargetReleased(bool _targetReleased) {
+        targetReleased = _targetReleased;
     }
     
     double getStepDeccellerate(double elapsedTime,int direction) {
@@ -71,7 +90,6 @@ public:
         }
         double decelerateTime = decelerateTimes.find(direction)->second;
         decelerateTime += elapsedTime;
-        std::cout<<"ELAPSED TIME DECELERATING: "<<decelerateTime<<std::endl;
         float step = .5/(1+exp(-0.6*(-decelerateTime-4)));
         if (step < 0.01f){
             lastStepSize = 0.0f;

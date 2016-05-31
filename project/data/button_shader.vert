@@ -18,7 +18,8 @@ uniform lowp vec3 Ia;   // ambient light intensity
 uniform lowp vec3 Id;   // diffuse light intensity
 uniform lowp vec3 Is;   // specular light intensity
 
-uniform mediump float pressedSeconds;
+uniform mediump float moveLeft;
+uniform mediump float moveTop;
 
 uniform mediump vec4 borders;
 // borders[0] : minX
@@ -62,7 +63,8 @@ void main()
     // BL: x>0.5,y>0.5
     // BR: x<0.5,y>0.5
     //
-    texCoordVarying.x = texCoordVarying.x +0.01*pressedSeconds;
+    texCoordVarying.x = texCoordVarying.x +0.01*moveLeft;
+    texCoordVarying.y = texCoordVarying.y +0.01*moveTop;
     gl_Position = ProjectionMatrix * ViewMatrix * posVarying;
     vVertex = gl_Position;
     

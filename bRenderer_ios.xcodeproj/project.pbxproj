@@ -62,6 +62,9 @@
 		A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A3E73C1CF2F80200966CBB /* green-squared.png */; };
 		A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8BA855F1CF87024003C42F1 /* button_shader.frag */; };
 		A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8BA85601CF87024003C42F1 /* button_shader.vert */; };
+		A8E55C111CFD92890034D946 /* knight.gif in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C101CFD92890034D946 /* knight.gif */; };
+		A8E55C131CFD97530034D946 /* Playerx.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C121CFD97530034D946 /* Playerx.png */; };
+		A8E55C151CFD98360034D946 /* smurf_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C141CFD98360034D946 /* smurf_sprite.png */; };
 		B44186971BA331E300604D7F /* RenderProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B44186961BA331E300604D7F /* RenderProject.cpp */; };
 		B47949AF1BA6742B00B5E9DC /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B47949921BA6742B00B5E9DC /* config.json */; };
 		B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B47949C41BA6743D00B5E9DC /* LICENSE.txt */; };
@@ -227,6 +230,9 @@
 		A8A3E73C1CF2F80200966CBB /* green-squared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-squared.png"; sourceTree = "<group>"; };
 		A8BA855F1CF87024003C42F1 /* button_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.frag; sourceTree = "<group>"; };
 		A8BA85601CF87024003C42F1 /* button_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.vert; sourceTree = "<group>"; };
+		A8E55C101CFD92890034D946 /* knight.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = knight.gif; sourceTree = "<group>"; };
+		A8E55C121CFD97530034D946 /* Playerx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Playerx.png; sourceTree = "<group>"; };
+		A8E55C141CFD98360034D946 /* smurf_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smurf_sprite.png; sourceTree = "<group>"; };
 		B44186941BA331E300604D7F /* RenderProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderProject.h; sourceTree = "<group>"; };
 		B44186961BA331E300604D7F /* RenderProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderProject.cpp; sourceTree = "<group>"; };
 		B47949921BA6742B00B5E9DC /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -483,9 +489,12 @@
 				6351C0811CE7381B000DEB3E /* block.mtl */,
 				6351C0821CE7381B000DEB3E /* block.obj */,
 				A83875401CE1D0EE004D88D9 /* level.txt */,
+				A8E55C101CFD92890034D946 /* knight.gif */,
 				63C674F31CF2146700E911C4 /* backgroundlevel.txt */,
+				A8E55C121CFD97530034D946 /* Playerx.png */,
 				630FAC731CD687DA00AB6C23 /* characterdiffuse.png */,
 				630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */,
+				A8E55C141CFD98360034D946 /* smurf_sprite.png */,
 				630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */,
 				A842B47B1CEAEEE1006A852A /* arrowL.png */,
 				A842B47C1CEAEEE1006A852A /* arrowR.png */,
@@ -827,6 +836,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E55C131CFD97530034D946 /* Playerx.png in Resources */,
 				A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */,
 				63C674F11CF212E500E911C4 /* coin20.mtl in Resources */,
 				63C674F41CF2146700E911C4 /* backgroundlevel.txt in Resources */,
@@ -842,10 +852,12 @@
 				630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */,
 				63C674EC1CF2070100E911C4 /* coin50.obj in Resources */,
 				63C6750B1CF25F1500E911C4 /* frog.mtl in Resources */,
+				A8E55C151CFD98360034D946 /* smurf_sprite.png in Resources */,
 				6351C08D1CE783F0000DEB3E /* player.mtl in Resources */,
 				A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */,
 				B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				6351C0911CE78849000DEB3E /* player.obj in Resources */,
+				A8E55C111CFD92890034D946 /* knight.gif in Resources */,
 				6351C0841CE7381B000DEB3E /* block.mtl in Resources */,
 				225A60C71CE6060C00424AF6 /* background.vert in Resources */,
 				63C674FA1CF21C1F00E911C4 /* silver.png in Resources */,

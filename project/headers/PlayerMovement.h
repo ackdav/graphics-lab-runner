@@ -17,11 +17,11 @@ class PlayerMovement: public Movement {
 private:
     
     Renderer bRenderer;
-    std::list<Entity> buttons;
+    std::vector<Entity> buttons;
     
     std::map<std::string, vmml::AABBf> boxes;
     
-    std::list<Entity>::iterator buttonIterator;
+    std::vector<Entity>::iterator buttonIterator;
     
     bool checkButton(std::string button,vmml::Vector2f click) {
         std::map<std::string, vmml::AABBf>::iterator boxIterator = boxes.find(button);
@@ -33,7 +33,7 @@ private:
     
 public:
     
-    PlayerMovement(Renderer _bRenderer,std::list<Entity> _buttons):Movement(),bRenderer(_bRenderer),buttons(_buttons){
+    PlayerMovement(Renderer _bRenderer,std::vector<Entity> _buttons):Movement(),bRenderer(_bRenderer),buttons(_buttons){
         for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator){
             vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(buttonIterator->getObjName())->getBoundingBoxObjectSpace();
             vmml::AABBf box(buttonIterator->getPos() * boundingBox.getMin(),buttonIterator->getPos() * boundingBox.getMax());
