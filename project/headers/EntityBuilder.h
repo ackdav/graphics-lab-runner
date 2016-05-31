@@ -117,7 +117,7 @@ public:
             return result;
         }
         if (eProperties.isMoving) {
-            MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
+            MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
             return result;
         }
         Entity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible);
@@ -125,7 +125,7 @@ public:
     }
     
     MoveableEntity createMoveableEntity() {
-        MoveableEntity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
+        MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
         return result;
     }
 };

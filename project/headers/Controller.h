@@ -28,6 +28,7 @@ private:
     std::list<MoveableEntity> moveableEntities;
     std::vector<Entity> buttons;
     
+    Entity test;
     GameController gameController;
     Renderer brenderer;
     MoveableEntity player;
@@ -109,7 +110,7 @@ private:
     void drawEntity(Entity entity) {
         vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
         vmml::Matrix4f projectionMatrix = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
-        drawEntity(entity,viewMatrix,projectionMatrix,0,0,vmml::Vector4f(0.0f,0.25f,0.0f,0.25f));
+        drawEntity(entity,viewMatrix,projectionMatrix,0,0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
     }
     
     vmml::Vector<4,bool> checkCollision(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
@@ -239,11 +240,13 @@ public:
         // TODO: Matrix to initialize objects
         LevelBuilder levelBuilder(_brenderer);
         
+        
         entities = levelBuilder.getEntities();
         moveableEntities = levelBuilder.getMoveableEntities();
         player = levelBuilder.getPlayer();
         skyplane = levelBuilder.getSkyplane();
         buttons = levelBuilder.getButtons();
+        test = levelBuilder.getTest();
     }
     
     void update(double elapsedTime, int direction) {
@@ -312,8 +315,8 @@ public:
             if (move.at(2) && movement->getDurationFlying() < 1.f) {
                 y += 0.1f;
             } else {
-                //movement->setDurationFlying(1.f);
-                //y += gravity;
+                movement->setDurationFlying(1.f);
+                y += gravity;
             }
             if (move.at(3)) {
                 if (movement->getTargetReleased() == true) {
@@ -334,6 +337,7 @@ public:
                 movement->setDurationFlying(movement->getDurationFlying() + elapsedTime);
             }
             while(col.at(0) != 0 || col.at(1) != 0) {
+                std::cout<<"COLLISION "<<col<<std::endl;
                 moveableIterator->move(col);
                 newbox.set(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
                 col = getCollision(oldbox,newbox);
@@ -377,6 +381,12 @@ public:
                 iteration = 1;
             }
         }
+        
+        std::cout<<"PLAYER POS: "<<player.getPos()<<std::endl;
+        std::cout<<"SMURF POS: "<<buttons.at(4).getPos()<<std::endl;
+        vmml::Matrix4f ma = buttons.at(4).getPos();
+        //player.setPos(ma);
+        drawEntity(test,viewMatrix2,projectionMatrix2,0,0,vmml::Vector4f(0.0f,0.25f,0.0f,0.25f));
         
         
         

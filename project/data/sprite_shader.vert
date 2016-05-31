@@ -24,12 +24,6 @@ uniform mediump vec4 borders;
 // borders[2] : minY
 // borders[3] : maxY
 
-uniform mediump vec4 bordersXMin;
-uniform mediump vec4 bordersXMax;
-uniform mediump vec4 bordersYMin;
-uniform mediump vec4 bordersYMax;
-
-
 attribute vec4 Position;
 attribute vec3 Normal;
 attribute vec3 Tangent;
@@ -57,22 +51,6 @@ void main()
     tangentVarying = normalize(NormalMatrix * Tangent);
     texCoordVarying = TexCoord;
     
-//        if (texCoordVarying.x > bordersXMax) {
-//            texCoordVarying.x = texCoordVarying.x - bordersXMax;
-//        } else if (texCoordVarying.x < bordersXMin) {
-//            texCoordVarying.x = texCoordVarying.x + bordersXMin;
-//        } else {
-//            texCoordVarying.x = texCoordVarying.x/0.5;
-//        }
-//        if (texCoordVarying.y > bordersYMax) {
-//            texCoordVarying.y = bordersYMax;
-//        } else if (texCoordVarying.y < bordersYMin) {
-//            texCoordVarying.y = bordersYMin;
-//        } else {
-//            texCoordVarying.y = texCoordVarying.y;
-//        }
-
-    
     if (texCoordVarying.x > borders[1]) {
         texCoordVarying.x = borders[1];
     } else if (texCoordVarying.x < borders[0]) {
@@ -88,13 +66,9 @@ void main()
         texCoordVarying.y = texCoordVarying.y;
     }
     texCoordVarying.t = texCoordVarying.t;
-    //texCoordVarying.t = 0f;
+
     PlayerPosVarying = PlayerPosition;
     
-    // TL:
-    // BL: x>0.5,y>0.5
-    // BR: x<0.5,y>0.5
-    //
     gl_Position = ProjectionMatrix * ViewMatrix * posVarying;
     vVertex = gl_Position;
     

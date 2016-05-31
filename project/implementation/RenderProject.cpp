@@ -81,6 +81,8 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->loadObjModel("coin20.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("floating_tree1.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("frog.obj", false, true, guyShader, guyProperties);
+    
+    bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png",bRenderer().getObjects()->getShader("sprite_shader"));
 
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)

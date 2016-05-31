@@ -99,6 +99,12 @@ public:
         _currentPos= vmml::create_translation(_translation) * _startPos;
     }
     
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,std::string _shaderName, std::string _objName, bool _isCollectible):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible){
+        this->scale = scale;
+        _startPos =  vmml::create_scaling(scale);
+        _currentPos= vmml::create_translation(_translation) * _startPos;
+    }
+    
     Entity(vmml::Matrix4f &Pos){
         _currentPos = Pos;
     }
