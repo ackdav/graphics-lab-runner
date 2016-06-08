@@ -63,7 +63,7 @@ private:
         } else if (std::strcmp(index.c_str(),"E") ==0) {
             //PlayerMovement movement;
             std::cout<<"INITIALIZE SMURF "<<row<<","<<column<<std::endl;
-            builder.setObjectName("smurf").setShaderName("sprite_shader").setIsMoving(true).setMovement(new PlayerMovement(bRenderer,buttons));
+//            builder.setObjectName("smurf").setShaderName("sprite_shader").setIsMoving(true).setMovement(new PlayerMovement(bRenderer,buttons));
         }  else if (std::strcmp(index.c_str(),"9") ==0) {
             //PlayerMovement movement;
             std::cout<<"INITIALIZE PLAYER "<<row<<","<<column<<std::endl;

@@ -68,9 +68,9 @@ void RenderProject::initFunction()
 
     PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
     
-    bRenderer().getObjects()->createSprite("plala", "sprite_pl.png", spriteAnimShader);
+//    bRenderer().getObjects()->createSprite("plala", "sprite_pl.png", spriteAnimShader);
     // load models
-    bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
+//    bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
     
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
     bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);

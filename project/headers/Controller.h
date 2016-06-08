@@ -299,18 +299,60 @@ public:
         for (moveableIterator = moveableEntities.begin(); moveableIterator != moveableEntities.end(); ++moveableIterator) {
             Movement *movement = moveableIterator->getMovement();
             
+            int row = 4 - (iteration-1)/4;
+            int column = (iteration - 1)%4;
+            
+            double yMax = row / 4.0f;
+            double yMin = (row - 1) / 4.0f;
+            double xMax = (column + 1) / 4.0f;
+            double xMin = (column) / 4.0f;
+
             vmml::Vector<4, bool > move = movement->getMove();
             float x = 0.0f;
             float y = 0.0f;
+            
+            //work on accellerate / decellerate to not make it schlitschuuuue style
             if (move.at(0)) {
-                x -= movement->getStepAccellerate(elapsedTime,0);
+                x -= movement->getStepAccellerate(elapsedTime/3.0,0);
+                
+
+                     row = 4 - (iteration-1)/4;
+                     column = (iteration - 1)%4;
+     
+                
+                     yMax = row / 4.0f;
+                     yMin = (row - 1) / 4.0f;
+                     xMax = (column + 1) / 4.0f;
+                     xMin = (column) / 4.0f;
+                    
+                    iteration = iteration + 1;
+                    if (iteration > 16) {
+                        iteration = 1;
+                    }
+//                }
+                
+                
             } else {
-                x -= movement->getStepDeccellerate(elapsedTime,0);
+                x -= movement->getStepDeccellerate(elapsedTime*8.0,0);
             }
             if (move.at(1)) {
-                x += movement->getStepAccellerate(elapsedTime,1);
+                x += movement->getStepAccellerate(elapsedTime/3.0,1);
+                
+                 row = 4 - (iteration-1)/4;
+                 column = (iteration - 1)%4;
+                yMax = row / 4.0f;
+                yMin = (row - 1) / 4.0f;
+                xMax = (column + 1) / 4.0f;
+                xMin = (column) / 4.0f;
+                
+                iteration = iteration + 1;
+                if (iteration > 16) {
+                    iteration = 1;
+                }
+                
+                
             } else {
-                x += movement->getStepDeccellerate(elapsedTime,1);
+                x += movement->getStepDeccellerate(elapsedTime*8.0,1);
             }
             if (move.at(2) && movement->getDurationFlying() < 1.f) {
                 y += 0.1f;
@@ -349,107 +391,51 @@ public:
             //Todo: move skyplane with player
             skyplane.setTranslate(vmml::Vector3f(getPlayerTrans().x()/2.f,0.,0.));
             skyplane.move(skyplane.getTranslate());
-            
             drawEntity(skyplane);
-            drawEntity(*moveableIterator);
-            
 
+            
+            drawEntity(*moveableIterator,
+                       brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                       brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
+                       vmml::Vector4f(xMin,xMax,yMin,yMax));
+            
         }
         if (totalSilvercoins < 0) {
             totalSilvercoins = silvercoins;
             totalGoldcoins = goldcoins;
         }
         
-        drawEntity(buttons.at(0),buttons.at(0).getViewMatrix(),vmml::Matrix4f::IDENTITY,-player.getMovement()->getDurationRight(),0,vmml::Vector4f(0.0f,1.0f/2.0f,0.0f,1.0f/2.0f));
-        drawEntity(buttons.at(1),buttons.at(1).getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationLeft(),0,vmml::Vector4f(0.0f,0.5f,0.0f,0.5f));
+        drawEntity(buttons.at(0),buttons.at(0).getViewMatrix(),vmml::Matrix4f::IDENTITY,-player.getMovement()->getDurationRight(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
+        drawEntity(buttons.at(1),buttons.at(1).getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationLeft(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(2),buttons.at(2).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,player.getMovement()->getDurationFlying(),vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
-        vmml::Matrix4f viewMatrix2 = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
-        vmml::Matrix4f projectionMatrix2 = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
-        if (lastUpdate < timeRunning/100) {
-            lastUpdate = timeRunning / 100;
-            int row = 4 - (iteration-1)/4;
-            int column = (iteration - 1)%4;
-            double yMax = row / 4.0f;
-            double yMin = (row - 1) / 4.0f;
-            double xMax = (column + 1) / 4.0f;
-            double xMin = (column) / 4.0f;
-            //drawEntity(buttons.at(4),buttons.at(4).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
-            drawEntity(buttons.at(4),viewMatrix2,projectionMatrix2,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
-            iteration = iteration + 1;
-            if (iteration > 16) {
-                iteration = 1;
-            }
-        }
-        
-        std::cout<<"PLAYER POS: "<<player.getPos()<<std::endl;
-        std::cout<<"SMURF POS: "<<buttons.at(4).getPos()<<std::endl;
+//        vmml::Matrix4f viewMatrix2 = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
+//        vmml::Matrix4f projectionMatrix2 = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
+//        
+//        
+//        if (lastUpdate < timeRunning/100) {
+//            lastUpdate = timeRunning / 100;
+//            int row = 4 - (iteration-1)/4;
+//            int column = (iteration - 1)%4;
+//            double yMax = row / 4.0f;
+//            double yMin = (row - 1) / 4.0f;
+//            double xMax = (column + 1) / 4.0f;
+//            double xMin = (column) / 4.0f;
+//            
+//            
+//            //drawEntity(buttons.at(4),buttons.at(4).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
+//            drawEntity(buttons.at(4),viewMatrix2,projectionMatrix2,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
+//            iteration = iteration + 1;
+//            if (iteration > 16) {
+//                iteration = 1;
+//            }
+//        }
+//
+//        std::cout<<"PLAYER POS: "<<player.getTranslate()<<std::endl;
+//        std::cout<<"SMURF POS:  XXXXX"<<buttons.at(4).getPos()<<std::endl;
         vmml::Matrix4f ma = buttons.at(4).getPos();
         //player.setPos(ma);
-        drawEntity(test,viewMatrix2,projectionMatrix2,0,0,vmml::Vector4f(0.0f,0.25f,0.0f,0.25f));
-        
-        
-        
-       // for (buttonIterator = buttons.begin(); buttonIterator != buttons.end(); ++buttonIterator) {
-           //player.getMovement()->get
-            
-//            ShaderPtr shader = brenderer.getObjects()->getShader("sprite_shader");
-//            
-//            vmml::Vector4f pos = buttonIterator->getPos().get_column(3);
-//            if (shader.get())
-//            {
-//                vmml::Matrix4f modelMatrix = buttonIterator->getPos();
-//                //        std::cout<<"SHADER: "<<shaderName<<std::endl;
-//                vmml::Matrix4f viewMatrix = buttonIterator->getViewMatrix();
-//                std::cout<<"SET THE DAMN VALUE"<<std::endl;
-//                shader->setUniform("spriteRect", vmml::Vector4f(1.0f,1.0f,512.0f,512.0f));
-//                shader->setUniform("spriteWorld", vmml::Vector2f(pos.at(0),pos.at(1)));
-//                shader->setUniform("textureSize", vmml::Vector2f(512.0f,512.0f));
-//                shader->setUniform("ProjectionMatrix", vmml::Matrix4f::IDENTITY);
-//                shader->setUniform("ViewMatrix", viewMatrix);
-//                shader->setUniform("ModelMatrix", modelMatrix);
-//                
-//                vmml::Matrix3f normalMatrix;
-//                vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
-//                shader->setUniform("NormalMatrix", normalMatrix);
-//                
-//                //This is the same as setting the camera
-//                vmml::Vector4f eyePos = getPlayerTrans() - vmml::Vector3f(0.0f,0.0f,-10.0f);
-//                
-//                shader->setUniform("EyePos", eyePos);
-//                
-//                //Setting up the sun - so it walks with him just a little bit
-//                float f = (GameTime - 0.1)*(1/0.8);
-//                std::cout<<"SUN POSITION: "<<f<<std::endl;
-//                vmml::Vector4f lightPos = vmml::Vector4f((getPlayerPosition().x()- 25.f) + (GameTime *0.1*brenderer.getView()->getScreenWidth()) , 25.f , 1.f  );
-//                
-//                shader->setUniform("LightPos", lightPos);
-//                
-//                shader->setUniform("Ia", vmml::Vector3f(1.f));
-//                shader->setUniform("Id", vmml::Vector3f(1.f));
-//                shader->setUniform("Is", vmml::Vector3f(1.f));
-//                
-//                shader->setUniform("GameTime", GameTime);
-//                
-//                vmml::Vector4f PlayerPos = -getPlayerPosition();
-//                
-//                shader->setUniform("PlayerPosition", PlayerPos);
-//                
-//                std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
-//
-//            }
-//            else
-//            {
-//                bRenderer::log("No shader available.");
-//            }
-//
-//            brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(buttonIterator->getObjName()), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
-//            
-//            std::cout<<"SPRITE PLAYER "<<brenderer.getObjects()->getModel("plala")->getBoundingBoxObjectSpace()<<std::endl;
-//            std::cout<<"BUTTON "<<brenderer.getObjects()->getModel(buttonIterator->getObjName())->getBoundingBoxObjectSpace()<<std::endl;
-            //brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel("plala"), buttonIterator->getPos(), buttonIterator->getViewMatrix(), vmml::Matrix4f::IDENTITY, std::vector<std::string>({}), false, false);
-       // }
-        
+
         
         
         GLfloat scale = 0.1f;

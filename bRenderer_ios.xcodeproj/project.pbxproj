@@ -20,13 +20,12 @@
 		540DDD791CA0024A00DE3FCC /* guy.obj in Resources */ = {isa = PBXBuildFile; fileRef = 540DDD761CA0024A00DE3FCC /* guy.obj */; };
 		540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */ = {isa = PBXBuildFile; fileRef = 540DDD771CA0024A00DE3FCC /* guy.vert */; };
 		540DDD7C1CA0058A00DE3FCC /* guy.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 540DDD7B1CA0058A00DE3FCC /* guy.mtl */; };
-		540DDD7E1CA020B700DE3FCC /* diffuse3.png in Resources */ = {isa = PBXBuildFile; fileRef = 540DDD7D1CA020B700DE3FCC /* diffuse3.png */; };
 		54B964A81CB259CE008843E2 /* normal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B964A61CB259CE008843E2 /* normal3.png */; };
 		54B964A91CB259CE008843E2 /* specular.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B964A71CB259CE008843E2 /* specular.png */; };
+		630305571D08046600D87135 /* smurf_sprite_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 630305561D08046600D87135 /* smurf_sprite_n.png */; };
 		630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC731CD687DA00AB6C23 /* characterdiffuse.png */; };
 		630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */; };
 		630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */; };
-		6351C0831CE7381B000DEB3E /* block_diff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0801CE7381B000DEB3E /* block_diff.png */; };
 		6351C0841CE7381B000DEB3E /* block.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0811CE7381B000DEB3E /* block.mtl */; };
 		6351C0851CE7381B000DEB3E /* block.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0821CE7381B000DEB3E /* block.obj */; };
 		6351C0871CE77FA3000DEB3E /* player.frag in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0861CE77FA3000DEB3E /* player.frag */; };
@@ -38,7 +37,6 @@
 		63C674EC1CF2070100E911C4 /* coin50.obj in Resources */ = {isa = PBXBuildFile; fileRef = 63C674EA1CF2070100E911C4 /* coin50.obj */; };
 		63C674F11CF212E500E911C4 /* coin20.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 63C674EE1CF212E400E911C4 /* coin20.mtl */; };
 		63C674F21CF212E500E911C4 /* coin20.obj in Resources */ = {isa = PBXBuildFile; fileRef = 63C674EF1CF212E400E911C4 /* coin20.obj */; };
-		63C674F41CF2146700E911C4 /* backgroundlevel.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63C674F31CF2146700E911C4 /* backgroundlevel.txt */; };
 		63C674F81CF21BD000E911C4 /* gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C674F71CF21BD000E911C4 /* gold.png */; };
 		63C674FA1CF21C1F00E911C4 /* silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C674F91CF21C1F00E911C4 /* silver.png */; };
 		63C674FD1CF23E1300E911C4 /* floating_tree1.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 63C674FB1CF23E1300E911C4 /* floating_tree1.mtl */; };
@@ -52,7 +50,6 @@
 		A81653571CE083FA00577BF2 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81653561CE083FA00577BF2 /* GameObject.cpp */; };
 		A828885E1CF82C76005F7055 /* sprite_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A828885D1CF82C76005F7055 /* sprite_shader.frag */; };
 		A82888601CF82CA5005F7055 /* sprite_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A828885F1CF82CA5005F7055 /* sprite_shader.vert */; };
-		A82888621CF831FB005F7055 /* sprite_pl.png in Resources */ = {isa = PBXBuildFile; fileRef = A82888611CF831FB005F7055 /* sprite_pl.png */; };
 		A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8337E9F1CF473FF0048BD70 /* arial.ttf */; };
 		A83875411CE1D0EE004D88D9 /* level.txt in Resources */ = {isa = PBXBuildFile; fileRef = A83875401CE1D0EE004D88D9 /* level.txt */; };
 		A842B47E1CEAEEE1006A852A /* arrowL.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B47B1CEAEEE1006A852A /* arrowL.png */; };
@@ -62,8 +59,6 @@
 		A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A3E73C1CF2F80200966CBB /* green-squared.png */; };
 		A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8BA855F1CF87024003C42F1 /* button_shader.frag */; };
 		A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8BA85601CF87024003C42F1 /* button_shader.vert */; };
-		A8E55C111CFD92890034D946 /* knight.gif in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C101CFD92890034D946 /* knight.gif */; };
-		A8E55C131CFD97530034D946 /* Playerx.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C121CFD97530034D946 /* Playerx.png */; };
 		A8E55C151CFD98360034D946 /* smurf_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E55C141CFD98360034D946 /* smurf_sprite.png */; };
 		B44186971BA331E300604D7F /* RenderProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B44186961BA331E300604D7F /* RenderProject.cpp */; };
 		B47949AF1BA6742B00B5E9DC /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B47949921BA6742B00B5E9DC /* config.json */; };
@@ -180,13 +175,12 @@
 		540DDD761CA0024A00DE3FCC /* guy.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guy.obj; sourceTree = "<group>"; };
 		540DDD771CA0024A00DE3FCC /* guy.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = guy.vert; sourceTree = "<group>"; };
 		540DDD7B1CA0058A00DE3FCC /* guy.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guy.mtl; sourceTree = "<group>"; };
-		540DDD7D1CA020B700DE3FCC /* diffuse3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diffuse3.png; sourceTree = "<group>"; };
 		54B964A61CB259CE008843E2 /* normal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal3.png; sourceTree = "<group>"; };
 		54B964A71CB259CE008843E2 /* specular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = specular.png; sourceTree = "<group>"; };
+		630305561D08046600D87135 /* smurf_sprite_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smurf_sprite_n.png; sourceTree = "<group>"; };
 		630FAC731CD687DA00AB6C23 /* characterdiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characterdiffuse.png; sourceTree = "<group>"; };
 		630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.mtl; sourceTree = "<group>"; };
 		630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.obj; sourceTree = "<group>"; };
-		6351C0801CE7381B000DEB3E /* block_diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block_diff.png; sourceTree = "<group>"; };
 		6351C0811CE7381B000DEB3E /* block.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.mtl; sourceTree = "<group>"; };
 		6351C0821CE7381B000DEB3E /* block.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.obj; sourceTree = "<group>"; };
 		6351C0861CE77FA3000DEB3E /* player.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = player.frag; sourceTree = "<group>"; };
@@ -200,7 +194,6 @@
 		63C674EA1CF2070100E911C4 /* coin50.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin50.obj; sourceTree = "<group>"; };
 		63C674EE1CF212E400E911C4 /* coin20.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin20.mtl; sourceTree = "<group>"; };
 		63C674EF1CF212E400E911C4 /* coin20.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin20.obj; sourceTree = "<group>"; };
-		63C674F31CF2146700E911C4 /* backgroundlevel.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = backgroundlevel.txt; sourceTree = "<group>"; };
 		63C674F71CF21BD000E911C4 /* gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold.png; sourceTree = "<group>"; };
 		63C674F91CF21C1F00E911C4 /* silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silver.png; sourceTree = "<group>"; };
 		63C674FB1CF23E1300E911C4 /* floating_tree1.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = floating_tree1.mtl; sourceTree = "<group>"; };
@@ -218,7 +211,6 @@
 		A81653581CE0842600577BF2 /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		A828885D1CF82C76005F7055 /* sprite_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite_shader.frag; sourceTree = "<group>"; };
 		A828885F1CF82CA5005F7055 /* sprite_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sprite_shader.vert; sourceTree = "<group>"; };
-		A82888611CF831FB005F7055 /* sprite_pl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite_pl.png; sourceTree = "<group>"; };
 		A8337E9F1CF473FF0048BD70 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
 		A83875401CE1D0EE004D88D9 /* level.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level.txt; sourceTree = "<group>"; };
 		A83875421CE1D11E004D88D9 /* LevelBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelBuilder.h; sourceTree = "<group>"; };
@@ -230,8 +222,6 @@
 		A8A3E73C1CF2F80200966CBB /* green-squared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-squared.png"; sourceTree = "<group>"; };
 		A8BA855F1CF87024003C42F1 /* button_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.frag; sourceTree = "<group>"; };
 		A8BA85601CF87024003C42F1 /* button_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.vert; sourceTree = "<group>"; };
-		A8E55C101CFD92890034D946 /* knight.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = knight.gif; sourceTree = "<group>"; };
-		A8E55C121CFD97530034D946 /* Playerx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Playerx.png; sourceTree = "<group>"; };
 		A8E55C141CFD98360034D946 /* smurf_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smurf_sprite.png; sourceTree = "<group>"; };
 		B44186941BA331E300604D7F /* RenderProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderProject.h; sourceTree = "<group>"; };
 		B44186961BA331E300604D7F /* RenderProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderProject.cpp; sourceTree = "<group>"; };
@@ -482,19 +472,16 @@
 				6351C0881CE77FAC000DEB3E /* player.vert */,
 				A842B4811CEAEEE9006A852A /* target.png */,
 				6351C0861CE77FA3000DEB3E /* player.frag */,
-				6351C0801CE7381B000DEB3E /* block_diff.png */,
 				A8BA855F1CF87024003C42F1 /* button_shader.frag */,
 				A8BA85601CF87024003C42F1 /* button_shader.vert */,
 				22A14CD81CEF6EA400B6CEF1 /* texture.png */,
 				6351C0811CE7381B000DEB3E /* block.mtl */,
 				6351C0821CE7381B000DEB3E /* block.obj */,
 				A83875401CE1D0EE004D88D9 /* level.txt */,
-				A8E55C101CFD92890034D946 /* knight.gif */,
-				63C674F31CF2146700E911C4 /* backgroundlevel.txt */,
-				A8E55C121CFD97530034D946 /* Playerx.png */,
 				630FAC731CD687DA00AB6C23 /* characterdiffuse.png */,
 				630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */,
 				A8E55C141CFD98360034D946 /* smurf_sprite.png */,
+				630305561D08046600D87135 /* smurf_sprite_n.png */,
 				630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */,
 				A842B47B1CEAEEE1006A852A /* arrowL.png */,
 				A842B47C1CEAEEE1006A852A /* arrowR.png */,
@@ -509,9 +496,7 @@
 				54B964A71CB259CE008843E2 /* specular.png */,
 				22842C0C1CF4708100F0D9EB /* cloud.frag */,
 				22842C0D1CF4708100F0D9EB /* cloud.vert */,
-				540DDD7D1CA020B700DE3FCC /* diffuse3.png */,
 				540DDD7B1CA0058A00DE3FCC /* guy.mtl */,
-				A82888611CF831FB005F7055 /* sprite_pl.png */,
 				540DDD751CA0024A00DE3FCC /* guy.frag */,
 				540DDD761CA0024A00DE3FCC /* guy.obj */,
 				540DDD771CA0024A00DE3FCC /* guy.vert */,
@@ -836,10 +821,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8E55C131CFD97530034D946 /* Playerx.png in Resources */,
 				A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */,
 				63C674F11CF212E500E911C4 /* coin20.mtl in Resources */,
-				63C674F41CF2146700E911C4 /* backgroundlevel.txt in Resources */,
 				22842C0E1CF4708100F0D9EB /* cloud.frag in Resources */,
 				630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */,
 				225A60C61CE6060C00424AF6 /* background.frag in Resources */,
@@ -848,6 +831,7 @@
 				A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */,
 				B4794A311BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				540DDD781CA0024A00DE3FCC /* guy.frag in Resources */,
+				630305571D08046600D87135 /* smurf_sprite_n.png in Resources */,
 				540DDD791CA0024A00DE3FCC /* guy.obj in Resources */,
 				630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */,
 				63C674EC1CF2070100E911C4 /* coin50.obj in Resources */,
@@ -857,7 +841,6 @@
 				A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */,
 				B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				6351C0911CE78849000DEB3E /* player.obj in Resources */,
-				A8E55C111CFD92890034D946 /* knight.gif in Resources */,
 				6351C0841CE7381B000DEB3E /* block.mtl in Resources */,
 				225A60C71CE6060C00424AF6 /* background.vert in Resources */,
 				63C674FA1CF21C1F00E911C4 /* silver.png in Resources */,
@@ -865,14 +848,12 @@
 				22842C0F1CF4708100F0D9EB /* cloud.vert in Resources */,
 				A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */,
 				540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */,
-				6351C0831CE7381B000DEB3E /* block_diff.png in Resources */,
 				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,
 				22A14CDB1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png in Resources */,
 				A83875411CE1D0EE004D88D9 /* level.txt in Resources */,
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,
 				63C674FE1CF23E1300E911C4 /* floating_tree1.obj in Resources */,
 				6351C08F1CE784A6000DEB3E /* sprite_player.png in Resources */,
-				A82888621CF831FB005F7055 /* sprite_pl.png in Resources */,
 				22BAD7521CD8E24B0070B4F2 /* backgroundDiff.png in Resources */,
 				B47949AF1BA6742B00B5E9DC /* config.json in Resources */,
 				6351C0871CE77FA3000DEB3E /* player.frag in Resources */,
@@ -883,7 +864,6 @@
 				A842B47E1CEAEEE1006A852A /* arrowL.png in Resources */,
 				63C674EB1CF2070100E911C4 /* coin50.mtl in Resources */,
 				6351C0891CE77FAC000DEB3E /* player.vert in Resources */,
-				540DDD7E1CA020B700DE3FCC /* diffuse3.png in Resources */,
 				22BAD7531CD8E24B0070B4F2 /* backgroundPlane.mtl in Resources */,
 				54B964A81CB259CE008843E2 /* normal3.png in Resources */,
 				63C674F81CF21BD000E911C4 /* gold.png in Resources */,

@@ -37,34 +37,35 @@ varying mediump vec3 tangentVarying;    // tangent in world space
 
 varying vec4 vVertex;
 
-lowp vec4 fogColor;
+//lowp vec4 fogColor;
 
 varying mediump vec4 PlayerPosVarying;
 
 // FogParameters
 
-struct fogParameters{
-    
-    float fDensity;
-    float fStart;
-    float fEnd;
-    vec4 fogColor;
-    int iFogEquation;
-} fogParams;
-
-
-
+//struct fogParameters{
+//    
+//    float fDensity;
+//    float fStart;
+//    float fEnd;
+//    vec4 fogColor;
+//    int iFogEquation;
+//} fogParams;
+//
+//
+//
 
 
 void main()
 {
     
     //fogParameters
-    fogParams.fDensity = 0.04;
-    fogParams.fStart = 10.0;
-    fogParams.fEnd = 20.0;
-    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
-    fogParams.iFogEquation = 2;
+//    fogParams.fDensity = 0.04;
+//    fogParams.fStart = 10.0;
+//    fogParams.fEnd = 20.0;
+//    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
+//    fogParams.iFogEquation = 2;
+    
     
     mediump vec3 sunpos = vec3(-20.0, 20.0, 0);
     mediump vec3 sunlightdirection = -sunpos.xyz;
