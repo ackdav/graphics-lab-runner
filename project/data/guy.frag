@@ -37,6 +37,8 @@ varying vec4 vVertex;
 
 void main()
 {
+    lowp vec4 tempColor;
+    
     lowp vec4 ambientResult = vec4(Ka * Ia, 1.0);
     
     mediump vec4 pos = posVarying;
@@ -50,45 +52,46 @@ void main()
     mediump mat3 tbn = mat3(tM, bM, nM);
     
     // TODO: read and correctly transform normals from normal map, then use them for lighting
-    mediump vec3 nTemp = texture2D(NormalMap, texCoordVarying.st).rgb;
-    nTemp = normalize(nTemp * 2.0 - 1.0);
-    nTemp = normalize(tbn * nTemp);
-    n = nTemp;
     
-    
-    mediump vec3 l = normalize(LightPos - pos).xyz;
+    mediump vec3 l = -normalize(LightPos - pos).xyz;
     
     lowp float intensity = dot(n, l);
     lowp vec3 diffuse = Kd * clamp(intensity, 0.0, 1.0) * Id;
     lowp vec4 diffuseResult = vec4(clamp(diffuse, 0.0, 1.0), 1.0);
 
+    vec4 specular = vec4(0.0);
+    if (dot(normalVarying, l) > 0.0)
+    {
+        highp vec3 eyeVec = normalize((EyePos - posVarying).xyz);
+        highp vec3 h = normalize((l + eyeVec)/length(l+eyeVec));
+        highp vec3 spec = Ks * pow(dot(normalVarying,h), Ns) * Is;
+        specular = vec4(clamp(spec,0.0,1.0),1.0);
+    }
     
-    lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.st);
-
-//    float sil = dot(normalize(LightPos - pos).xyz, normalVarying);
-//    
-//    
-////
-////    
-////    for(float i = 1.0; i>0.5; i=i-0.25){
-////        
-////        if(sil>i){
-////            color *=i*vec4(1.0,1.0,1.0,1.0);
-////            break;
-////        }
-////    }
-////    
-//    
-//    
-//
-//    
-//    if (gl_FrontFacing == true) {
-//        color*=0.5*vec4(1.0,1.0,1.0,1.0);
+    vec4 VertexToCamera = EyePos+vVertex;
+    
+    float CameraFacingPercentage = dot(vec3(VertexToCamera), normalVarying);
+    
+    
+//    if(CameraFacingPercentage<0.1){
+//        
+//        gl_FragColor= vec4(0.0,1.0,0.0,1.0);
 //    }
-//    else
-//        color*=vec4(1.0,1.0,1.0,1.0);
-   
+    
+//    else{
 
-    gl_FragColor = (ambientResult+diffuseResult ) * color ;
+    
+    lowp vec4 NormalizedReflectedViewVector = vec4(l - 2.0 * ( l * n ) * n, 1.0);
+    
+    lowp float D = pow(dot(normalize(EyePos-vVertex), NormalizedReflectedViewVector),1.0);
+    
+    lowp vec4 color = texture2D(DiffuseMap, (D*texCoordVarying).st);
+    
+    
+    tempColor = ambientResult+diffuseResult;
+
+    gl_FragColor = tempColor * color + specular;
+        
+//    }
     
 }

@@ -1,7 +1,7 @@
 # Blender MTL File: 'block.blend'
 # Material Count: 2
 
-newmtl Material.001
+newmtl topblock
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -10,9 +10,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd block_diff.png
+map_Kd texture.png
 
-newmtl Material.002
+newmtl bottomblock
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -21,4 +21,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd block_diff.png
+map_Kd HLG_map3_orig_smut.png

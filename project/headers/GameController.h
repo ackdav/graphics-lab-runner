@@ -14,8 +14,6 @@
 #include "bRenderer.h"
 #include "Entity.h"
 #include "Player.h"
-#include "Environment.h"
-#include "Background.h"
 #include "GameObject.h"
 
 class GameController {
