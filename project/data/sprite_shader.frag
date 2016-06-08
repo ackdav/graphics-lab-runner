@@ -41,32 +41,10 @@ varying vec4 vVertex;
 
 varying mediump vec4 PlayerPosVarying;
 
-// FogParameters
-
-//struct fogParameters{
-//    
-//    float fDensity;
-//    float fStart;
-//    float fEnd;
-//    vec4 fogColor;
-//    int iFogEquation;
-//} fogParams;
-//
-//
-//
-
 
 void main()
 {
-    
-    //fogParameters
-//    fogParams.fDensity = 0.04;
-//    fogParams.fStart = 10.0;
-//    fogParams.fEnd = 20.0;
-//    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
-//    fogParams.iFogEquation = 2;
-    
-    
+
     mediump vec3 sunpos = vec3(-20.0, 20.0, 0);
     mediump vec3 sunlightdirection = -sunpos.xyz;
     mediump vec4 sunlightcolor = vec4(0.5,0.5,0.5,0.5);
@@ -112,6 +90,8 @@ void main()
     
     lowp vec4 color = texture2D(DiffuseMap, (texCoordVarying).xy);
 
+    
+    color = color * texture2D(NormalMap, (texCoordVarying).xy);
     
     gl_FragColor = tempColor * color ;
 }
