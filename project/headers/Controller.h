@@ -45,6 +45,7 @@ private:
     bool goingUp = true;
 
     float timeRunning;
+    vmml::Vector3f birdTranslate;
     
     void drawEntity(Entity entity, vmml::Matrix4f viewMatrix, vmml::Matrix4f projectionMatrix,double left, double top, vmml::Vector4f borders) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -227,7 +228,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBird(1){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBird(1), birdTranslate(vmml::Vector3f(0.,0.,0.)){
         
     }
     
@@ -289,12 +290,13 @@ public:
         std::cout<<"GameTime: "<<GameTime<<std::endl;
         
         
+        
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+            
+            
             
             int row = 2 - (iterationBird-1)/2;
             int column = (iterationBird - 1)%2;
-            
-            
             
             double yMax = row / 2.0f;
             double yMin = (row - 1) / 2.0f;
@@ -313,25 +315,25 @@ public:
                 silvercoins+=1;
 
             }
+     
             if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
                 
-//                iterator -> setTranslate(vmml::Vector3f(0., sin(timeRunning),0.));
-//                
             }
             
             if( std::strcmp(name.c_str(),"birdD") ==0) {
-
-            iterationBird = iterationBird + 1;
+                
+                iterationBird = iterationBird + 1;
                 if (iterationBird > 4) {
                     iterationBird = 1;
                 }
+                birdTranslate += vmml::Vector3f(0.004,0.,0.);
+                iterator->move(birdTranslate);
             }
             drawEntity(*iterator,
                        brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
                        brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
                        vmml::Vector4f(xMin,xMax,yMin,yMax));
             
-//            drawEntity(*iterator);
         }
         // Move default -0.9 to floor
         float gravity = -0.15f;
@@ -370,9 +372,7 @@ public:
                     if (iterationPlayer > 16) {
                         iterationPlayer = 1;
                     }
-//                }
-                
-                
+
             } else {
                 x -= movement->getStepDeccellerate(elapsedTime*8.0,0);
             }
