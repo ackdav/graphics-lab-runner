@@ -68,7 +68,7 @@ private:
             builder.setObjectName("smurf").setShaderName("sprite_shader").setIsMoving(true).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"2") ==0) {
             //PlayerMovement movement;
-            builder.setObjectName("minecraftcharacter").setShaderName("player").setIsMoving(true).setFacing(3).setMovement(new PlayerMovement(bRenderer,buttons));
+            //builder.setObjectName("minecraftcharacter").setShaderName("player").setIsMoving(true).setFacing(3).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"3") ==0) {
             vmml::AABBf boundingBox = bRenderer.getObjects()->getModel("coin50")->getBoundingBoxObjectSpace();
             //set rotation !! Doesnt work yet

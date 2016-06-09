@@ -51,9 +51,9 @@ void RenderProject::initFunction()
     ShaderPtr backgroundShader = bRenderer().getObjects()->loadShaderFile("background", 1, false, false, false, false, false);
     ShaderPtr playerShader = bRenderer().getObjects()->loadShaderFile("player", 0, false, true, true, false, false);
     // load shader from file without lighting, the number of lights won't ever change during rendering (no variable number of lights)
-    MaterialPtr playerMaterial = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
+    //MaterialPtr playerMaterial = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
     
-    MaterialPtr playerMjjj = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
+    //MaterialPtr playerMjjj = bRenderer().getObjects()->loadObjMaterial("player.mtl", "player", playerShader);
     
     FontPtr font = bRenderer().getObjects()->loadFont("arial.ttf", 50);
     
@@ -74,7 +74,7 @@ void RenderProject::initFunction()
 //    bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
     
     //bRenderer().getObjects()->loadObjModel("guy.obj", true, true, true, 0, false, false, guyProperties);
-    bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);
+    //bRenderer().getObjects()->loadObjModel("minecraftcharacter.obj", false, true, playerShader, playerProperties);
     bRenderer().getObjects()->loadObjModel("block.obj", false, true, guyShader, guyProperties);
     bRenderer().getObjects()->loadObjModel("clouds.obj", false, true, cloudShader, cloudProperties);
     bRenderer().getObjects()->loadObjModel("backgroundPlane.obj", false, true, backgroundShader, backgroundProperties);
