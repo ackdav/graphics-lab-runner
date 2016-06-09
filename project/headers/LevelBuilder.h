@@ -62,11 +62,9 @@ private:
             builder.setObjectName("block").setShaderName("guy");
         } else if (std::strcmp(index.c_str(),"E") ==0) {
             //PlayerMovement movement;
-            std::cout<<"INITIALIZE SMURF "<<row<<","<<column<<std::endl;
 //            builder.setObjectName("smurf").setShaderName("sprite_shader").setIsMoving(true).setMovement(new PlayerMovement(bRenderer,buttons));
         }  else if (std::strcmp(index.c_str(),"9") ==0) {
             //PlayerMovement movement;
-            std::cout<<"INITIALIZE PLAYER "<<row<<","<<column<<std::endl;
             builder.setObjectName("smurf").setShaderName("sprite_shader").setIsMoving(true).setMovement(new PlayerMovement(bRenderer,buttons));
         } else if (std::strcmp(index.c_str(),"2") ==0) {
             //PlayerMovement movement;
@@ -85,11 +83,11 @@ private:
         }
         else if (std::strcmp(index.c_str(),"A") ==0) {
             //set rotation !!
-            builder.setObjectName("floating_tree1").setShaderName("guy").setIsMoving(false).setFacing(2);
+            builder.setObjectName("floating_tree1").setShaderName("guy").setIsMoving(false).setFacing(2).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"C") ==0) {
             //set rotation !!
-            builder.setObjectName("clouds").setShaderName("cloud").setIsMoving(false).setFacing(2);
+            builder.setObjectName("clouds").setShaderName("cloud").setIsMoving(false).setFacing(2).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"B") ==0) {
             builder.setObjectName("birdA").setShaderName("sprite_shader").setIsMoving(false);

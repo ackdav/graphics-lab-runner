@@ -28,6 +28,7 @@ private:
     std::string objName;
     std::string image;
     bool isCollectible;
+    bool collision2D;
     
 public:
     
@@ -81,6 +82,10 @@ public:
         return viewMatrix;
     }
     
+    bool getCollision2D() {
+        return collision2D;
+    }
+    
     void setRotation(float angle){
         _startPos =  vmml::create_rotation(angle, vmml::Vector3f(0.,1.,0.)) *vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(translation) * _startPos;
@@ -93,13 +98,13 @@ public:
         _currentPos= vmml::create_translation(_translation) * _startPos;
     }
     
-    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,vmml::Vector3f axis,float angle, std::string _shaderName, std::string _objName, bool _isCollectible):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible){
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,vmml::Vector3f axis,float angle, std::string _shaderName, std::string _objName, bool _isCollectible, bool _collision2D):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible),collision2D(_collision2D){
         this->scale = scale;
         _startPos =  vmml::create_rotation(angle, axis) *vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;
     }
     
-    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,std::string _shaderName, std::string _objName, bool _isCollectible):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible){
+    Entity(vmml::Vector3f scale,vmml::Vector3f _translation,std::string _shaderName, std::string _objName, bool _isCollectible, bool _collision2D):translation(_translation),shaderName(_shaderName),objName(_objName),isCollectible(_isCollectible),collision2D(_collision2D){
         this->scale = scale;
         _startPos =  vmml::create_scaling(scale);
         _currentPos= vmml::create_translation(_translation) * _startPos;

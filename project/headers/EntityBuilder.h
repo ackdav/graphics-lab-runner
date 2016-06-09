@@ -24,7 +24,8 @@ private:
         shaderName(""),
         objectName(""),
         facing(-1),
-        isCollectible(false){
+        isCollectible(false),
+        collision2D(true){
         }
         
         vmml::Vector3f scale;
@@ -38,6 +39,7 @@ private:
         bool setValue;
         int facing;
         bool isCollectible;
+        bool collision2D;
         
         friend class EntityBuilder;
     };
@@ -82,6 +84,11 @@ public:
         return *this;
     }
     
+    EntityBuilder& setCollision2D(bool _collision2D) {
+        eProperties.collision2D = _collision2D;
+        return *this;
+    }
+    
     EntityBuilder& setViewMatrix(vmml::Matrix4f _viewMatrix) {
         eProperties.viewMatrix = _viewMatrix;
         return *this;
@@ -117,15 +124,15 @@ public:
             return result;
         }
         if (eProperties.isMoving) {
-            MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
+            MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.collision2D,eProperties.movement);
             return result;
         }
-        Entity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible);
+        Entity result(eProperties.scale,eProperties.translation,vmml::Vector3f(0,1,0),M_PI_F*eProperties.facing*1/2,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.collision2D);
         return result;
     }
     
     MoveableEntity createMoveableEntity() {
-        MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.movement);
+        MoveableEntity result(eProperties.scale,eProperties.translation,eProperties.shaderName,eProperties.objectName,eProperties.isCollectible,eProperties.collision2D,eProperties.movement);
         return result;
     }
 };

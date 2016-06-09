@@ -22,7 +22,7 @@ public:
     
     MoveableEntity(){} 
     
-    MoveableEntity(vmml::Vector3f _scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName, bool _isCollectible, Movement *_movement):Entity(_scale,_translation,_shaderName,_objName,_isCollectible){
+    MoveableEntity(vmml::Vector3f _scale,vmml::Vector3f _translation, std::string _shaderName, std::string _objName, bool _isCollectible, bool _collision2D, Movement *_movement):Entity(_scale,_translation,_shaderName,_objName,_isCollectible, _collision2D){
         movement = _movement;
     }
     
