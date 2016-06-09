@@ -92,7 +92,7 @@ private:
             builder.setObjectName("clouds").setShaderName("cloud").setIsMoving(false).setFacing(2);
         }
         else if (std::strcmp(index.c_str(),"B") ==0) {
-            builder.setObjectName("birdA").setShaderName("sprite_shader").setIsMoving(false);
+            builder.setObjectName("birdD").setShaderName("sprite_shader").setIsMoving(false);
         }
         //There is an element
         if (std::strcmp(index.c_str(),"0") !=0) {
@@ -166,7 +166,7 @@ public:
         vmml::Vector3f trans = vmml::Vector3f(7-7,7+-10,0);
         //addSpriteImage("bPlayerSprite","smurf_sprite.png",vmml::Vector3f(-0.35f, -0.4f, -0.00f));
         addSpriteImage("smurf","smurf_sprite.png",trans);
-        addSpriteImage("birdA","mapBirdA.png",vmml::Vector3f(7-9,7+-12,0));
+        addSpriteImage("birdD","mapBirdD.png",vmml::Vector3f(7-7,7+-10,0));
 //        addSpriteImage("birdA", "mapBirdA",vmml::Vector3f(7-9,7+-13,0));
         
         std::string line;

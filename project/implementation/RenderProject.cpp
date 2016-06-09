@@ -86,7 +86,7 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png",bRenderer().getObjects()->getShader("sprite_shader"));
 //    bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png", );
 
-    bRenderer().getObjects()->createSprite("birdA","mapBirdA", bRenderer().getObjects()->getShader("sprite_shader"));
+    bRenderer().getObjects()->createSprite("birdD","mapBirdD.png", bRenderer().getObjects()->getShader("sprite_shader"));
 
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)

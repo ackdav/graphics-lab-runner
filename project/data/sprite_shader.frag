@@ -48,7 +48,7 @@ void main()
     mediump vec3 sunlightdirection = -sunpos.xyz;
     mediump vec4 sunlightcolor = vec4(0.5,0.5,0.5,0.5);
     
-    
+
     
     lowp vec4 tempColor;
     

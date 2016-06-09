@@ -218,7 +218,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBird(1){
         
     }
     
@@ -251,6 +251,10 @@ public:
     }
     
     void update(double elapsedTime, int direction) {
+        skyplane.setTranslate(vmml::Vector3f(getPlayerTrans().x()/2.f,0.,0.));
+        skyplane.move(skyplane.getTranslate());
+        drawEntity(skyplane);
+        
         int silvercoins = 0;
         int goldcoins = 0;
         timeRunning += elapsedTime;
@@ -302,15 +306,16 @@ public:
             }
             if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
                 
-                iterator -> setTranslate(vmml::Vector3f(0., sin(timeRunning),0.));
+//                iterator -> setTranslate(vmml::Vector3f(0., sin(timeRunning),0.));
+//                
             }
             
-            if( std::strcmp(name.c_str(),"birdA") ==0) {
+            if( std::strcmp(name.c_str(),"birdD") ==0) {
 
-//            iteration = iteration + 1;
-//                if (iteration > 4) {
-//                    iteration = 1;
-//                }
+            iterationBird = iterationBird + 1;
+                if (iterationBird > 4) {
+                    iterationBird = 1;
+                }
             }
             drawEntity(*iterator,
                        brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
@@ -416,9 +421,7 @@ public:
             std::cout << moveableIterator->getObjName();
             
             //Todo: move skyplane with player
-            skyplane.setTranslate(vmml::Vector3f(getPlayerTrans().x()/2.f,0.,0.));
-            skyplane.move(skyplane.getTranslate());
-            drawEntity(skyplane);
+          
 
             
             drawEntity(*moveableIterator,
