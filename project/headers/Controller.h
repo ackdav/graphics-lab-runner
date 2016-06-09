@@ -140,12 +140,15 @@ private:
         return vmml::Vector<4,bool>(left,right,top,bottom);
     }
     
-    bool isIn(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
-    
-        //return oldCenter.at(0) < newCenter.at(0) + newwidth && oldCenter.at(0) + oldwidth > newCenter.at(0) && oldCenter.at(1) < newCenter.at(1) + newheight && oldheight + oldCenter.at(1) > newCenter.at(1) && oldCenter.at(2) < newCenter.at(2) + newdepth && olddepth + oldCenter.at(2) > newCenter.at(2);
+    bool isIn3D(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
         return (((boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) || (boxMax.at(0) > posMax.at(0) && boxMin.at(0) < posMax.at(0))) &&
                 ((boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) || (boxMax.at(1) > posMax.at(1) && boxMin.at(1) < posMax.at(1))) &&
                 ((boxMax.at(2) > posMin.at(2) && boxMin.at(2) < posMin.at(2)) || (boxMax.at(2) > posMax.at(2) && boxMin.at(2) < posMax.at(2))));
+    }
+    
+    bool isIn2D(vmml::Vector3f oldCenter, vmml::Vector3f newCenter, vmml::Vector3f boxMin,vmml::Vector3f boxMax, vmml::Vector3f posMin, vmml::Vector3f posMax) {
+        return (((boxMax.at(0) > posMin.at(0) && boxMin.at(0) < posMin.at(0)) || (boxMax.at(0) > posMax.at(0) && boxMin.at(0) < posMax.at(0))) &&
+                ((boxMax.at(1) > posMin.at(1) && boxMin.at(1) < posMin.at(1)) || (boxMax.at(1) > posMax.at(1) && boxMin.at(1) < posMax.at(1))));
     }
     
     bool hasCollision(vmml::Vector<4,bool> collision) {
@@ -175,7 +178,13 @@ private:
             vmml::Vector3f posMax = getMax(newbox.getMax(),newbox.getMin());
             vmml::Vector3f posMin = getMin(newbox.getMax(),newbox.getMin());
             // Upon collision, move 0.01 up, until no collision is detected (still need to check with all other objects for collision, therefore no break)
-            if (isIn(box2.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax)){
+            bool hasCollision;
+            if (iterator->getCollision2D()) {
+                hasCollision = isIn2D(box2.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax);
+            } else {
+                hasCollision = isIn3D(box2.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax);
+            }
+            if (hasCollision){
                 if (iterator->getIsCollectible()) {
                     entities.erase(iterator++);
                     continue;
@@ -411,7 +420,6 @@ public:
                 movement->setDurationFlying(movement->getDurationFlying() + elapsedTime);
             }
             while(col.at(0) != 0 || col.at(1) != 0) {
-                std::cout<<"COLLISION "<<col<<std::endl;
                 moveableIterator->move(col);
                 newbox.set(moveableIterator->getPos() * boundingBox.getMin(),moveableIterator->getPos() * boundingBox.getMax());
                 col = getCollision(oldbox,newbox);
