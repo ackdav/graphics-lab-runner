@@ -19,10 +19,6 @@ uniform lowp vec3 Id;   // diffuse light intensity
 uniform lowp vec3 Is;   // specular light intensity
 
 uniform mediump vec4 borders;
-// borders[0] : minX
-// borders[1] : maxX
-// borders[2] : minY
-// borders[3] : maxY
 
 attribute vec4 Position;
 attribute vec3 Normal;
@@ -39,6 +35,7 @@ varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
 varying vec4 vVertex;
+//uniform String objName;
 
 uniform mediump vec4 PlayerPosition;
 

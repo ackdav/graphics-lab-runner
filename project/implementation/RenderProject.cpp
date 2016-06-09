@@ -67,7 +67,8 @@ void RenderProject::initFunction()
     PropertiesPtr cloudProperties = bRenderer().getObjects()->createProperties("cloudProperties");
 
     PropertiesPtr backgroundProperties = bRenderer().getObjects()->createProperties("backgroundProperties");
-    
+    PropertiesPtr smurfProperties = bRenderer().getObjects()->createProperties("smurfProperties");
+
 //    bRenderer().getObjects()->createSprite("plala", "sprite_pl.png", spriteAnimShader);
     // load models
 //    bRenderer().getObjects()->createSprite("player", playerMaterial, false, playerProperties);				// create a sprite using the material created above, to pass additional properties a Properties object is used
@@ -83,6 +84,9 @@ void RenderProject::initFunction()
     bRenderer().getObjects()->loadObjModel("frog.obj", false, true, guyShader, guyProperties);
     
     bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png",bRenderer().getObjects()->getShader("sprite_shader"));
+//    bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png", );
+
+    bRenderer().getObjects()->createSprite("birdA","mapBirdA", bRenderer().getObjects()->getShader("sprite_shader"));
 
     
     // automatically generates a shader with a maximum of 4 lights (number of lights may vary between 0 and 4 during rendering without performance loss)

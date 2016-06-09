@@ -38,7 +38,8 @@ private:
     int totalGoldcoins;
     int totalSilvercoins;
     double lastUpdate;
-    int iteration;
+    int iterationPlayer;
+    int iterationBird;
 
     float GameTime = 0.0;
     bool goingUp = true;
@@ -217,7 +218,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iteration(0){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1){
         
     }
     
@@ -276,12 +277,23 @@ public:
         
         
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+            
+            int row = 2 - (iterationBird-1)/2;
+            int column = (iterationBird - 1)%2;
+            
+            
+            
+            double yMax = row / 2.0f;
+            double yMin = (row - 1) / 2.0f;
+            double xMax = (column + 1) / 2.0f;
+            double xMin = (column) / 2.0f;
+            
+            
+            
             std::string name = iterator->getObjName();
             if( std::strcmp(name.c_str(),"coin50") ==0) {
-             //Implement Coin Rotation here
                 iterator->setRotation(1.2*timeRunning);
                 goldcoins+=1;
-
             }
             if( std::strcmp(name.c_str(),"coin20") ==0) {
                 iterator->setRotation(1.2*timeRunning);
@@ -292,15 +304,30 @@ public:
                 
                 iterator -> setTranslate(vmml::Vector3f(0., sin(timeRunning),0.));
             }
-            drawEntity(*iterator);
+            
+            if( std::strcmp(name.c_str(),"birdA") ==0) {
+
+//            iteration = iteration + 1;
+//                if (iteration > 4) {
+//                    iteration = 1;
+//                }
+            }
+            drawEntity(*iterator,
+                       brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                       brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
+                       vmml::Vector4f(xMin,xMax,yMin,yMax));
+            
+//            drawEntity(*iterator);
         }
         // Move default -0.9 to floor
         float gravity = -0.15f;
         for (moveableIterator = moveableEntities.begin(); moveableIterator != moveableEntities.end(); ++moveableIterator) {
             Movement *movement = moveableIterator->getMovement();
             
-            int row = 4 - (iteration-1)/4;
-            int column = (iteration - 1)%4;
+            int row = 4 - (iterationPlayer-1)/4;
+            int column = (iterationPlayer - 1)%4;
+            
+            
             
             double yMax = row / 4.0f;
             double yMin = (row - 1) / 4.0f;
@@ -316,8 +343,8 @@ public:
                 x -= movement->getStepAccellerate(elapsedTime/3.0,0);
                 
 
-                     row = 4 - (iteration-1)/4;
-                     column = (iteration - 1)%4;
+                     row = 4 - (iterationPlayer-1)/4;
+                     column = (iterationPlayer - 1)%4;
      
                 
                      yMax = row / 4.0f;
@@ -325,9 +352,9 @@ public:
                      xMax = (column + 1) / 4.0f;
                      xMin = (column) / 4.0f;
                     
-                    iteration = iteration + 1;
-                    if (iteration > 16) {
-                        iteration = 1;
+                    iterationPlayer = iterationPlayer + 1;
+                    if (iterationPlayer > 16) {
+                        iterationPlayer = 1;
                     }
 //                }
                 
@@ -338,16 +365,16 @@ public:
             if (move.at(1)) {
                 x += movement->getStepAccellerate(elapsedTime/3.0,1);
                 
-                 row = 4 - (iteration-1)/4;
-                 column = (iteration - 1)%4;
+                 row = 4 - (iterationPlayer-1)/4;
+                 column = (iterationPlayer - 1)%4;
                 yMax = row / 4.0f;
                 yMin = (row - 1) / 4.0f;
                 xMax = (column + 1) / 4.0f;
                 xMin = (column) / 4.0f;
                 
-                iteration = iteration + 1;
-                if (iteration > 16) {
-                    iteration = 1;
+                iterationPlayer = iterationPlayer + 1;
+                if (iterationPlayer > 16) {
+                    iterationPlayer = 1;
                 }
                 
                 

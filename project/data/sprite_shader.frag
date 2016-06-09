@@ -34,7 +34,6 @@ varying mediump vec3 normalVarying;     // normal in world space
 varying mediump vec3 tangentVarying;    // tangent in world space
 
 
-
 varying vec4 vVertex;
 
 //lowp vec4 fogColor;
@@ -88,10 +87,11 @@ void main()
     lowp float D = pow(dot(normalize(EyePos-vVertex), NormalizedReflectedViewVector),1.0);
     
     
-    lowp vec4 color = texture2D(DiffuseMap, (texCoordVarying).xy);
+    lowp vec4 color = texture2D(DiffuseMap, (texCoordVarying).xy) ;
 
     
-    color = color * texture2D(NormalMap, (texCoordVarying).xy);
+    color = color  *  texture2D(NormalMap, (texCoordVarying).xy);
+  
     
     gl_FragColor = tempColor * color ;
 }
