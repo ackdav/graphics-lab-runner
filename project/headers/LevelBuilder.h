@@ -84,7 +84,9 @@ private:
         else if (std::strcmp(index.c_str(),"B") ==0) {
             builder.setObjectName("birdD").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
         }
-        
+        else if (std::strcmp(index.c_str(),"b") ==0) {
+            builder.setObjectName("birdA").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
+        }
         else if (std::strcmp(index.c_str(),"A") ==0) {
             //set rotation !!
             builder.setObjectName("floating_tree1").setShaderName("guy").setIsMoving(false).setFacing(2).setCollision2D(false);
@@ -131,6 +133,9 @@ private:
                 if(std::strcmp(index.c_str(),"B")==0){
                     entities.push_back(builder.createEntity());
                 }
+                else if(std::strcmp(index.c_str(),"b")==0){
+                    entities.push_back(builder.createEntity());
+                }
                 else{
                     entities.push_front(builder.createEntity());
                 }
@@ -173,8 +178,8 @@ public:
         vmml::Vector3f trans = vmml::Vector3f(7-7,7+-10,0);
         //addSpriteImage("bPlayerSprite","smurf_sprite.png",vmml::Vector3f(-0.35f, -0.4f, -0.00f));
         addSpriteImage("smurf","smurf_sprite.png",trans);
-//        addSpriteImage("birdD","mapBirdD.png",trans);
-//        addSpriteImage("birdA", "mapBirdA",vmml::Vector3f(7-9,7+-13,0));
+        addSpriteImage("birdD","mapBirdD.png",trans);
+        addSpriteImage("birdA", "mapBirdA.png",trans);
         
         std::string line;
         std::ifstream myfile (bRenderer::getFilePath("level.txt"));

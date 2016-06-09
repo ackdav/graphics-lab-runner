@@ -39,13 +39,15 @@ private:
     int totalSilvercoins;
     double lastUpdate;
     int iterationPlayer;
-    int iterationBird;
-
+    int iterationBirdRight;
+    
+    int iterationBirdLeft;
     float GameTime = 0.0;
     bool goingUp = true;
 
     float timeRunning;
     vmml::Vector3f birdTranslate;
+    vmml::Vector3f birdTranslateMinus;
     
     void drawEntity(Entity entity, vmml::Matrix4f viewMatrix, vmml::Matrix4f projectionMatrix,double left, double top, vmml::Vector4f borders) {
         vmml::Matrix4f modelMatrix = entity.getPos();
@@ -228,7 +230,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBird(1), birdTranslate(vmml::Vector3f(0.,0.,0.)){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)){
         
     }
     
@@ -287,52 +289,74 @@ public:
             goingUp=true;
         }
        
-        std::cout<<"GameTime: "<<GameTime<<std::endl;
-        
-        
         
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
-            
-            
-            
-            int row = 2 - (iterationBird-1)/2;
-            int column = (iterationBird - 1)%2;
-            
-            double yMax = row / 2.0f;
-            double yMin = (row - 1) / 2.0f;
-            double xMax = (column + 1) / 2.0f;
-            double xMin = (column) / 2.0f;
-            
-            
-            
             std::string name = iterator->getObjName();
+
+            
             if( std::strcmp(name.c_str(),"coin50") ==0) {
                 iterator->setRotation(1.2*timeRunning);
                 goldcoins+=1;
+                drawEntity(*iterator);
             }
-            if( std::strcmp(name.c_str(),"coin20") ==0) {
+            else if( std::strcmp(name.c_str(),"coin20") ==0) {
                 iterator->setRotation(1.2*timeRunning);
                 silvercoins+=1;
-
+                drawEntity(*iterator);
             }
      
-            if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
-                
+            else if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
+                drawEntity(*iterator);
             }
             
-            if( std::strcmp(name.c_str(),"birdD") ==0) {
+            else if( std::strcmp(name.c_str(),"birdD") ==0) {
+                int row = 2 - (iterationBirdRight-1)/2;
+                int column = (iterationBirdRight - 1)%2;
                 
-                iterationBird = iterationBird + 1;
-                if (iterationBird > 4) {
-                    iterationBird = 1;
+                double yMax = row / 2.0f;
+                double yMin = (row - 1) / 2.0f;
+                double xMax = (column + 1) / 2.0f;
+                double xMin = (column) / 2.0f;
+                
+                iterationBirdRight = iterationBirdRight + 1;
+                if (iterationBirdRight > 4) {
+                    iterationBirdRight = 1;
                 }
-                birdTranslate += vmml::Vector3f(0.004,0.,0.);
-                iterator->move(birdTranslate);
+                birdTranslate += vmml::Vector3f(elapsedTime/10,0.,0.);
+                iterator->move( birdTranslate);
+                
+                drawEntity(*iterator,
+                           brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                           brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
+                           vmml::Vector4f(xMin,xMax,yMin,yMax));
             }
-            drawEntity(*iterator,
-                       brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
-                       brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
-                       vmml::Vector4f(xMin,xMax,yMin,yMax));
+            else if( std::strcmp(name.c_str(),"birdA") ==0) {
+                int row = 2 - (iterationBirdLeft-1)/2;
+                int column = (iterationBirdLeft - 1)%2;
+                
+                double yMax = row / 2.0f;
+                double yMin = (row - 1) / 2.0f;
+                double xMax = (column + 1) / 2.0f;
+                double xMin = (column) / 2.0f;
+                
+                iterationBirdLeft  = iterationBirdLeft + 1;
+                if (iterationBirdLeft > 4) {
+                    iterationBirdLeft = 1;
+                }
+                birdTranslateMinus += vmml::Vector3f(-elapsedTime/10,0.,0.);
+                iterator->move(birdTranslateMinus);
+                
+                drawEntity(*iterator,
+                           brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                           brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
+                           vmml::Vector4f(xMin,xMax,yMin,yMax));
+                
+            }
+            else{
+                drawEntity(*iterator);
+            }
+            
+//            drawEntity(*iterator);
             
         }
         // Move default -0.9 to floor

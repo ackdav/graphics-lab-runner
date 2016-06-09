@@ -57,10 +57,10 @@
 		A842B4821CEAEEE9006A852A /* target.png in Resources */ = {isa = PBXBuildFile; fileRef = A842B4811CEAEEE9006A852A /* target.png */; };
 		A87CD1F51D095ECA00DBC368 /* mapBirdB.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1F11D095ECA00DBC368 /* mapBirdB.png */; };
 		A87CD1F61D095ECA00DBC368 /* mapBirdB_n.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1F21D095ECA00DBC368 /* mapBirdB_n.png */; };
-		A87CD1F71D095ECA00DBC368 /* mapBirdA.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1F31D095ECA00DBC368 /* mapBirdA.png */; };
-		A87CD1F81D095ECA00DBC368 /* mapBirdA_n.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1F41D095ECA00DBC368 /* mapBirdA_n.png */; };
 		A87CD1FB1D09755400DBC368 /* mapBirdD.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1F91D09755400DBC368 /* mapBirdD.png */; };
 		A87CD1FC1D09755400DBC368 /* mapBirdD_n.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1FA1D09755400DBC368 /* mapBirdD_n.png */; };
+		A87CD1FF1D0994A100DBC368 /* mapBirdA_n.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1FD1D0994A100DBC368 /* mapBirdA_n.png */; };
+		A87CD2001D0994A100DBC368 /* mapBirdA.png in Resources */ = {isa = PBXBuildFile; fileRef = A87CD1FE1D0994A100DBC368 /* mapBirdA.png */; };
 		A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A3E73C1CF2F80200966CBB /* green-squared.png */; };
 		A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8BA855F1CF87024003C42F1 /* button_shader.frag */; };
 		A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8BA85601CF87024003C42F1 /* button_shader.vert */; };
@@ -225,10 +225,10 @@
 		A842B4811CEAEEE9006A852A /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = target.png; sourceTree = "<group>"; };
 		A87CD1F11D095ECA00DBC368 /* mapBirdB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdB.png; sourceTree = "<group>"; };
 		A87CD1F21D095ECA00DBC368 /* mapBirdB_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdB_n.png; sourceTree = "<group>"; };
-		A87CD1F31D095ECA00DBC368 /* mapBirdA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdA.png; sourceTree = "<group>"; };
-		A87CD1F41D095ECA00DBC368 /* mapBirdA_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdA_n.png; sourceTree = "<group>"; };
 		A87CD1F91D09755400DBC368 /* mapBirdD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdD.png; sourceTree = "<group>"; };
 		A87CD1FA1D09755400DBC368 /* mapBirdD_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdD_n.png; sourceTree = "<group>"; };
+		A87CD1FD1D0994A100DBC368 /* mapBirdA_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdA_n.png; sourceTree = "<group>"; };
+		A87CD1FE1D0994A100DBC368 /* mapBirdA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapBirdA.png; sourceTree = "<group>"; };
 		A8A3E73C1CF2F80200966CBB /* green-squared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-squared.png"; sourceTree = "<group>"; };
 		A8BA855F1CF87024003C42F1 /* button_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.frag; sourceTree = "<group>"; };
 		A8BA85601CF87024003C42F1 /* button_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.vert; sourceTree = "<group>"; };
@@ -460,12 +460,12 @@
 		B47949841BA6742B00B5E9DC /* data */ = {
 			isa = PBXGroup;
 			children = (
+				A87CD1FD1D0994A100DBC368 /* mapBirdA_n.png */,
+				A87CD1FE1D0994A100DBC368 /* mapBirdA.png */,
 				A87CD1F91D09755400DBC368 /* mapBirdD.png */,
 				A87CD1FA1D09755400DBC368 /* mapBirdD_n.png */,
 				A87CD1F11D095ECA00DBC368 /* mapBirdB.png */,
 				A87CD1F21D095ECA00DBC368 /* mapBirdB_n.png */,
-				A87CD1F31D095ECA00DBC368 /* mapBirdA.png */,
-				A87CD1F41D095ECA00DBC368 /* mapBirdA_n.png */,
 				A8A3E73C1CF2F80200966CBB /* green-squared.png */,
 				63C675091CF25F1500E911C4 /* frog.mtl */,
 				63C6750A1CF25F1500E911C4 /* frog.obj */,
@@ -870,13 +870,13 @@
 				A83875411CE1D0EE004D88D9 /* level.txt in Resources */,
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,
 				63C674FE1CF23E1300E911C4 /* floating_tree1.obj in Resources */,
-				A87CD1F81D095ECA00DBC368 /* mapBirdA_n.png in Resources */,
 				22BAD7521CD8E24B0070B4F2 /* backgroundDiff.png in Resources */,
 				B47949AF1BA6742B00B5E9DC /* config.json in Resources */,
 				6351C0871CE77FA3000DEB3E /* player.frag in Resources */,
 				22BAD7541CD8E24B0070B4F2 /* backgroundPlane.obj in Resources */,
 				B4794A301BA6743D00B5E9DC /* LICENSE.txt in Resources */,
 				A87CD1FB1D09755400DBC368 /* mapBirdD.png in Resources */,
+				A87CD2001D0994A100DBC368 /* mapBirdA.png in Resources */,
 				A87CD1FC1D09755400DBC368 /* mapBirdD_n.png in Resources */,
 				63C6750C1CF25F1500E911C4 /* frog.obj in Resources */,
 				6351C0851CE7381B000DEB3E /* block.obj in Resources */,
@@ -889,11 +889,11 @@
 				22A14CD91CEF6EA400B6CEF1 /* texture.png in Resources */,
 				A82888601CF82CA5005F7055 /* sprite_shader.vert in Resources */,
 				B4CB8CD01B72E43300FE041B /* Project-Info.plist in Resources */,
+				A87CD1FF1D0994A100DBC368 /* mapBirdA_n.png in Resources */,
 				63C674FD1CF23E1300E911C4 /* floating_tree1.mtl in Resources */,
 				A842B47F1CEAEEE1006A852A /* arrowR.png in Resources */,
 				A842B4801CEAEEE1006A852A /* arrowU.png in Resources */,
 				63C674F21CF212E500E911C4 /* coin20.obj in Resources */,
-				A87CD1F71D095ECA00DBC368 /* mapBirdA.png in Resources */,
 				63C675021CF23FC600E911C4 /* green1.png in Resources */,
 				63C675081CF2538500E911C4 /* clouds.obj in Resources */,
 				A828885E1CF82C76005F7055 /* sprite_shader.frag in Resources */,
