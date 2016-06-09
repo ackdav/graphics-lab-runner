@@ -40,10 +40,34 @@ varying vec4 vVertex;
 
 varying mediump vec4 PlayerPosVarying;
 
+// FogParameters
+
+struct fogParameters{
+    
+    float fDensity;
+    float fStart;
+    float fEnd;
+    vec4 fogColor;
+    int iFogEquation;
+} fogParams;
+
+
+
+
+
+
 
 void main()
 {
-
+    
+    //fogParameters
+    fogParams.fDensity = 0.04;
+    fogParams.fStart = 10.0;
+    fogParams.fEnd = 20.0;
+    fogParams.fogColor = vec4(0.7, 0.7, 0.7, 1.0);
+    fogParams.iFogEquation = 2;
+    
+    
     mediump vec3 sunpos = vec3(-20.0, 20.0, 0);
     mediump vec3 sunlightdirection = -sunpos.xyz;
     mediump vec4 sunlightcolor = vec4(0.5,0.5,0.5,0.5);
@@ -94,4 +118,28 @@ void main()
   
     
     gl_FragColor = tempColor * color ;
+    
+    float fFogCoord = abs(EyePos.y/EyePos.w);
+    
+    float fogFactor;
+    
+    float fResult = 0.0;
+    
+    fResult = exp(-fogParams.fDensity*fFogCoord);
+    
+    fogFactor = fResult;
+    
+    
+    float depth = pos.y;
+    float fogFactorIntensity = (1.0-(1.0/(-depth))+0.2);
+    
+    if(pos.y<-1.0 && gl_FragColor.w > 0.1){
+        gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactorIntensity*fogFactor-0.1);
+    }
+    
+    
+    
+    
+    
+    
 }
