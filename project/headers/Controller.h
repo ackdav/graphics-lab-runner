@@ -278,13 +278,13 @@ public:
 
         
         if(GameTime<1.5 && goingUp == true) {
-            GameTime += 0.1;
+            GameTime += 0.01;
         }
         if(GameTime>=1.5 && goingUp == true){
             goingUp = false;
         }
         if(goingUp==false){
-            GameTime -= 0.1;
+            GameTime -= 0.01;
         }
         if(GameTime<=0.1){
             goingUp=true;

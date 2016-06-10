@@ -215,7 +215,7 @@ void RenderProject::updateRenderQueue(const std::string &camera, const double &d
     
 
     
-    controller.update(0.04f,direction);
+    controller.update(0.02f,direction);
     
     
 
