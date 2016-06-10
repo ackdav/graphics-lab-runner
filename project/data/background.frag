@@ -111,6 +111,7 @@ void main()
     float sil = dot(normalize(LightPos.xyz - pos.xyz), normalVarying);
     
     
+    if (color.z > 0.7){
     
     if (GameTimeVarying < 1.0){
     
@@ -133,8 +134,8 @@ void main()
 
         
     }
+    }
 
-   
 
     gl_FragColor = (ambientResult+diffuseResult ) * color;
     
@@ -156,7 +157,8 @@ void main()
     fogFactor = fResult;
     
     
+    
     gl_FragColor = mix(gl_FragColor, fogParams.fogColor, fogFactor);
 
-    
+  
 }
