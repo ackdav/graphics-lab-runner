@@ -58,6 +58,10 @@ private:
         
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
         
+        ShaderPtr spriteshader = brenderer.getObjects()->getShader("sprite_shader");
+        ShaderPtr birdshader = brenderer.getObjects()->getShader("bird_shader");
+
+        
         
         if (shader.get())
         {
@@ -69,6 +73,7 @@ private:
             vmml::Matrix3f normalMatrix;
             vmml::compute_inverse(vmml::transpose(vmml::Matrix3f(modelMatrix)), normalMatrix);
             shader->setUniform("NormalMatrix", normalMatrix);
+            
             
             //This is the same as setting the camera
             vmml::Vector4f eyePos = getPlayerTrans() - vmml::Vector3f(0.0f,0.0f,-10.0f);
@@ -94,7 +99,7 @@ private:
             vmml::Vector4f PlayerPos = -getPlayerPosition();
             
             shader->setUniform("PlayerPosition", PlayerPos);
-            
+  
             //std::cout<<"POSITION "<<shader->getAttribLocation("Position")<<std::endl;
             std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
             
@@ -103,6 +108,15 @@ private:
         {
             bRenderer::log("No shader available.");
         }
+        
+        
+        
+        spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite_n.png"));
+        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
+
+        
+        
+        
         //GLfloat titleScale = 2.0f;
         //vmml::Matrix4f scaling = vmml::create_scaling(vmml::Vector3f(titleScale / brenderer.getView()->getAspectRatio(), titleScale, titleScale));
         //modelMatrix = vmml::create_translation(vmml::Vector3f(-0.4f, 0.0f, -10.0f)) * scaling;
@@ -477,7 +491,6 @@ public:
             //Todo: move skyplane with player
           
 
-            
             drawEntity(*moveableIterator,
                        brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
                        brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,

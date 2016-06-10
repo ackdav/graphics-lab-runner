@@ -82,10 +82,10 @@ private:
 ;
         }
         else if (std::strcmp(index.c_str(),"B") ==0) {
-            builder.setObjectName("birdD").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
+            builder.setObjectName("birdD").setShaderName("bird_shader").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"b") ==0) {
-            builder.setObjectName("birdA").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
+            builder.setObjectName("birdA").setShaderName("bird_shader").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"D") ==0) {
             builder.setObjectName("door").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
