@@ -87,6 +87,9 @@ private:
         else if (std::strcmp(index.c_str(),"b") ==0) {
             builder.setObjectName("birdA").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
         }
+        else if (std::strcmp(index.c_str(),"D") ==0) {
+            builder.setObjectName("door").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
+        }
         else if (std::strcmp(index.c_str(),"A") ==0) {
             //set rotation !!
             builder.setObjectName("floating_tree1").setShaderName("guy").setIsMoving(false).setFacing(2).setCollision2D(false);
@@ -180,6 +183,8 @@ public:
         addSpriteImage("smurf","smurf_sprite.png",trans);
         addSpriteImage("birdD","mapBirdD.png",trans);
         addSpriteImage("birdA", "mapBirdA.png",trans);
+        addSpriteImage("door", "door_sprite.png",trans);
+
         
         std::string line;
         std::ifstream myfile (bRenderer::getFilePath("level.txt"));

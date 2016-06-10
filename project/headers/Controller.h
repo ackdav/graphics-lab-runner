@@ -40,6 +40,7 @@ private:
     double lastUpdate;
     int iterationPlayer;
     int iterationBirdRight;
+    int iterationDoor;
     
     int iterationBirdLeft;
     float GameTime = 0.0;
@@ -230,7 +231,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1),iterationDoor(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)){
         
     }
     
@@ -307,6 +308,27 @@ public:
      
             else if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
                 drawEntity(*iterator);
+            }
+            else if( std::strcmp(name.c_str(),"door") ==0) {
+                int row = 3 - (iterationDoor-1)/3;
+                int column = (iterationDoor - 1)%3;
+                
+                double yMax = row / 3.0f;
+                double yMin = (row - 1) / 3.0f;
+                double xMax = (column + 1) / 3.0f;
+                double xMin = (column) / 3.0f;
+                
+                iterationDoor = iterationDoor + 1;
+                if (iterationDoor > 9) {
+                    iterationDoor = 1;
+                }
+//                birdTranslate += vmml::Vector3f(elapsedTime/10,0.,0.);
+//                iterator->move( birdTranslate);
+                
+                drawEntity(*iterator,
+                           brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                           brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
+                           vmml::Vector4f(xMin,xMax,yMin,yMax));
             }
             
             else if( std::strcmp(name.c_str(),"birdD") ==0) {
