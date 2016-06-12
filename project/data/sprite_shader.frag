@@ -79,12 +79,22 @@ void main()
     
     mediump vec4 pos = posVarying;
     
-    lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.xy) ;
+    float sunlightangle = acos(dot(sunlightdirection.xyz, normalVarying.xyz)/(length(sunlightdirection.xyz)*length(normalVarying.xyz)));
 
-    color = color  +  texture2D(NormalMap, (texCoordVarying).xy);
-  
+    
+    lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.xy) ;
+    color = color  + texture2D(NormalMap, (texCoordVarying).xy);
     
     gl_FragColor = tempColor * color ;
+    
+    
+//    if(sunlightangle>0.0 && sunlightangle < 3.141 && normalVarying.x > 0.0){
+//        gl_FragColor = gl_FragColor * sunlightcolor;
+//
+//    }
+    
+ 
+    
     
     float fFogCoord = abs(EyePos.y/EyePos.w);
     

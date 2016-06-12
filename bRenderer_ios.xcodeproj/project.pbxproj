@@ -23,9 +23,8 @@
 		54B964A81CB259CE008843E2 /* normal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B964A61CB259CE008843E2 /* normal3.png */; };
 		54B964A91CB259CE008843E2 /* specular.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B964A71CB259CE008843E2 /* specular.png */; };
 		630305571D08046600D87135 /* smurf_sprite_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 630305561D08046600D87135 /* smurf_sprite_n.png */; };
+		630305591D0DB41000D87135 /* smurf_sprite_n_test.png in Resources */ = {isa = PBXBuildFile; fileRef = 630305581D0DB41000D87135 /* smurf_sprite_n_test.png */; };
 		630FAC761CD687DA00AB6C23 /* characterdiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC731CD687DA00AB6C23 /* characterdiffuse.png */; };
-		630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */; };
-		630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */ = {isa = PBXBuildFile; fileRef = 630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */; };
 		6351C0841CE7381B000DEB3E /* block.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0811CE7381B000DEB3E /* block.mtl */; };
 		6351C0851CE7381B000DEB3E /* block.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0821CE7381B000DEB3E /* block.obj */; };
 		6351C0871CE77FA3000DEB3E /* player.frag in Resources */ = {isa = PBXBuildFile; fileRef = 6351C0861CE77FA3000DEB3E /* player.frag */; };
@@ -188,9 +187,8 @@
 		54B964A61CB259CE008843E2 /* normal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal3.png; sourceTree = "<group>"; };
 		54B964A71CB259CE008843E2 /* specular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = specular.png; sourceTree = "<group>"; };
 		630305561D08046600D87135 /* smurf_sprite_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smurf_sprite_n.png; sourceTree = "<group>"; };
+		630305581D0DB41000D87135 /* smurf_sprite_n_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smurf_sprite_n_test.png; sourceTree = "<group>"; };
 		630FAC731CD687DA00AB6C23 /* characterdiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characterdiffuse.png; sourceTree = "<group>"; };
-		630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.mtl; sourceTree = "<group>"; };
-		630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minecraftcharacter.obj; sourceTree = "<group>"; };
 		6351C0811CE7381B000DEB3E /* block.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.mtl; sourceTree = "<group>"; };
 		6351C0821CE7381B000DEB3E /* block.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.obj; sourceTree = "<group>"; };
 		6351C0861CE77FA3000DEB3E /* player.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = player.frag; sourceTree = "<group>"; };
@@ -500,8 +498,6 @@
 				6351C0821CE7381B000DEB3E /* block.obj */,
 				A83875401CE1D0EE004D88D9 /* level.txt */,
 				630FAC731CD687DA00AB6C23 /* characterdiffuse.png */,
-				630FAC741CD687DA00AB6C23 /* minecraftcharacter.mtl */,
-				630FAC751CD687DA00AB6C23 /* minecraftcharacter.obj */,
 				A842B47B1CEAEEE1006A852A /* arrowL.png */,
 				A842B47C1CEAEEE1006A852A /* arrowR.png */,
 				A842B47D1CEAEEE1006A852A /* arrowU.png */,
@@ -531,6 +527,7 @@
 				A87CD1F21D095ECA00DBC368 /* mapBirdB_n.png */,
 				A8E55C141CFD98360034D946 /* smurf_sprite.png */,
 				630305561D08046600D87135 /* smurf_sprite_n.png */,
+				630305581D0DB41000D87135 /* smurf_sprite_n_test.png */,
 				A87687121D0AC705006E56F9 /* door_sprite.png */,
 				A87687161D0AC9D3006E56F9 /* door_sprite_n.png */,
 			);
@@ -855,7 +852,6 @@
 				A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */,
 				63C674F11CF212E500E911C4 /* coin20.mtl in Resources */,
 				22842C0E1CF4708100F0D9EB /* cloud.frag in Resources */,
-				630FAC771CD687DA00AB6C23 /* minecraftcharacter.mtl in Resources */,
 				225A60C61CE6060C00424AF6 /* background.frag in Resources */,
 				540DDD7C1CA0058A00DE3FCC /* guy.mtl in Resources */,
 				A842B4821CEAEEE9006A852A /* target.png in Resources */,
@@ -881,7 +877,7 @@
 				22842C0F1CF4708100F0D9EB /* cloud.vert in Resources */,
 				A8337EA01CF473FF0048BD70 /* arial.ttf in Resources */,
 				540DDD7A1CA0024A00DE3FCC /* guy.vert in Resources */,
-				630FAC781CD687DA00AB6C23 /* minecraftcharacter.obj in Resources */,
+				630305591D0DB41000D87135 /* smurf_sprite_n_test.png in Resources */,
 				22A14CDB1CEF6EA900B6CEF1 /* HLG_map3_orig_smut.png in Resources */,
 				A83875411CE1D0EE004D88D9 /* level.txt in Resources */,
 				54B964A91CB259CE008843E2 /* specular.png in Resources */,

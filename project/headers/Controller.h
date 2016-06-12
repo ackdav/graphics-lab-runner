@@ -41,6 +41,7 @@ private:
     int iterationPlayer;
     int iterationBirdRight;
     int iterationDoor;
+    bool collectedCoins;
     
     int iterationBirdLeft;
     float GameTime = 0.0;
@@ -111,7 +112,7 @@ private:
         
         
         
-        spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite_n.png"));
+        spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite_n_test.png"));
         birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
 
         
@@ -245,7 +246,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1),iterationDoor(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1),iterationDoor(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)),collectedCoins(false){
         
     }
     
@@ -331,14 +332,14 @@ public:
                 double yMin = (row - 1) / 3.0f;
                 double xMax = (column + 1) / 3.0f;
                 double xMin = (column) / 3.0f;
-                
-                iterationDoor = iterationDoor + 1;
-                if (iterationDoor > 9) {
-                    iterationDoor = 1;
+              
+                if (collectedCoins){
+              
+                if (iterationDoor < 9) {
+                    iterationDoor = iterationDoor + 1;
+
+                    }
                 }
-//                birdTranslate += vmml::Vector3f(elapsedTime/10,0.,0.);
-//                iterator->move( birdTranslate);
-                
                 drawEntity(*iterator,
                            brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
                            brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
@@ -506,34 +507,13 @@ public:
         drawEntity(buttons.at(1),buttons.at(1).getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationLeft(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(2),buttons.at(2).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,player.getMovement()->getDurationFlying(),vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
-//        vmml::Matrix4f viewMatrix2 = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
-//        vmml::Matrix4f projectionMatrix2 = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
-//        
-//        
-//        if (lastUpdate < timeRunning/100) {
-//            lastUpdate = timeRunning / 100;
-//            int row = 4 - (iteration-1)/4;
-//            int column = (iteration - 1)%4;
-//            double yMax = row / 4.0f;
-//            double yMin = (row - 1) / 4.0f;
-//            double xMax = (column + 1) / 4.0f;
-//            double xMin = (column) / 4.0f;
-//            
-//            
-//            //drawEntity(buttons.at(4),buttons.at(4).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
-//            drawEntity(buttons.at(4),viewMatrix2,projectionMatrix2,0,0,vmml::Vector4f(xMin,xMax,yMin,yMax));
-//            iteration = iteration + 1;
-//            if (iteration > 16) {
-//                iteration = 1;
-//            }
-//        }
-//
-//        std::cout<<"PLAYER POS: "<<player.getTranslate()<<std::endl;
-//        std::cout<<"SMURF POS:  XXXXX"<<buttons.at(4).getPos()<<std::endl;
+
+        
         vmml::Matrix4f ma = buttons.at(4).getPos();
         //player.setPos(ma);
 
         
+        if (totalSilvercoins - silvercoins== totalSilvercoins && totalGoldcoins - goldcoins == totalGoldcoins ){collectedCoins = true;}
         
         GLfloat scale = 0.1f;
         vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
