@@ -42,6 +42,7 @@ private:
     int iterationBirdRight;
     int iterationDoor;
     bool collectedCoins;
+    bool gameOver;
     
     int iterationBirdLeft;
     float GameTime = 0.0;
@@ -246,7 +247,7 @@ private:
     
 public:
     
-    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1),iterationDoor(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)),collectedCoins(false){
+    Controller():timeSinceLast(0),totalSilvercoins(-1),totalGoldcoins(-1),lastUpdate(0),iterationPlayer(1),iterationDoor(1), iterationBirdRight(1),iterationBirdLeft(1), birdTranslate(vmml::Vector3f(0.,0.,0.)),birdTranslateMinus(vmml::Vector3f(0.,0.,0.)),collectedCoins(false),gameOver(false){
         
     }
     
@@ -279,6 +280,7 @@ public:
     }
     
     void update(double elapsedTime, int direction) {
+        
         skyplane.setTranslate(vmml::Vector3f(getPlayerTrans().x()/2.f,0.,0.));
         skyplane.move(skyplane.getTranslate());
         drawEntity(skyplane);
@@ -305,7 +307,6 @@ public:
             goingUp=true;
         }
        
-        
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
             std::string name = iterator->getObjName();
 
@@ -383,11 +384,16 @@ public:
                 birdTranslateMinus += vmml::Vector3f(-elapsedTime/10,0.,0.);
                 iterator->move(birdTranslateMinus);
                 
+                GLfloat scale = 0.65f;
+
+                vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale , scale, scale));
+              
+                
                 drawEntity(*iterator,
-                           brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                           brenderer.getObjects()->getCamera("camera")->getViewMatrix()*scalingMatrix,
                            brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
                            vmml::Vector4f(xMin,xMax,yMin,yMax));
-                
+
             }
             else{
                 drawEntity(*iterator);
@@ -513,7 +519,7 @@ public:
         //player.setPos(ma);
 
         
-        if (totalSilvercoins - silvercoins== totalSilvercoins && totalGoldcoins - goldcoins == totalGoldcoins ){collectedCoins = true;}
+      
         
         GLfloat scale = 0.1f;
         vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
@@ -527,7 +533,26 @@ public:
         vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(0.65f, 0.85f, 0.f)) * scalingMatrix;
         brenderer.getObjects()->getTextSprite("totalSilverCoins")->setText(std::to_string(totalSilvercoins-silvercoins) + "/" + std::to_string(totalSilvercoins));
         brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("totalSilverCoins"), modelMatrix2, viewMatrix, projectionMatrix, std::vector<std::string>({}));
-  
+
+        if (totalSilvercoins - silvercoins== totalSilvercoins && totalGoldcoins - goldcoins == totalGoldcoins ){collectedCoins = true;
+            
+            if (getPlayerPosition().x() <= -15.5){
+                gameOver = true;}
+        
+        }
+        
+    
+        if (gameOver){
+            GLfloat scale = 0.4f;
+            vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
+            vmml::Matrix4f modelMatrix = vmml::create_translation(vmml::Vector3f(0.0f, 0.0f, 0.f)) * scalingMatrix;
+            vmml::Matrix4f viewMatrix = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
+            vmml::Matrix4f projectionMatrix = vmml::Matrix4f::IDENTITY;
+            brenderer.getObjects()->getTextSprite("gameover")->setText("YOU WON!");
+            vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(-0.8f, 0.0f, 0.f)) * scalingMatrix;
+            brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("gameover"), modelMatrix2, viewMatrix, projectionMatrix, std::vector<std::string>({}));
+
+        }
     }
     
     
