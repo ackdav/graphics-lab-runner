@@ -113,7 +113,7 @@ private:
         
         
         
-        spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite_n_test.png"));
+        spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite.png"));
         birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
 
         
@@ -341,8 +341,13 @@ public:
 
                     }
                 }
+                
+                GLfloat scale = 1.5f;
+                
+                vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale , scale, scale));
+                
                 drawEntity(*iterator,
-                           brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
+                           brenderer.getObjects()->getCamera("camera")->getViewMatrix()*scalingMatrix,
                            brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
                            vmml::Vector4f(xMin,xMax,yMin,yMax));
             }
@@ -398,9 +403,7 @@ public:
             else{
                 drawEntity(*iterator);
             }
-            
-//            drawEntity(*iterator);
-            
+                        
         }
         // Move default -0.9 to floor
         float gravity = -0.15f;
