@@ -81,7 +81,7 @@ void main()
     
     lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.xy) ;
 
-    color = color  +  texture2D(NormalMap, (texCoordVarying).xy);
+//    color = color  +  texture2D(NormalMap, (texCoordVarying).xy);
   
     
     gl_FragColor = tempColor * color ;

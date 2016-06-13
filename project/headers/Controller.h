@@ -191,6 +191,7 @@ private:
         std::list<Entity>::iterator iterator;
         float xtrans = 0;
         float ytrans = 0;
+        vmml::Vector3f moved = newbox.getCenter() - oldbox.getCenter();
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
             
             vmml::AABBf boundingBox2 = brenderer.getObjects()->getModel(iterator->getObjName())->getBoundingBoxObjectSpace();
@@ -212,34 +213,36 @@ private:
                     continue;
                 }
                 vmml::Vector<4,bool> collision = checkCollision(oldbox.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax );
-                if (collision.at(3)) {
-                    ytrans = box2.getMin().at(1) - newbox.getMax().at(1)-0.001;
+                if (ytrans == 0) {
+                    if (collision.at(3)) {
+                        ytrans = boxMin.at(1) - posMax.at(1)-0.001;
+                    }
+                    if (collision.at(2)) {
+                        ytrans = boxMax.at(1) - posMin.at(1)+0.001;
+                    }
+                    if (std::abs(ytrans) > std::abs(moved.at(1))+0.001) {
+                        ytrans = 0;
+                    }
                 }
-                if (collision.at(2)) {
-                    ytrans = box2.getMax().at(1) - newbox.getMin().at(1)+0.001;
+                if (xtrans == 0) {
+                    if (collision.at(1)) {
+                        xtrans = boxMax.at(0)-posMin.at(0)+ 0.001;
+                    } else if (collision.at(0)) {
+                        xtrans = boxMin.at(0)-posMax.at(0)-0.001;
+                    }
+                    //std::cout<<"XTRANS "<<xtrans<<", MOVED "<<moved.at(0)<<std::endl;
+                    if (std::abs(xtrans) > std::abs(moved.at(0))+0.001) {
+                        xtrans = 0;
+                    }
                 }
-                if (collision.at(1)) {
-                    xtrans = box2.getMax().at(0)-newbox.getMax().at(0)+ 0.001;
-                }
-                if (collision.at(0)) {
-                    xtrans = box2.getMin().at(0)-newbox.getMin().at(0)-0.001;
-                }
-
             }
+
         }
-        //if (std::abs(movedBy.at(0)) > std::abs(movedBy.at(1))) {
-        //    return vmml::Vector3f(xtrans,0.0f,0.0f);
-        //}
-        float resX = 0.0f;
-        float resY = 0.0f;
-        
-        if (newbox.getCenter().at(1) != oldbox.getCenter().at(1)) {
-            resY = ytrans;
-        } else if (newbox.getCenter().at(0) != oldbox.getCenter().at(0)) {
-            resX = xtrans;
+        if (std::abs(moved.at(0)) > std::abs(moved.at(1))) {
+            return vmml::Vector3f(xtrans,0.0f,0.0f);
         }
         
-        return vmml::Vector3f(resX,resY,0.0f);
+        return vmml::Vector3f(0.0f,ytrans,0.0f);
     }
     
     
