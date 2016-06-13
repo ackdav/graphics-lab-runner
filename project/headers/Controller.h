@@ -544,7 +544,7 @@ public:
         
         if (totalSilvercoins - silvercoins== totalSilvercoins && totalGoldcoins - goldcoins == totalGoldcoins ){collectedCoins = true;
             
-            if (getPlayerPosition().x() <= -15.5){
+            if (getPlayerPosition().x() <= -28.5){
                 gameOver = true;}
             
         }
