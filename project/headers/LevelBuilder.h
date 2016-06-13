@@ -109,9 +109,6 @@ private:
                 else if(std::strcmp(index.c_str(),"C")==0){
                      builder.setScale(vmml::Vector3f(1.f + 1/(arc4random_uniform(1.) + 1.) )).setTranslation(vmml::Vector3f(-3. + column-colCenter,5.+ row+rowCenter,8. + arc4random_uniform(4.) ));
                 }
-                else if(std::strcmp(index.c_str(),"9")==0){
-                    builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(0,0,0));
-                }
                 else if(std::strcmp(index.c_str(),"3")!=0&&std::strcmp(index.c_str(),"4")!=0&&std::strcmp(index.c_str(),"2")!=0){
                 builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,0));
                 }
