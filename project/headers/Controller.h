@@ -47,7 +47,7 @@ private:
     int iterationBirdLeft;
     float GameTime = 0.0;
     bool goingUp = true;
-
+    
     float timeRunning;
     vmml::Vector3f birdTranslate;
     vmml::Vector3f birdTranslateMinus;
@@ -61,8 +61,9 @@ private:
         ShaderPtr shader = brenderer.getObjects()->getShader(shaderName);
         
         ShaderPtr spriteshader = brenderer.getObjects()->getShader("sprite_shader");
-        ShaderPtr birdshader = brenderer.getObjects()->getShader("bird_shader");
-
+//        ShaderPtr birdshader = brenderer.getObjects()->getShader("bird_shader");
+//        ShaderPtr birdshader2 = brenderer.getObjects()->getShader("bird_shader2");
+//        
         
         
         if (shader.get())
@@ -101,7 +102,7 @@ private:
             vmml::Vector4f PlayerPos = -getPlayerPosition();
             
             shader->setUniform("PlayerPosition", PlayerPos);
-  
+            
             //std::cout<<"POSITION "<<shader->getAttribLocation("Position")<<std::endl;
             std::cout << "PLAYER POS " << getPlayerPosition() << std::endl;
             
@@ -114,8 +115,9 @@ private:
         
         
         spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite.png"));
-//        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
-
+//        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdD_n.png"));
+//        birdshader2->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
+//        
         
         
         
@@ -125,9 +127,9 @@ private:
         brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getModel(objName), modelMatrix,viewMatrix, projectionMatrix, std::vector<std::string>({ }),false,false);
         //brenderer.getModelRenderer()->drawModel(objName, "camera", modelMatrix, std::vector<std::string>({ }));
         //         std::cout << "object " << objName << brenderer.getObjects()->getModel("block")->getBoundingBoxObjectSpace();
-
+        
     }
-
+    
     void drawEntity(Entity entity) {
         vmml::Matrix4f viewMatrix = brenderer.getObjects()->getCamera("camera")->getViewMatrix();
         vmml::Matrix4f projectionMatrix = brenderer.getObjects()->getCamera("camera")->getProjectionMatrix();
@@ -189,6 +191,7 @@ private:
         std::list<Entity>::iterator iterator;
         float xtrans = 0;
         float ytrans = 0;
+        vmml::Vector3f moved = newbox.getCenter() - oldbox.getCenter();
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
             
             vmml::AABBf boundingBox2 = brenderer.getObjects()->getModel(iterator->getObjName())->getBoundingBoxObjectSpace();
@@ -210,34 +213,36 @@ private:
                     continue;
                 }
                 vmml::Vector<4,bool> collision = checkCollision(oldbox.getCenter(),newbox.getCenter(),boxMin,boxMax,posMin,posMax );
-                if (collision.at(3)) {
-                    ytrans = box2.getMin().at(1) - newbox.getMax().at(1)-0.001;
+                if (ytrans == 0) {
+                    if (collision.at(3)) {
+                        ytrans = boxMin.at(1) - posMax.at(1)-0.001;
+                    }
+                    if (collision.at(2)) {
+                        ytrans = boxMax.at(1) - posMin.at(1)+0.001;
+                    }
+                    if (std::abs(ytrans) > std::abs(moved.at(1))+0.001) {
+                        ytrans = 0;
+                    }
                 }
-                if (collision.at(2)) {
-                    ytrans = box2.getMax().at(1) - newbox.getMin().at(1)+0.001;
+                if (xtrans == 0) {
+                    if (collision.at(1)) {
+                        xtrans = boxMax.at(0)-posMin.at(0)+ 0.001;
+                    } else if (collision.at(0)) {
+                        xtrans = boxMin.at(0)-posMax.at(0)-0.001;
+                    }
+                    //std::cout<<"XTRANS "<<xtrans<<", MOVED "<<moved.at(0)<<std::endl;
+                    if (std::abs(xtrans) > std::abs(moved.at(0))+0.001) {
+                        xtrans = 0;
+                    }
                 }
-                if (collision.at(1)) {
-                    xtrans = box2.getMax().at(0)-newbox.getMax().at(0)+ 0.001;
-                }
-                if (collision.at(0)) {
-                    xtrans = box2.getMin().at(0)-newbox.getMin().at(0)-0.001;
-                }
-
             }
+            
         }
-        //if (std::abs(movedBy.at(0)) > std::abs(movedBy.at(1))) {
-        //    return vmml::Vector3f(xtrans,0.0f,0.0f);
-        //}
-        float resX = 0.0f;
-        float resY = 0.0f;
-        
-        if (newbox.getCenter().at(1) != oldbox.getCenter().at(1)) {
-            resY = ytrans;
-        } else if (newbox.getCenter().at(0) != oldbox.getCenter().at(0)) {
-            resX = xtrans;
+        if (std::abs(moved.at(0)) > std::abs(moved.at(1))) {
+            return vmml::Vector3f(xtrans,0.0f,0.0f);
         }
         
-        return vmml::Vector3f(resX,resY,0.0f);
+        return vmml::Vector3f(0.0f,ytrans,0.0f);
     }
     
     
@@ -256,7 +261,7 @@ public:
     }
     
     vmml::Vector3f getPlayerPosition() {
-//        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
+        //        std::cout<<"POS"<<vmml::Vector3f(moveableEntities.begin()->getCurrentXPos(), 0.f,0.f)<<std::endl;
         return vmml::Vector3f(-moveableEntities.begin()->getPos().x(), 0.f,0.f);
     }
     
@@ -292,7 +297,7 @@ public:
         std::list<Entity>::iterator iterator;
         std::list<MoveableEntity>::iterator moveableIterator;
         std::list<Entity>::iterator buttonIterator;
-
+        
         
         if(GameTime<1.5 && goingUp == true) {
             GameTime += 0.01;
@@ -306,10 +311,10 @@ public:
         if(GameTime<=0.1){
             goingUp=true;
         }
-       
+        
         for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
             std::string name = iterator->getObjName();
-
+            
             
             if( std::strcmp(name.c_str(),"coin50") ==0) {
                 iterator->setRotation(1.2*timeRunning);
@@ -321,7 +326,7 @@ public:
                 silvercoins+=1;
                 drawEntity(*iterator);
             }
-     
+            
             else if( std::strcmp(name.c_str(),"floating_tree1") ==0) {
                 drawEntity(*iterator);
             }
@@ -333,16 +338,16 @@ public:
                 double yMin = (row - 1) / 3.0f;
                 double xMax = (column + 1) / 3.0f;
                 double xMin = (column) / 3.0f;
-              
+                
                 if (collectedCoins){
-              
-                if (iterationDoor < 9) {
-                    iterationDoor = iterationDoor + 1;
-
+                    
+                    if (iterationDoor < 9) {
+                        iterationDoor = iterationDoor + 1;
+                        
                     }
                 }
                 
-                GLfloat scale = 1.0f;
+                GLfloat scale = 1.f;
                 
                 vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale , scale, scale));
                 
@@ -390,20 +395,20 @@ public:
                 iterator->move(birdTranslateMinus);
                 
                 GLfloat scale = 0.65f;
-
+                
                 vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale , scale, scale));
-              
+                
                 
                 drawEntity(*iterator,
                            brenderer.getObjects()->getCamera("camera")->getViewMatrix()*scalingMatrix,
                            brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
                            vmml::Vector4f(xMin,xMax,yMin,yMax));
-
+                
             }
             else{
                 drawEntity(*iterator);
             }
-                        
+            
         }
         // Move default -0.9 to floor
         float gravity = -0.15f;
@@ -419,7 +424,7 @@ public:
             double yMin = (row - 1) / 4.0f;
             double xMax = (column + 1) / 4.0f;
             double xMin = (column) / 4.0f;
-
+            
             vmml::Vector<4, bool > move = movement->getMove();
             float x = 0.0f;
             float y = 0.0f;
@@ -428,29 +433,29 @@ public:
             if (move.at(0)) {
                 x -= movement->getStepAccellerate(elapsedTime/3.0,0);
                 
-
-                     row = 4 - (iterationPlayer-1)/4;
-                     column = (iterationPlayer - 1)%4;
-     
                 
-                     yMax = row / 4.0f;
-                     yMin = (row - 1) / 4.0f;
-                     xMax = (column + 1) / 4.0f;
-                     xMin = (column) / 4.0f;
-                    
-                    iterationPlayer = iterationPlayer + 1;
-                    if (iterationPlayer > 16) {
-                        iterationPlayer = 1;
-                    }
-
+                row = 4 - (iterationPlayer-1)/4;
+                column = (iterationPlayer - 1)%4;
+                
+                
+                yMax = row / 4.0f;
+                yMin = (row - 1) / 4.0f;
+                xMax = (column + 1) / 4.0f;
+                xMin = (column) / 4.0f;
+                
+                iterationPlayer = iterationPlayer + 1;
+                if (iterationPlayer > 16) {
+                    iterationPlayer = 1;
+                }
+                
             } else {
                 x -= movement->getStepDeccellerate(elapsedTime*8.0,0);
             }
             if (move.at(1)) {
                 x += movement->getStepAccellerate(elapsedTime/3.0,1);
                 
-                 row = 4 - (iterationPlayer-1)/4;
-                 column = (iterationPlayer - 1)%4;
+                row = 4 - (iterationPlayer-1)/4;
+                column = (iterationPlayer - 1)%4;
                 yMax = row / 4.0f;
                 yMin = (row - 1) / 4.0f;
                 xMax = (column + 1) / 4.0f;
@@ -499,8 +504,8 @@ public:
             std::cout << moveableIterator->getObjName();
             
             //Todo: move skyplane with player
-          
-
+            
+            
             drawEntity(*moveableIterator,
                        brenderer.getObjects()->getCamera("camera")->getViewMatrix(),
                        brenderer.getObjects()->getCamera("camera")->getProjectionMatrix(),0,0,
@@ -515,14 +520,14 @@ public:
         drawEntity(buttons.at(0),buttons.at(0).getViewMatrix(),vmml::Matrix4f::IDENTITY,-player.getMovement()->getDurationRight(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(1),buttons.at(1).getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationLeft(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(2),buttons.at(2).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,player.getMovement()->getDurationFlying(),vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
-        drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
-
+        //        drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
+        
         
         vmml::Matrix4f ma = buttons.at(4).getPos();
         //player.setPos(ma);
-
         
-      
+        
+        
         
         GLfloat scale = 0.1f;
         vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
@@ -536,15 +541,15 @@ public:
         vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(0.65f, 0.85f, 0.f)) * scalingMatrix;
         brenderer.getObjects()->getTextSprite("totalSilverCoins")->setText(std::to_string(totalSilvercoins-silvercoins) + "/" + std::to_string(totalSilvercoins));
         brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("totalSilverCoins"), modelMatrix2, viewMatrix, projectionMatrix, std::vector<std::string>({}));
-
+        
         if (totalSilvercoins - silvercoins== totalSilvercoins && totalGoldcoins - goldcoins == totalGoldcoins ){collectedCoins = true;
             
             if (getPlayerPosition().x() <= -15.5){
                 gameOver = true;}
-        
+            
         }
         
-    
+        
         if (gameOver){
             GLfloat scale = 0.4f;
             vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale / brenderer.getView()->getAspectRatio(), scale, scale));
@@ -554,7 +559,7 @@ public:
             brenderer.getObjects()->getTextSprite("gameover")->setText("YOU WON!");
             vmml::Matrix4f modelMatrix2 = vmml::create_translation(vmml::Vector3f(-0.8f, 0.0f, 0.f)) * scalingMatrix;
             brenderer.getModelRenderer()->drawModel(brenderer.getObjects()->getTextSprite("gameover"), modelMatrix2, viewMatrix, projectionMatrix, std::vector<std::string>({}));
-
+            
         }
     }
     
