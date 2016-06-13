@@ -83,9 +83,8 @@ void main()
 
     
     lowp vec4 color = texture2D(DiffuseMap, texCoordVarying.xy) ;
-    color = color+ 2.*texture2D(NormalMap, (texCoordVarying).xy);
     
-    gl_FragColor = tempColor * color ;
+    gl_FragColor =  color ;
     
     
 //    if(sunlightangle>0.0 && sunlightangle < 3.141 && normalVarying.x > 0.0){

@@ -114,7 +114,7 @@ private:
         
         
         spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite.png"));
-        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
+//        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
 
         
         
@@ -342,7 +342,7 @@ public:
                     }
                 }
                 
-                GLfloat scale = 1.5f;
+                GLfloat scale = 1.0f;
                 
                 vmml::Matrix4f scalingMatrix = vmml::create_scaling(vmml::Vector3f(scale , scale, scale));
                 

@@ -88,7 +88,7 @@ private:
             builder.setObjectName("birdA").setShaderName("bird_shader").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"D") ==0) {
-            builder.setObjectName("door").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
+            builder.setObjectName("door").setShaderName("door_shader").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"A") ==0) {
             //set rotation !!
@@ -109,17 +109,12 @@ private:
                 else if(std::strcmp(index.c_str(),"C")==0){
                      builder.setScale(vmml::Vector3f(1.f + 1/(arc4random_uniform(1.) + 1.) )).setTranslation(vmml::Vector3f(-3. + column-colCenter,5.+ row+rowCenter,8. + arc4random_uniform(4.) ));
                 }
-                else if(std::strcmp(index.c_str(),"9")==0){
-                    builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(0,0,0));
-                }
                 else if(std::strcmp(index.c_str(),"3")!=0&&std::strcmp(index.c_str(),"4")!=0&&std::strcmp(index.c_str(),"2")!=0){
                 builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(vmml::Vector3f(column-colCenter,row+rowCenter,0));
                 }
             
             if (std::strcmp(index.c_str(),"2") ==0) {
                 std::cout<<"SPRITE PLAYER :" <<boundingBox.getDimension().find_max()<<std::endl;
-            } else if (std::strcmp(index.c_str(),"9") ==0) {
-                std::cout<<"BOX PLAYER :" <<boundingBox.getDimension().find_max()<<std::endl;
             }
             
             if (builder.isMoving() && std::strcmp(index.c_str(),"E")!=0) {
@@ -147,20 +142,20 @@ private:
     }
     
     void addButton(std::string name, std::string image, vmml::Vector3f translation) {
-        bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("sprite_shader"));
+        bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("button_shader"));
         EntityBuilder builder;
         vmml::Matrix4f _viewMatrixHUD = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
-        builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio(), imageScale, imageScale)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
+        builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio(), imageScale, imageScale)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("button_shader");
         buttons.push_back(builder.createEntity());
     }
     
-    void addSpriteImage(std::string name, std::string image, vmml::Vector3f translation) {
+    void addSpriteImage(std::string name, std::string image, vmml::Vector3f translation, std::string shader) {
         //bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("sprite_shader"));
         EntityBuilder builder;
         //bRenderer.getObjects()->createSprite("plala2", "sprite_pl.png");
         vmml::Matrix4f _viewMatrixHUD = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
         vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(name)->getBoundingBoxObjectSpace();
-        builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
+        builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName(shader);
         //builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio()*7, imageScale*7, imageScale*7)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
         buttons.push_back(builder.createEntity());
     }
@@ -174,16 +169,16 @@ public:
         //addSpriteImage("plala2","sprite_pl.png",vmml::Vector3f(0.55f, -0.9f, -0.00f));
         addButton("bRight","arrowR.png",vmml::Vector3f(0.85f, -0.9f, -0.00f));
         addButton("bLeft","arrowL",vmml::Vector3f(0.65f, -0.9f, -0.00f));
-        addButton("bUp","arrowU.png",vmml::Vector3f(-0.55f, -0.9f, -0.00f));
-        addButton("bTarget","target.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
+        addButton("bUp","arrowU.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
+//        addButton("bTarget","target.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
         
         //vmml::Vector3f trans = vmml::Vector3f(7-9,7+3,0);
         vmml::Vector3f trans = vmml::Vector3f(0,-3,0);
         //addSpriteImage("bPlayerSprite","smurf_sprite.png",vmml::Vector3f(-0.35f, -0.4f, -0.00f));
-        addSpriteImage("smurf","smurf_sprite.png",trans);
-        addSpriteImage("birdD","mapBirdD.png",trans);
-        addSpriteImage("birdA", "mapBirdA.png",trans);
-        addSpriteImage("door", "door_sprite.png",trans);
+        addSpriteImage("smurf","smurf_sprite.png",trans, "sprite_shader");
+        addSpriteImage("birdD","mapBirdD.png",trans,"bird_shader");
+        addSpriteImage("birdA", "mapBirdA.png",trans,"bird_shader");
+        addSpriteImage("door", "door_sprite.png",trans,"door_shader");
 
         
         std::string line;
