@@ -154,22 +154,23 @@ private:
         buttons.push_back(builder.createEntity());
     }
     
-    void addSpriteImage(std::string name, std::string image, vmml::Vector3f translation) {
+
+    void addSpriteImage(std::string name, std::string image, vmml::Vector3f translation, std::string shader) {
         //bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("sprite_shader"));
         EntityBuilder builder;
         //bRenderer.getObjects()->createSprite("plala2", "sprite_pl.png");
         vmml::Matrix4f _viewMatrixHUD = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
         vmml::AABBf boundingBox = bRenderer.getObjects()->getModel(name)->getBoundingBoxObjectSpace();
-        builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
+        builder.setScale(vmml::Vector3f(1/boundingBox.getDimension().find_max())).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName(shader);
         //builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio()*7, imageScale*7, imageScale*7)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
         buttons.push_back(builder.createEntity());
     }
-    
 public:
     
     LevelBuilder(Renderer _brenderer):bRenderer(_brenderer){
         
         imageScale = 0.1f;
+        
         
         //addSpriteImage("plala2","sprite_pl.png",vmml::Vector3f(0.55f, -0.9f, -0.00f));
         addButton("bRight","arrowR.png",vmml::Vector3f(0.85f, -0.9f, -0.00f));
@@ -180,11 +181,22 @@ public:
         //vmml::Vector3f trans = vmml::Vector3f(7-9,7+3,0);
         vmml::Vector3f trans = vmml::Vector3f(0,-3,0);
         //addSpriteImage("bPlayerSprite","smurf_sprite.png",vmml::Vector3f(-0.35f, -0.4f, -0.00f));
-        addSpriteImage("smurf","smurf_sprite.png",trans);
-        addSpriteImage("birdD","mapBirdD.png",trans);
-        addSpriteImage("birdA", "mapBirdA.png",trans);
-        addSpriteImage("door", "door_sprite.png",trans);
-
+        addSpriteImage("smurf","smurf_sprite.png",trans,"sprite_shader");
+        
+        addSpriteImage("birdD","mapBirdD.png",trans,"bird_shader");
+        addSpriteImage("birdA", "mapBirdA.png",trans, "bird_shader2");
+        addSpriteImage("door", "door_sprite.png",trans,"door_shader");
+        
+        
+        
+        
+//        std::list<Entity>::iterator iterator;
+//        
+//        for (iterator = entities.begin(); iterator != entities.end(); ++iterator) {
+//            
+//            addSpriteImage("door", "door_sprite.png",b);
+//
+//        }
         
         std::string line;
         std::ifstream myfile (bRenderer::getFilePath("level.txt"));
