@@ -44,6 +44,7 @@ void RenderProject::initFunction()
     
     ShaderPtr spriteAnimShader = bRenderer().getObjects()->loadShaderFile("sprite_shader",1,true,true,false,false,false);
     ShaderPtr birdAnimShader = bRenderer().getObjects()->loadShaderFile("bird_shader",1,true,true,false,false,false);
+    ShaderPtr birdAnimShader2 = bRenderer().getObjects()->loadShaderFile("bird_shader2",1,true,true,false,false,false);
 
     
     ShaderPtr buttonShader = bRenderer().getObjects()->loadShaderFile("button_shader",1,true,true,false,false,false);
@@ -90,7 +91,7 @@ void RenderProject::initFunction()
 //    bRenderer().getObjects()->createSprite("smurf", "smurf_sprite.png", );
 
     bRenderer().getObjects()->createSprite("birdD","mapBirdD.png", bRenderer().getObjects()->getShader("bird_shader"));
-    bRenderer().getObjects()->createSprite("birdA","mapBirdA.png", bRenderer().getObjects()->getShader("bird_shader"));
+    bRenderer().getObjects()->createSprite("birdA","mapBirdA.png", bRenderer().getObjects()->getShader("bird_shader2"));
 
     bRenderer().getObjects()->createSprite("door","door_sprite.png", bRenderer().getObjects()->getShader("sprite_shader"));
 

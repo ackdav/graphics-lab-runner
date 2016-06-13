@@ -85,7 +85,7 @@ private:
             builder.setObjectName("birdD").setShaderName("bird_shader").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"b") ==0) {
-            builder.setObjectName("birdA").setShaderName("bird_shader").setIsMoving(false).setCollision2D(false);
+            builder.setObjectName("birdA").setShaderName("bird_shader2").setIsMoving(false).setCollision2D(false);
         }
         else if (std::strcmp(index.c_str(),"D") ==0) {
             builder.setObjectName("door").setShaderName("sprite_shader").setIsMoving(false).setCollision2D(false);
@@ -147,10 +147,10 @@ private:
     }
     
     void addButton(std::string name, std::string image, vmml::Vector3f translation) {
-        bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("sprite_shader"));
+        bRenderer.getObjects()->createSprite(name, image,bRenderer.getObjects()->getShader("button_shader"));
         EntityBuilder builder;
         vmml::Matrix4f _viewMatrixHUD = Camera::lookAt(vmml::Vector3f(0.0f, 0.0f, 0.25f), vmml::Vector3f::ZERO, vmml::Vector3f::UP);
-        builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio(), imageScale, imageScale)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("sprite_shader");
+        builder.setScale(vmml::Vector3f(imageScale / bRenderer.getView()->getAspectRatio(), imageScale, imageScale)).setTranslation(translation).setViewMatrix(_viewMatrixHUD).setObjectName(name).setImage(image).setShaderName("button_shader");
         buttons.push_back(builder.createEntity());
     }
     
@@ -174,8 +174,8 @@ public:
         //addSpriteImage("plala2","sprite_pl.png",vmml::Vector3f(0.55f, -0.9f, -0.00f));
         addButton("bRight","arrowR.png",vmml::Vector3f(0.85f, -0.9f, -0.00f));
         addButton("bLeft","arrowL",vmml::Vector3f(0.65f, -0.9f, -0.00f));
-        addButton("bUp","arrowU.png",vmml::Vector3f(-0.55f, -0.9f, -0.00f));
-        addButton("bTarget","target.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
+        addButton("bUp","arrowU.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
+//        addButton("bTarget","target.png",vmml::Vector3f(-0.85f, -0.9f, -0.00f));
         
         //vmml::Vector3f trans = vmml::Vector3f(7-9,7+3,0);
         vmml::Vector3f trans = vmml::Vector3f(0,-3,0);

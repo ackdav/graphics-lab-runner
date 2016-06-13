@@ -70,6 +70,8 @@
 		A8A3E73D1CF2F80200966CBB /* green-squared.png in Resources */ = {isa = PBXBuildFile; fileRef = A8A3E73C1CF2F80200966CBB /* green-squared.png */; };
 		A8BA85611CF87024003C42F1 /* button_shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8BA855F1CF87024003C42F1 /* button_shader.frag */; };
 		A8BA85621CF87024003C42F1 /* button_shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8BA85601CF87024003C42F1 /* button_shader.vert */; };
+		A8E4D4681D0EAB2000F3D184 /* bird_shader2.frag in Resources */ = {isa = PBXBuildFile; fileRef = A8E4D4661D0EAB2000F3D184 /* bird_shader2.frag */; };
+		A8E4D4691D0EAB2000F3D184 /* bird_shader2.vert in Resources */ = {isa = PBXBuildFile; fileRef = A8E4D4671D0EAB2000F3D184 /* bird_shader2.vert */; };
 		B44186971BA331E300604D7F /* RenderProject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B44186961BA331E300604D7F /* RenderProject.cpp */; };
 		B47949AF1BA6742B00B5E9DC /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B47949921BA6742B00B5E9DC /* config.json */; };
 		B4794A2A1BA6743D00B5E9DC /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B47949C41BA6743D00B5E9DC /* LICENSE.txt */; };
@@ -243,6 +245,8 @@
 		A8A3E73C1CF2F80200966CBB /* green-squared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-squared.png"; sourceTree = "<group>"; };
 		A8BA855F1CF87024003C42F1 /* button_shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.frag; sourceTree = "<group>"; };
 		A8BA85601CF87024003C42F1 /* button_shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = button_shader.vert; sourceTree = "<group>"; };
+		A8E4D4661D0EAB2000F3D184 /* bird_shader2.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bird_shader2.frag; sourceTree = "<group>"; };
+		A8E4D4671D0EAB2000F3D184 /* bird_shader2.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bird_shader2.vert; sourceTree = "<group>"; };
 		B44186941BA331E300604D7F /* RenderProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderProject.h; sourceTree = "<group>"; };
 		B44186961BA331E300604D7F /* RenderProject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderProject.cpp; sourceTree = "<group>"; };
 		B47949921BA6742B00B5E9DC /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 			children = (
 				A85E82621D0AEF7800060D0D /* bird_shader.frag */,
 				A85E82631D0AEF7800060D0D /* bird_shader.vert */,
+				A8E4D4661D0EAB2000F3D184 /* bird_shader2.frag */,
+				A8E4D4671D0EAB2000F3D184 /* bird_shader2.vert */,
 				A8A3E73C1CF2F80200966CBB /* green-squared.png */,
 				63C675091CF25F1500E911C4 /* frog.mtl */,
 				63C6750A1CF25F1500E911C4 /* frog.obj */,
@@ -903,6 +909,7 @@
 				6351C0891CE77FAC000DEB3E /* player.vert in Resources */,
 				22BAD7531CD8E24B0070B4F2 /* backgroundPlane.mtl in Resources */,
 				54B964A81CB259CE008843E2 /* normal3.png in Resources */,
+				A8E4D4681D0EAB2000F3D184 /* bird_shader2.frag in Resources */,
 				63C674F81CF21BD000E911C4 /* gold.png in Resources */,
 				6303056D1D0E013700D87135 /* smurf_sprite.png in Resources */,
 				A85E82641D0AEF7800060D0D /* bird_shader.frag in Resources */,
@@ -911,6 +918,7 @@
 				B4CB8CD01B72E43300FE041B /* Project-Info.plist in Resources */,
 				A87CD1FF1D0994A100DBC368 /* mapBirdA_n.png in Resources */,
 				63C674FD1CF23E1300E911C4 /* floating_tree1.mtl in Resources */,
+				A8E4D4691D0EAB2000F3D184 /* bird_shader2.vert in Resources */,
 				A842B47F1CEAEEE1006A852A /* arrowR.png in Resources */,
 				A842B4801CEAEEE1006A852A /* arrowU.png in Resources */,
 				63C674F21CF212E500E911C4 /* coin20.obj in Resources */,

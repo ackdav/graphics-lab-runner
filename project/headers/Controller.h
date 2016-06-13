@@ -62,6 +62,7 @@ private:
         
         ShaderPtr spriteshader = brenderer.getObjects()->getShader("sprite_shader");
         ShaderPtr birdshader = brenderer.getObjects()->getShader("bird_shader");
+        ShaderPtr birdshader2 = brenderer.getObjects()->getShader("bird_shader2");
 
         
         
@@ -114,7 +115,8 @@ private:
         
         
         spriteshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("smurf_sprite.png"));
-        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
+        birdshader->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdD_n.png"));
+        birdshader2->setUniform("NormalMap",brenderer.getObjects()->loadTexture("mapBirdA_n.png"));
 
         
         
@@ -515,7 +517,7 @@ public:
         drawEntity(buttons.at(0),buttons.at(0).getViewMatrix(),vmml::Matrix4f::IDENTITY,-player.getMovement()->getDurationRight(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(1),buttons.at(1).getViewMatrix(),vmml::Matrix4f::IDENTITY,player.getMovement()->getDurationLeft(),0,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
         drawEntity(buttons.at(2),buttons.at(2).getViewMatrix(),vmml::Matrix4f::IDENTITY,0,player.getMovement()->getDurationFlying(),vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
-        drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
+//        drawEntity(buttons.at(3),buttons.at(3).getViewMatrix(),vmml::Matrix4f::IDENTITY,2,2,vmml::Vector4f(0.0f,1.0f,0.0f,1.0f));
 
         
         vmml::Matrix4f ma = buttons.at(4).getPos();
